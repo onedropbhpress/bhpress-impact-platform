@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#ffffff;color:#14161a;font-family:'Hanken Grotesk',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  ::selection{background:#00269f;color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(7px);}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    [data-reveal]{opacity:1 !important;transform:none !important;}
+    *{animation-duration:.001ms !important;}
+  }
+  @media (max-width:900px){
+    .hdr-nav{display:none !important;}
+    .hdr-burger{display:flex !important;}
+    .grid-2{grid-template-columns:1fr !important;}
+    .sect-grid{grid-template-columns:1fr 1fr !important;}
+    .foot-grid{grid-template-columns:1fr 1fr !important;}
+  }
+  @media (max-width:620px){
+    .sect-grid{grid-template-columns:1fr !important;}
+    .foot-grid{grid-template-columns:1fr !important;}
+  }
+</style>
+</helmet>
+
+<div id="page" style="animation:pageIn .8s ease both;">
+
+<header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:60;background:transparent;border-bottom:1px solid transparent;transition:background .4s ease,border-color .4s ease,box-shadow .4s ease;">
+  <div style="max-width:1240px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;gap:24px;">
+    <a href="/" data-nav style="display:flex;align-items:center;">
+      <img id="hdrLogo" src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:32px;display:block;transition:filter .4s ease;filter:brightness(0) invert(1);">
+    </a>
+    <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:4px;">
+      <a href="/quem-somos" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Quem Somos</a>
+      <a href="/estrategia" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Estratégia</a>
+      <a href="/pessoas" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Pessoas</a>
+      <a href="/clientes" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Clientes</a>
+      <a href="/ambiente" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Ambiente</a>
+      <a href="/sobre" data-nav class="hdr-tx hdr-cta" style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#fff;border:1px solid rgba(255,255,255,.45);padding:8px 14px;border-radius:7px;transition:color .4s ease,border-color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Sobre o relatório</a>
+    </nav>
+    <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid rgba(255,255,255,.4);background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+      <span style="width:18px;height:2px;background:#fff;display:block;"></span><span style="width:18px;height:2px;background:#fff;display:block;"></span><span style="width:18px;height:2px;background:#fff;display:block;"></span>
+    </button>
+  </div>
+</header>
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:6px;">
+    <button type="button" onClick="{{ closeNav }}" aria-label="Fechar" style="position:absolute;top:24px;right:32px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;font-size:20px;cursor:pointer;">×</button>
+    <a href="/quem-somos" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
+    <a href="/estrategia" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Estratégia &amp; Governança</a>
+    <a href="/pessoas" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Pessoas</a>
+    <a href="/clientes" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Clientes</a>
+    <a href="/ambiente" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;">Ambiente</a>
+  </div>
+</sc-if>
+
+<!-- ============ HERO ============ -->
+<section style="position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#0c0e12;">
+  <video id="heroVideo" data-parallax="0.18" autoplay muted loop playsinline preload="auto" style="position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;background:#171a20;opacity:0.45;">
+    <source src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,14,.62) 0%,rgba(8,10,14,.30) 38%,rgba(8,10,14,.78) 100%);"></div>
+  <div style="position:absolute;top:96px;left:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.25);padding:5px 10px;border-radius:5px;">[HERO_VIDEO] · abertura institucional</div>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:6px;display:flex;">
+    <span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span>
+  </div>
+  <div style="position:relative;max-width:1240px;margin:0 auto;width:100%;padding:0 40px 110px;">
+    <p data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin:0 0 26px;">Ano-base 2025 · BH Press Comunicação e Sustentabilidade</p>
+    <h1 data-reveal data-delay="90" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:0;color:#fff;font-weight:800;font-size:clamp(48px,8.2vw,120px);line-height:.95;letter-spacing:-.03em;max-width:14ch;">Plataforma de Impacto 2026</h1>
+    <p data-reveal data-delay="200" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:30px 0 0;color:rgba(255,255,255,.85);font-size:clamp(18px,2vw,23px);line-height:1.55;max-width:50ch;">Este é o nosso terceiro relatório de impacto. Aqui, apresentamos nossos avanços, desafios e compromissos no período de 2025.</p>
+    <div data-reveal data-delay="320" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin-top:42px;display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.6);">
+      <span style="display:inline-block;width:22px;height:34px;border:1.5px solid rgba(255,255,255,.4);border-radius:11px;position:relative;"><span style="position:absolute;top:7px;left:50%;width:3px;height:7px;background:rgba(255,255,255,.7);border-radius:2px;transform:translateX(-50%);animation:bob 1.6s ease-in-out infinite;"></span></span>
+      role para explorar
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENSAGEM DA LIDERANÇA ============ -->
+<section style="position:relative;background:#ffffff;padding:clamp(80px,11vw,150px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,90px);align-items:center;" class="grid-2">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
+      <div style="position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;border:1px solid #e6e6e3;background-color:#f1f1ef;display:flex;align-items:center;justify-content:center;">
+        <img src="assets/webp-ceo-message-video-thumb/img-bhp-ceo-cover.webp" alt="Dulcemar Costa" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        <button type="button" aria-label="Reproduzir vídeo" style="position:relative;width:82px;height:82px;border-radius:50%;border:none;background:#00269f;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 40px -10px rgba(0,38,159,.6);transition:transform .25s ease;z-index:2;" style-hover="transform:scale(1.07);">
+          <span style="display:block;width:0;height:0;border-top:13px solid transparent;border-bottom:13px solid transparent;border-left:21px solid #fff;margin-left:5px;"></span>
+        </button>
+        <div style="position:absolute;bottom:14px;left:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#5c6268;background:#fff;border:1px solid #e6e6e3;padding:8px 11px;border-radius:6px;z-index:2;">Vídeo · Dulcemar da Costa, CEO</div>
+      </div>
+    </div>
+    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Mensagem da liderança</p>
+      <p style="margin:0;font-size:clamp(22px,2.5vw,32px);line-height:1.34;font-weight:600;letter-spacing:-.01em;color:#14161a;">Em 2025, a BH Press se certificou como uma <span style="color:#00269f;">Empresa B</span>, revisou seu contrato social, com avanços em governança e gestão de impactos e mudou sua razão social para <span style="color:#00269f;">BH Press Comunicação e Sustentabilidade</span> — refletindo de forma explícita um posicionamento que já vinha sendo construído na prática: integrar estratégia, reputação e impacto em uma mesma proposta de valor.</p>
+      <div style="margin-top:34px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+        <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:#14161a;color:#fff;font-weight:600;font-size:15px;padding:14px 24px;border-radius:9px;transition:transform .2s ease,background .2s ease;" style-hover="background:#00269f;transform:translateY(-2px);">Assista à mensagem completa <span style="font-size:17px;">→</span></a>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-22</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESTAQUES DO ANO ============ -->
+<section style="background:#0c0e12;color:#fff;padding:clamp(80px,11vw,140px) 0;overflow:hidden;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:50px;">
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 18px;">Destaques do ano</p>
+        <h2 style="margin:0;font-size:clamp(32px,4.6vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.02;max-width:18ch;">Os marcos que definiram o ciclo de 2025</h2>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button type="button" onClick="{{ scrollDestaquesLeft }}" aria-label="Anterior" style="width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font-size:20px;cursor:pointer;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">←</button>
+        <button type="button" onClick="{{ scrollDestaquesRight }}" aria-label="Próximo" style="width:50px;height:50px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font-size:20px;cursor:pointer;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">→</button>
+      </div>
+    </div>
+  </div>
+  <div ref="{{ destaquesRef }}" style="display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 40px 30px;scrollbar-width:none;-ms-overflow-style:none;max-width:1320px;margin:0 auto;">
+    <a href="/quem-somos" data-nav style="scroll-snap-align:start;flex:none;width:380px;background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(0,38,159,.7);">
+      <div style="position:relative;aspect-ratio:16/10;background-color:#1c2027;display:flex;align-items:flex-end;padding:14px;overflow:hidden;">
+        <img src="assets/webp-2025-highlights-cards/img-bp-highlights-2.webp" alt="Certificação Empresa B" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="padding:24px 26px 28px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#7e93d6;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem Somos</span>
+        <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;">Certificação Empresa B</h3>
+        <p style="margin:0;color:rgba(255,255,255,.62);font-size:15px;line-height:1.5;">Primeira agência de comunicação de Minas Gerais a integrar o Sistema B.</p>
+      </div>
+    </a>
+    <a href="/quem-somos" data-nav style="scroll-snap-align:start;flex:none;width:380px;background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(0,38,159,.7);">
+      <div style="position:relative;aspect-ratio:16/10;background-color:#1c2027;display:flex;align-items:flex-end;padding:14px;overflow:hidden;">
+        <img src="assets/webp-2025-highlights-cards/img-bp-highlights-1.webp" alt="COP 30" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="padding:24px 26px 28px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#7e93d6;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem Somos</span>
+        <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;">COP30 e &ldquo;A COP da verdade&rdquo;</h3>
+        <p style="margin:0;color:rgba(255,255,255,.62);font-size:15px;line-height:1.5;">Presença em Belém e o minidocumentário lançado no evento CineESG.</p>
+      </div>
+    </a>
+    <a href="/quem-somos" data-nav style="scroll-snap-align:start;flex:none;width:380px;background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(0,38,159,.7);">
+      <div style="position:relative;aspect-ratio:16/10;background-color:#1c2027;display:flex;align-items:flex-end;padding:14px;overflow:hidden;">
+        <img src="assets/webp-2025-highlights-cards/img-bp-highlights-4.webp" alt="Prêmio Troféu Jatobá" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="padding:24px 26px 28px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#7e93d6;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem Somos</span>
+        <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;">Prêmio Troféu Jatobá</h3>
+        <p style="margin:0;color:rgba(255,255,255,.62);font-size:15px;line-height:1.5;">Melhor Relatório de Sustentabilidade, em parceria com a MRV&amp;CO.</p>
+      </div>
+    </a>
+    <a href="/estrategia" data-nav style="scroll-snap-align:start;flex:none;width:380px;background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(159,214,173,.6);">
+      <div style="position:relative;aspect-ratio:16/10;background-color:#1c2027;display:flex;align-items:flex-end;padding:14px;overflow:hidden;">
+        <img src="assets/webp-2025-highlights-cards/img-bp-highlights-3.webp" alt="Dulcemar da Costa CEO" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="padding:24px 26px 28px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#6f8f88;"><span style="width:8px;height:8px;border-radius:50%;background:#1a3834;"></span>Estratégia &amp; Governança</span>
+        <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;">Dulcemar da Costa assume como CEO</h3>
+        <p style="margin:0;color:rgba(255,255,255,.62);font-size:15px;line-height:1.5;">Transição de governança e fortalecimento do posicionamento da agência.</p>
+      </div>
+    </a>
+    <a href="/estrategia" data-nav style="scroll-snap-align:start;flex:none;width:380px;background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(159,214,173,.6);">
+      <div style="position:relative;aspect-ratio:16/10;background-color:#1c2027;display:flex;align-items:flex-end;padding:14px;overflow:hidden;">
+        <img src="assets/webp-2025-highlights-cards/img-bp-highlights-5.webp" alt="Claude Partner" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="padding:24px 26px 28px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#6f8f88;"><span style="width:8px;height:8px;border-radius:50%;background:#1a3834;"></span>Estratégia &amp; Governança</span>
+        <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;">Adesão ao Claude Partner Network</h3>
+        <p style="margin:0;color:rgba(255,255,255,.62);font-size:15px;line-height:1.5;">10 colaboradores formados, rumo à certificação CCA-F com a Anthropic.</p>
+      </div>
+    </a>
+    <a href="/ambiente" data-nav style="scroll-snap-align:start;flex:none;width:380px;background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;text-decoration:none;transition:transform .3s ease,border-color .3s ease;" style-hover="transform:translateY(-6px);border-color:rgba(131,203,150,.6);">
+      <div style="position:relative;aspect-ratio:16/10;background-color:#1c2027;display:flex;align-items:flex-end;padding:14px;overflow:hidden;">
+        <img src="assets/webp-2025-highlights-cards/img-bp-highlights-6.webp" alt="Carbon Free Brasil" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div style="padding:24px 26px 28px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#7bbd95;"><span style="width:8px;height:8px;border-radius:50%;background:#3f9c63;"></span>Ambiente</span>
+        <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;">Adesão ao Carbon Free Brasil</h3>
+        <p style="margin:0;color:rgba(255,255,255,.62);font-size:15px;line-height:1.5;">Início da estruturação da gestão de emissões da agência.</p>
+      </div>
+    </a>
+    <div style="flex:none;width:8px;"></div>
+  </div>
+</section>
+
+<!-- ============ NAVEGAÇÃO POR SEÇÕES ============ -->
+<section style="background:#f6f6f5;padding:clamp(80px,11vw,150px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:60ch;margin-bottom:54px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Explore o relatório</p>
+      <h2 style="margin:0;font-size:clamp(32px,4.6vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.02;">Seis frentes que organizam<br>nossos impactos.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="sect-grid">
+
+      <a href="/quem-somos" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;min-height:320px;">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#00269f;"></div>
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;overflow:hidden;">
+          <img src="assets/webp-work-fronts-cards/img-bp-wor-front-5.webp" alt="Quem Somos" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">01 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#00269f;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Quem Somos</h3>
+          <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Identidade, propósito, trajetória, frentes de atuação, Empresa B, participação institucional e reconhecimento.</p>
+        </div>
+      </a>
+
+      <a href="/estrategia" data-nav data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .2s ease,box-shadow .2s ease;position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;min-height:320px;text-decoration:none;color:inherit;" style-hover="border-color:#1a3834;box-shadow:0 18px 40px -24px rgba(0,0,0,.4);">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#1a3834;"></div>
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;overflow:hidden;">
+          <img src="assets/webp-work-fronts-cards/img-bp-wor-front-2.webp" alt="Estratégia e Governança" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">02 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a3834;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Estratégia &amp; Governança</h3>
+          <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Agenda ESG / BH Press 2030, governança corporativa e transformação digital com IA.</p>
+        </div>
+      </a>
+
+      <a href="/pessoas" data-nav data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .2s ease,box-shadow .2s ease;position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;min-height:320px;text-decoration:none;color:inherit;" style-hover="border-color:#ff9965;box-shadow:0 18px 40px -24px rgba(0,0,0,.4);">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#ff9965;"></div>
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;overflow:hidden;">
+          <img src="assets/webp-work-fronts-cards/img-bp-wor-front-6.webp" alt="Pessoas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#d4763f;font-weight:600;">03 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#d4763f;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Pessoas</h3>
+          <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Emprego e cadeia de valor, diversidade e equidade, capacitação e educação.</p>
+        </div>
+      </a>
+
+      <a href="/clientes" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .2s ease,box-shadow .2s ease;position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;min-height:320px;text-decoration:none;color:inherit;" style-hover="border-color:#caa400;box-shadow:0 18px 40px -24px rgba(0,0,0,.4);">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#caa400;"></div>
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;overflow:hidden;">
+          <img src="assets/webp-work-fronts-cards/img-bp-wor-front-3.webp" alt="Clientes" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a7e00;font-weight:600;">04 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a7e00;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Clientes</h3>
+          <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Valor gerado, gestão de contratos e privacidade e proteção de dados.</p>
+        </div>
+      </a>
+
+      <a href="/ambiente" data-nav data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),border-color .2s ease,box-shadow .2s ease;position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;min-height:320px;text-decoration:none;color:inherit;" style-hover="border-color:#3f9c63;box-shadow:0 18px 40px -24px rgba(0,0,0,.4);">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#3f9c63;"></div>
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;overflow:hidden;">
+          <img src="assets/webp-work-fronts-cards/img-bp-wor-front-4.webp" alt="Ambiente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#2f7a4c;font-weight:600;">05 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#2f7a4c;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Ambiente</h3>
+          <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Gestão de impactos ambientais da operação e a nova agenda de emissões.</p>
+        </div>
+      </a>
+
+      <a href="/sobre" data-nav id="sobre" data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),box-shadow .2s ease;position:relative;display:flex;flex-direction:column;background:#14161a;color:#fff;border:1px solid #14161a;border-radius:14px;overflow:hidden;min-height:320px;text-decoration:none;" style-hover="box-shadow:0 18px 40px -20px rgba(0,0,0,.6);">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00269f,#3f9c63,#fade71,#ff9965,#ff6757);"></div>
+        <div style="padding:30px 26px;display:flex;flex-direction:column;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.6);font-weight:600;">06 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.5);">utilitário</span></div>
+          <h3 style="margin:14px 0 12px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Sobre este relatório</h3>
+          <p style="margin:0 0 22px;color:rgba(255,255,255,.7);font-size:15px;line-height:1.5;">Transparência metodológica: escopo, metodologia, índice GRI e contato. Acessível a partir do rodapé em qualquer página.</p>
+          <div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:7px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18);padding:5px 9px;border-radius:5px;">GRI 2-2 · 2-3 · 2-4 · 2-5</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER GLOBAL ============ -->
+<footer style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.1);" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;margin-bottom:22px;">
+          <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
+        </div>
+        <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p>
+        <a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;transition:color .2s ease;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <a href="#" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">in</a>
+          <a href="#" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">ig</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p>
+        <a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Quem Somos</a>
+        <a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Sobre este relatório</a>
+        <a href="#" style="display:block;font-size:15px;color:rgba(255,255,255,.75);transition:color .2s ease;" style-hover="color:#fff;">Índice GRI</a>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);">
+      <span>© 2026 BH Press Comunicação e Sustentabilidade</span>
+      <span>Relatório de Impacto 2026 · ano-base 2025</span>
+    </div>
+  </div>
+  <div style="height:6px;display:flex;">
+    <span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { navOpen:false };
+
+  renderVals(){
+    return {
+      navOpen: this.state.navOpen,
+      toggleNav: ()=> this.setState(s=>({navOpen:!s.navOpen})),
+      closeNav: ()=> this.setState({navOpen:false}),
+      scrollDestaquesLeft: ()=> this.scrollDestaques(-1),
+      scrollDestaquesRight: ()=> this.scrollDestaques(1),
+      destaquesRef: (el)=>{ this.destaquesEl = el; },
+    };
+  }
+
+  scrollDestaques(dir){
+    if(!this.destaquesEl) return;
+    const step = Math.min(420, this.destaquesEl.clientWidth*0.85);
+    this.destaquesEl.scrollBy({ left: dir*step, behavior:'smooth' });
+  }
+
+  componentDidMount(){
+    this.initReveal();
+    this.initParallax();
+    this.initHeader();
+    this.initNavLinks();
+    this.initHeroVideo();
+  }
+
+  initReveal(){
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const reveal = (el)=>{
+      const d = parseInt(el.getAttribute('data-delay')||'0',10);
+      el.style.transitionDelay = d+'ms';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    };
+    if(!('IntersectionObserver' in window)){ els.forEach(reveal); return; }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
+    }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(el=>{
+      const r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight*0.92){ reveal(el); }
+      else io.observe(el);
+    });
+    // failsafe
+    setTimeout(()=>els.forEach(reveal), 2200);
+  }
+
+  initParallax(){
+    const els = Array.from(document.querySelectorAll('[data-parallax]'));
+    if(!els.length) return;
+    let ticking = false;
+    const update = ()=>{
+      const vh = window.innerHeight;
+      els.forEach(el=>{
+        const f = parseFloat(el.getAttribute('data-parallax'))||0.15;
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height/2 - vh/2;
+        el.style.transform = 'translate3d(0,'+(center*-f).toFixed(1)+'px,0)';
+      });
+      ticking = false;
+    };
+    const onScroll = ()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll, { passive:true });
+    update();
+  }
+
+  initHeader(){
+    const hdr = document.getElementById('hdr');
+    if(!hdr) return;
+    const txEls = ()=> Array.from(hdr.querySelectorAll('.hdr-tx'));
+    const logo = document.getElementById('hdrLogo');
+    const apply = (solid)=>{
+      if(solid){
+        hdr.style.background = 'rgba(255,255,255,.94)';
+        hdr.style.backdropFilter = 'blur(10px)';
+        hdr.style.borderBottomColor = '#e6e6e3';
+        hdr.style.boxShadow = '0 4px 20px -14px rgba(0,0,0,.4)';
+        txEls().forEach(el=>{ el.style.color = '#14161a'; });
+        hdr.querySelectorAll('.hdr-cta').forEach(el=>{ el.style.borderColor = '#d9d9d6'; });
+        hdr.querySelectorAll('.hdr-burger span').forEach(el=>{ el.style.background = '#14161a'; });
+        const b = hdr.querySelector('.hdr-burger'); if(b) b.style.borderColor = '#d9d9d6';
+        if(logo) logo.style.filter = 'none';
+      } else {
+        hdr.style.background = 'transparent';
+        hdr.style.backdropFilter = 'none';
+        hdr.style.borderBottomColor = 'transparent';
+        hdr.style.boxShadow = 'none';
+        txEls().forEach(el=>{ el.style.color = '#fff'; });
+        hdr.querySelectorAll('.hdr-cta').forEach(el=>{ el.style.borderColor = 'rgba(255,255,255,.45)'; });
+        hdr.querySelectorAll('.hdr-burger span').forEach(el=>{ el.style.background = '#fff'; });
+        const b = hdr.querySelector('.hdr-burger'); if(b) b.style.borderColor = 'rgba(255,255,255,.4)';
+        if(logo) logo.style.filter = 'brightness(0) invert(1)';
+      }
+    };
+    let solid = false;
+    const onScroll = ()=>{
+      const want = window.scrollY > window.innerHeight - 90;
+      if(want !== solid){ solid = want; apply(solid); }
+    };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+    this.applyHeader = apply;
+  }
+
+  initHeroVideo(){
+    const video = document.getElementById('heroVideo');
+    if(!video) return;
+    video.muted = true; // garante autoplay permitido pelos navegadores
+    const tryPlay = ()=>{ const p = video.play(); if(p && p.catch) p.catch(()=>{}); };
+    tryPlay(); // hero é a abertura: toca imediatamente ao carregar
+    // re-tenta assim que houver dados (arquivo grande pode não estar pronto no mount)
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('canplay', tryPlay);
+
+    let ticking = false;
+    const onScroll = () => {
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const heroHeight = window.innerHeight;
+        if (window.scrollY > heroHeight) {
+          if(!video.paused) video.pause();        // fora de vista: pausa
+        } else {
+          if(video.paused) tryPlay();             // de volta ao hero: retoma
+        }
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive:true });
+  }
+
+  initNavLinks(){
+    const page = document.getElementById('page');
+    document.querySelectorAll('a[data-nav]').forEach(a=>{
+      const href = a.getAttribute('href');
+      if(!href || href.charAt(0)==='#') return;
+      a.addEventListener('click', (e)=>{
+        if(e.metaKey||e.ctrlKey||e.shiftKey) return;
+        e.preventDefault();
+        if(page){ page.style.transition='opacity .38s ease'; page.style.opacity='0'; }
+        setTimeout(()=>{ window.location.href = href; }, 360);
+      });
+    });
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#ffffff;color:#14161a;font-family:'Hanken Grotesk',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  ::selection{background:#00269f;color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    [data-reveal]{opacity:1 !important;transform:none !important;}
+    *{animation-duration:.001ms !important;}
+  }
+  @media (max-width:900px){
+    .hdr-nav{display:none !important;}
+    .hdr-burger{display:flex !important;}
+    .split-2{grid-template-columns:1fr !important;}
+    .val-grid{grid-template-columns:1fr 1fr !important;}
+    .frentes-grid{grid-template-columns:1fr !important;}
+    .award-grid{grid-template-columns:1fr !important;}
+    .foot-grid{grid-template-columns:1fr 1fr !important;}
+  }
+  @media (max-width:620px){
+    .val-grid{grid-template-columns:1fr !important;}
+    .foot-grid{grid-template-columns:1fr !important;}
+    .tabs-bar{overflow-x:auto;}
+  }
+  /* ---- Cards "Nossos valores": outline degradê animado no hover ---- */
+  @keyframes valBorderFlow{0%{background-position:0% 50%;}100%{background-position:300% 50%;}}
+  .val-card::before{
+    content:"";position:absolute;inset:-1.5px;border-radius:14px;padding:1.5px;
+    background:linear-gradient(90deg,#00269f,#3f9c63,#fade71,#ff9965,#ff6757,#00269f);
+    background-size:300% 100%;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .35s ease;pointer-events:none;
+  }
+  .val-card:hover::before{opacity:1;animation:valBorderFlow 3s linear infinite;}
+  @media (prefers-reduced-motion:reduce){
+    .val-card:hover::before{animation:none;}
+  }
+  /* Círculo-mosaico da trajetória: reposiciona ao colapsar o grid */
+  @media (max-width:900px){
+    .traj-circle-wrap{top:auto;bottom:auto;left:50%;transform:translate(-50%,0)!important;position:relative;width:min(460px,82vw);margin:0 auto 8px;}
+    .traj-spacer{display:none;}
+  }
+</style>
+</helmet>
+
+<div id="page" style="animation:pageIn .8s ease both;">
+
+<header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e6e6e3;transition:background .4s ease,border-color .4s ease;">
+  <div style="max-width:1240px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;gap:24px;">
+    <a href="/" data-nav style="display:flex;align-items:center;">
+      <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:32px;display:block;">
+    </a>
+    <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:4px;">
+      <a href="/quem-somos" data-nav style="font-size:14px;font-weight:600;color:#00269f;padding:8px 13px;border-radius:6px;background:rgba(0,38,159,.07);">Quem Somos</a>
+      <a href="/estrategia" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 13px;border-radius:6px;transition:background .2s ease;" style-hover="background:#f6f6f5;">Estratégia</a>
+      <a href="/pessoas" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 13px;border-radius:6px;transition:background .2s ease;" style-hover="background:#f6f6f5;">Pessoas</a>
+      <a href="/clientes" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 13px;border-radius:6px;transition:background .2s ease;" style-hover="background:#f6f6f5;">Clientes</a>
+      <a href="/ambiente" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 13px;border-radius:6px;transition:background .2s ease;" style-hover="background:#f6f6f5;">Ambiente</a>
+      <a href="/sobre" data-nav style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 14px;border-radius:7px;transition:background .2s ease;" style-hover="background:#f6f6f5;">← Home</a>
+    </nav>
+    <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+      <span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span>
+    </button>
+  </div>
+</header>
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:6px;">
+    <button type="button" onClick="{{ closeNav }}" aria-label="Fechar" style="position:absolute;top:24px;right:32px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;font-size:20px;cursor:pointer;">×</button>
+    <a href="/" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Home</a>
+    <a href="/quem-somos" data-nav style="color:#83a4ff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
+    <a href="/estrategia" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Estratégia &amp; Governança</a>
+    <a href="/pessoas" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Pessoas</a>
+    <a href="/clientes" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Clientes</a>
+    <a href="/ambiente" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Ambiente</a>
+    <a href="/sobre" data-nav style="color:rgba(255,255,255,.7);font-size:30px;font-weight:700;padding:14px 0;">Sobre este relatório</a>
+  </div>
+</sc-if>
+
+<!-- ============ SECTION HERO ============ -->
+<section style="position:relative;padding:170px 0 0;background:#fff;overflow:hidden;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;gap:14px;margin-bottom:30px;">
+      <a href="/" data-nav style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;transition:color .2s ease;" style-hover="color:#00269f;">Home</a>
+      <span style="color:#cfcfcc;">/</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">Seção 01 / 06</span>
+    </div>
+    <h1 data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:0;font-size:clamp(54px,9vw,128px);font-weight:800;letter-spacing:-.035em;line-height:.92;">Quem Somos</h1>
+    <p data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:34px 0 0;font-size:clamp(19px,2.1vw,25px);line-height:1.5;color:#3d4248;max-width:60ch;">Identidade, propósito e trajetória da BH Press — o que fazemos, nossa transformação em Empresa B, a participação institucional e o reconhecimento de mercado.</p>
+  </div>
+  <div data-reveal data-delay="260" style="opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);margin-top:70px;position:relative;height:clamp(320px,46vw,560px);overflow:hidden;">
+    <style>
+      .bh-slideshow { position: absolute; inset: 0; overflow: hidden; background:#eef0ef; }
+      .bh-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity 1.5s ease-in-out, transform 6s ease-out; transform: scale(1.0); }
+      .bh-slide.active { opacity: 1; transform: scale(1.05); }
+    </style>
+    <div class="bh-slideshow" id="qsSlideshow">
+      <img class="bh-slide active" src="assets/webp-quem-somos/img-bp-quem-somos-1.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-2.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-3.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-4.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-5.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-6.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-7.webp" alt="Equipe BH Press">
+      <img class="bh-slide" src="assets/webp-quem-somos/img-bp-quem-somos-8.webp" alt="Equipe BH Press">
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:5px;background:#00269f;z-index:10;"></div>
+    <script>
+      setInterval(() => {
+        const slides = document.querySelectorAll('#qsSlideshow .bh-slide');
+        if (slides.length === 0) return;
+        let activeIdx = -1;
+        slides.forEach((slide, idx) => {
+          if (slide.classList.contains('active')) activeIdx = idx;
+        });
+        if (activeIdx > -1) {
+          slides[activeIdx].classList.remove('active');
+          const nextIdx = (activeIdx + 1) % slides.length;
+          slides[nextIdx].classList.add('active');
+        }
+      }, 5000);
+    </script>
+  </div>
+</section>
+
+<!-- ============ NOSSA TRAJETÓRIA ============ -->
+<section style="background:#fff;padding:clamp(80px,11vw,140px) 0;overflow:hidden;position:relative;">
+  <div class="traj-circle-wrap" style="position:absolute;top:50%;left:0;transform:translate(-32%,-50%);width:min(1320px,80vw);aspect-ratio:1/1;pointer-events:none;z-index:0;">
+    <img id="trajCircle" data-scroll-rotate="0.06" src="assets/webp-circle-mosaic/img-bp-circle-mosaic.webp" alt="Mosaico de fotos da equipe BH Press ao longo de três décadas" style="width:100%;height:100%;object-fit:contain;display:block;will-change:transform;">
+  </div>
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,84px);align-items:center;position:relative;z-index:1;" class="split-2">
+    <div aria-hidden="true" class="traj-spacer" style="min-height:clamp(420px,46vw,580px);"></div>
+    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Nossa trajetória</p>
+      <p style="margin:0 0 22px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Ao longo de três décadas, construímos uma trajetória marcada pela capacidade de adaptação, leitura de contexto e evolução contínua. Fundada como assessoria de imprensa e agência produtora de conteúdo, consolidamos nossa atuação em frentes como comunicação institucional, interna, relacionamento com a mídia e com comunidades, branding, estratégia, planejamento, digital e comunicação para a sustentabilidade, com soluções sob medida para os desafios de cada cliente.</p>
+      <p style="margin:0;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Esse percurso acompanhou as transformações do mercado e o avanço das demandas das organizações, que passaram a exigir uma abordagem mais integrada, estratégica, orientada por dados e conectada aos desafios reputacionais, culturais, sociais e ambientais do nosso tempo.</p>
+      <div style="margin-top:28px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-1 · 2-6</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOSSO PROPÓSITO ============ -->
+<section style="position:relative;background:#001540;color:#fff;padding:clamp(100px,14vw,180px) 0;overflow:hidden;">
+  <video id="propositoVideo" class="dc-scroll-video" muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+    <source src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video-quem-somos-comp.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:rgba(0, 20, 75, 0.84);"></div>
+  <div style="position:relative;max-width:1100px;margin:0 auto;padding:0 40px;text-align:center;">
+    <p data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);margin:0 0 36px;">Nosso propósito</p>
+    <p data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);margin:0;font-size:clamp(28px,4.2vw,56px);font-weight:700;letter-spacing:-.02em;line-height:1.18;">Construir e compartilhar sentidos para conectar negócios e pessoas, contribuindo para relações mais transparentes, prósperas e transformadoras.</p>
+  </div>
+</section>
+
+<!-- ============ NOSSOS VALORES ============ -->
+<section style="background:#fff;padding:clamp(80px,11vw,140px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-bottom:50px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Nossos valores</p>
+      <h2 style="margin:0;font-size:clamp(30px,4vw,50px);font-weight:700;letter-spacing:-.02em;line-height:1.04;max-width:20ch;">O que nos guia, todos os dias.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;" class="val-grid">
+      <div data-reveal class="val-card" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:26px 22px;min-height:230px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#00269f;">01</span>
+        </div>
+        <p style="margin:auto 0 0;font-size:17px;line-height:1.45;font-weight:500;color:#1a1d22;">Somos confiáveis e, para nós, a integridade é inegociável.</p>
+      </div>
+      <div data-reveal data-delay="70" class="val-card" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:26px 22px;min-height:230px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#00269f;">02</span>
+        </div>
+        <p style="margin:auto 0 0;font-size:17px;line-height:1.45;font-weight:500;color:#1a1d22;">Fazemos sempre o melhor, com consistência e foco.</p>
+      </div>
+      <div data-reveal data-delay="140" class="val-card" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:26px 22px;min-height:230px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#00269f;">03</span>
+        </div>
+        <p style="margin:auto 0 0;font-size:17px;line-height:1.45;font-weight:500;color:#1a1d22;">Somos todos responsáveis pelo clima de trabalho.</p>
+      </div>
+      <div data-reveal data-delay="210" class="val-card" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:26px 22px;min-height:230px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#00269f;">04</span>
+        </div>
+        <p style="margin:auto 0 0;font-size:17px;line-height:1.45;font-weight:500;color:#1a1d22;">Atendemos o cliente como gostaríamos de ser atendidos.</p>
+      </div>
+      <div data-reveal data-delay="280" class="val-card" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:26px 22px;min-height:230px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:#00269f;">05</span>
+        </div>
+        <p style="margin:auto 0 0;font-size:17px;line-height:1.45;font-weight:500;color:#1a1d22;">O resultado é importante, mas o processo também.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O QUE FAZEMOS ============ -->
+<section style="background:#f6f6f5;padding:clamp(80px,11vw,140px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,84px);align-items:start;" class="split-2">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);position:sticky;top:110px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">O que fazemos</p>
+      <h2 style="margin:0 0 26px;font-size:clamp(30px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Soluções que constroem posicionamentos genuínos.</h2>
+      <button type="button" onClick="{{ openSeg }}" style="display:inline-flex;align-items:center;gap:10px;background:#14161a;color:#fff;font-weight:600;font-size:15px;padding:14px 22px;border:none;border-radius:9px;cursor:pointer;transition:transform .2s ease,background .2s ease;" style-hover="background:#00269f;transform:translateY(-2px);">
+        Segmentos atendidos em 2025 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;opacity:.7;">+40 clientes</span>
+      </button>
+    </div>
+    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
+      <p style="margin:0 0 22px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Trabalhamos na construção de soluções que apoiam nossos clientes na definição e prática de posicionamentos, na gestão da estratégia, na clareza das mensagens, no engajamento de stakeholders, na comunicação transparente de resultados e compromissos, sempre com base nas boas práticas e nos pilares sólidos do nosso campo, e incorporando dados, métricas, tecnologia e inovação.</p>
+      <p style="margin:0 0 26px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Dessa forma, apoiamos a construção de posicionamentos de marca genuínos, reduzindo as assimetrias de informação, fortalecendo a tomada de decisão — elementos importantes para gerar valor e confiança no longo prazo.</p>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;background:#fff;padding:6px 11px;border-radius:6px;">GRI 2-6 · 2-23 · 2-24 · 2-25</span>
+
+      <h3 style="margin:46px 0 22px;font-size:21px;font-weight:700;letter-spacing:-.01em;">Principais frentes de atuação</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;" class="frentes-grid">
+        <div style="display:flex;gap:12px;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">01</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Estratégias de posicionamento institucional e reputação</span></div>
+        <div style="display:flex;gap:12px;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">02</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Comunicação interna e cultura organizacional</span></div>
+        <div style="display:flex;gap:12px;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">03</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Gestão de crises</span></div>
+        <div style="display:flex;gap:12px;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">04</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Comunicação com comunidades</span></div>
+        <div style="display:flex;gap:12px;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">05</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Assessoria de imprensa e gestão de relacionamento com stakeholders</span></div>
+        <div style="display:flex;gap:12px;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">06</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Relatórios de sustentabilidade e impacto (GRI, IFRS S1 e S2, SASB, finanças sustentáveis) e consultoria para estruturação de agendas ESG</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRANSFORMAÇÃO / EMPRESA B ============ -->
+<section style="background:#fff;padding:clamp(80px,11vw,140px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:64ch;margin-bottom:48px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Transformação</p>
+      <p style="margin:0 0 22px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">O marco de 30 anos refletiu o momento atual da BH Press: uma agência que utiliza a experiência acumulada e segue em movimento para responder aos desafios da comunicação. Esse movimento também se conecta à consolidação da nossa agenda de sustentabilidade.</p>
+      <p style="margin:0;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Em 2025, conquistamos a certificação de Empresa B, tornando-nos a primeira agência de comunicação de Minas Gerais a integrar esse movimento global. A conquista representa a consolidação de um modelo de atuação que busca equilibrar resultados econômicos com a geração de valor para a sociedade.</p>
+    </div>
+    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);position:relative;background:#1a3834;color:#fff;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.2fr 1fr;gap:0;" class="split-2">
+      <div style="padding:clamp(34px,4vw,56px);">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#9fd6ad;border:1px solid rgba(159,214,173,.4);padding:6px 12px;border-radius:20px;">● Empresa B Certificada</span>
+        <h3 style="margin:26px 0 18px;font-size:clamp(26px,3vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.12;">1ª agência de comunicação de Minas Gerais no Sistema B.</h3>
+        <p style="margin:0 0 28px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.78);max-width:48ch;">Esse compromisso se reflete tanto na condução dos projetos quanto na forma de orientar clientes, contribuindo para o avanço de práticas mais transparentes, estruturadas e alinhadas às agendas globais de sustentabilidade.</p>
+        <span style="display:inline-flex;align-items:center;gap:9px;font-size:14px;color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.15);padding-top:20px;">
+          Relacionado: <span style="font-weight:600;color:#fff;">Estratégia &amp; Governança · Jornada B / Agenda ESG</span> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9fd6ad;">em breve</span>
+        </span>
+      </div>
+      <div style="position:relative;min-height:260px;background-color:#16302c;overflow:hidden;">
+        <video class="dc-scroll-video" muted playsinline preload="metadata" data-loop-start="6" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <source src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-video-bcorp.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTICIPAÇÃO INSTITUCIONAL (TABS) ============ -->
+<section style="background:#0c0e12;color:#fff;padding:clamp(80px,11vw,140px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:64ch;margin-bottom:14px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 18px;">Participação institucional</p>
+      <h2 style="margin:0 0 16px;font-size:clamp(30px,4vw,52px);font-weight:700;letter-spacing:-.02em;line-height:1.04;">Presença que amplia repertório e fortalece o setor.</h2>
+      <p style="margin:0;font-size:18px;line-height:1.6;color:rgba(255,255,255,.7);">Acreditamos que a comunicação tem papel essencial na construção de relações de confiança entre organizações, pessoas e sociedade. Por isso, participamos de associações, fóruns e iniciativas que fortalecem a comunicação corporativa, a agenda ESG e a transparência nos negócios. <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.5);">GRI 2-28</span></p>
+    </div>
+
+    <div class="tabs-bar" style="display:flex;gap:8px;border-bottom:1px solid rgba(255,255,255,.12);margin:38px 0 0;">
+      <button type="button" data-tab="0" onClick="{{ setTab0 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.6);font-family:inherit;font-size:15px;font-weight:600;padding:14px 18px;cursor:pointer;white-space:nowrap;transition:color .2s ease,border-color .2s ease;">Filiação</button>
+      <button type="button" data-tab="1" onClick="{{ setTab1 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.6);font-family:inherit;font-size:15px;font-weight:600;padding:14px 18px;cursor:pointer;white-space:nowrap;transition:color .2s ease,border-color .2s ease;">Repertório e debate</button>
+      <button type="button" data-tab="2" onClick="{{ setTab2 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.6);font-family:inherit;font-size:15px;font-weight:600;padding:14px 18px;cursor:pointer;white-space:nowrap;transition:color .2s ease,border-color .2s ease;">COP30 e agenda climática</button>
+      <button type="button" data-tab="3" onClick="{{ setTab3 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,.6);font-family:inherit;font-size:15px;font-weight:600;padding:14px 18px;cursor:pointer;white-space:nowrap;transition:color .2s ease,border-color .2s ease;">Glossário</button>
+    </div>
+
+    <div id="tabpanels" style="padding-top:44px;min-height:300px;">
+      <!-- 0 Filiação -->
+      <div data-panel="0" data-disp="grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;" class="frentes-grid">
+        <div style="background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:28px;">
+          <div style="height:72px;display:flex;align-items:center;margin-bottom:22px;"><img src="assets/webp-filiados-logos/aberje-vector-logo.webp" alt="Aberje" style="height:64px;width:auto;max-width:100%;object-fit:contain;display:block;"></div>
+          <p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.62);">Associação Brasileira de Comunicação Empresarial — compartilhamento de conhecimento, boas práticas e atualização técnica do setor.</p>
+        </div>
+        <div style="background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:28px;">
+          <div style="height:72px;display:flex;align-items:center;margin-bottom:22px;"><img src="assets/webp-filiados-logos/abracom-vector-logo.webp" alt="Abracom" style="height:96px;width:auto;max-width:100%;object-fit:contain;display:block;"></div>
+          <p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.62);">Associação Brasileira das Agências de Comunicação — desenvolvimento do setor e troca entre agências.</p>
+        </div>
+        <div style="background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:28px;">
+          <div style="height:72px;display:flex;align-items:center;margin-bottom:22px;"><img src="assets/webp-filiados-logos/pglobal-vector-logo.webp" alt="Pacto Global da ONU" style="height:72px;width:auto;max-width:100%;object-fit:contain;display:block;"></div>
+          <p style="margin:0 0 10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:#9fd6ad;">desde 2024</span></p>
+          <p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.62);">Iniciativa que reúne organizações comprometidas com princípios universais de direitos humanos, trabalho, meio ambiente e combate à corrupção.</p>
+        </div>
+      </div>
+      <!-- 1 Repertório -->
+      <div data-panel="1" style="display:none;max-width:75ch;">
+        <p style="margin:0 0 22px;font-size:clamp(18px,1.7vw,22px);line-height:1.6;color:rgba(255,255,255,.82);">Essa participação amplia nosso repertório, fortalece nossa escuta e nos mantém próximas das discussões que movimentam o setor. Também contribui para qualificar nossa atuação em temas como comunicação corporativa, reputação, sustentabilidade, transparência e relacionamento com públicos estratégicos.</p>
+        <p style="margin:0;font-size:clamp(18px,1.7vw,22px);line-height:1.6;color:rgba(255,255,255,.82);">Com a participação nesses espaços também contribuímos para a circulação de conhecimento e para o amadurecimento do debate público sobre comunicação e sustentabilidade. Para nós, atuar em colaboração com o nosso setor e com organizações com as quais guardamos afinidade de propósito é uma forma de aprender, compartilhar experiências e ampliar o nosso impacto positivo.</p>
+      </div>
+      <!-- 2 COP30 -->
+      <div data-panel="2" style="display:none;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;" class="split-2">
+          <div>
+            <p style="margin:0 0 20px;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:rgba(255,255,255,.82);">Em 2025, estivemos presentes na COP30, em Belém, acompanhando debates e ouvindo especialistas, ativistas, lideranças indígenas, acadêmicos e representantes de diferentes setores. A partir dessa escuta, registramos perspectivas sobre a urgência da crise climática e os desafios de transformar compromissos em ação.</p>
+            <p style="margin:0 0 26px;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:rgba(255,255,255,.82);">Como desdobramento dessa cobertura, produzimos o minidocumentário &ldquo;A COP da verdade&rdquo;, lançado em 26/05/2026, na primeira edição do evento &ldquo;CineESG: haverá futuro?&rdquo;, seguido de uma mesa-redonda sobre o futuro do ESG e negócios de impacto. O evento, gratuito, aconteceu no Cine Santa Tereza, cinema público e de rua de Belo Horizonte.</p>
+            <p style="margin:0;font-size:13px;color:rgba(255,255,255,.5);">Relacionado: <span style="color:#7bbd95;font-weight:600;">Ambiente · Agenda climática</span> <span style="font-family:'JetBrains Mono',monospace;font-size:11px;">em breve</span></p>
+          </div>
+          <div style="position:relative;aspect-ratio:16/9;border-radius:13px;overflow:hidden;background:#000;">
+            <iframe src="https://www.youtube-nocookie.com/embed/oqVE9voXMBM?rel=0" title="A COP da verdade" style="position:absolute;inset:0;width:100%;height:100%;border:0;" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <!-- 3 Glossário -->
+      <div data-panel="3" style="display:none;">
+        <div style="background:#15181e;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:clamp(30px,4vw,52px);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(34px,4vw,52px);align-items:center;" class="split-2">
+          <div>
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#fade71;border:1px solid rgba(250,222,113,.4);padding:6px 12px;border-radius:20px;">Material gratuito</span>
+            <h3 style="margin:22px 0 14px;font-size:clamp(24px,2.6vw,34px);font-weight:700;letter-spacing:-.01em;">Glossário Clima, COP e sustentabilidade</h3>
+            <p style="margin:0 0 30px;font-size:17px;line-height:1.6;color:rgba(255,255,255,.72);">Antes da realização da COP30, lançamos um material gratuito para apoiar profissionais, organizações e demais públicos na compreensão de termos relacionados a clima e sustentabilidade. A iniciativa nasceu da percepção de que comunicar bem sobre esses assuntos exige domínio técnico, clareza e capacidade de traduzir conceitos complexos para diferentes públicos.</p>
+            <a href="https://bhpress.com.br/wp-content/uploads/2025/08/Glossario_COP_30_BHPress-2.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#fade71;color:#14161a;font-weight:700;font-size:15px;padding:16px 26px;border-radius:10px;white-space:nowrap;transition:transform .2s ease;" style-hover="transform:translateY(-2px);">↓ Baixar glossário</a>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <img src="assets/webp-glossario/img-bp-glossario.webp" alt="Capa do Glossário Clima, COP e sustentabilidade" style="display:block;width:70%;height:auto;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECONHECIMENTO E IMPACTO ============ -->
+<section style="background:#fff;padding:clamp(80px,11vw,140px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:60ch;margin-bottom:50px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Reconhecimento e impacto</p>
+      <h2 style="margin:0 0 16px;font-size:clamp(30px,4vw,52px);font-weight:700;letter-spacing:-.02em;line-height:1.04;">Duas premiações que reforçam nossa credibilidade.</h2>
+      <p style="margin:0;font-size:18px;line-height:1.6;color:#5c6268;">Em 2025, fomos reconhecidos por premiações que representam o fortalecimento da nossa credibilidade institucional e a ampliação do impacto positivo que geramos para os clientes e para o setor de comunicação.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;" class="award-grid">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;border:1px solid #e6e6e3;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;background-image:repeating-linear-gradient(135deg,rgba(20,22,26,.045) 0 1px,transparent 1px 13px);"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9aa0a6;background:#fff;border:1px solid #e6e6e3;padding:4px 8px;border-radius:5px;">[CLIENT_CASE_IMAGE]</span></div>
+        <div style="padding:30px 30px 34px;">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">★ Prêmio</span>
+          <h3 style="margin:14px 0 10px;font-size:24px;font-weight:700;letter-spacing:-.01em;">Troféu Jatobá</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#5c6268;">Categoria de melhor Relatório de Sustentabilidade, conquistado junto com a MRV&amp;CO — reforçando a relevância da nossa atuação em projetos que geram valor e transparência para os clientes.</p>
+        </div>
+      </div>
+      <div data-reveal data-delay="100" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;border:1px solid #e6e6e3;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+        <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;background-image:repeating-linear-gradient(135deg,rgba(20,22,26,.045) 0 1px,transparent 1px 13px);"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9aa0a6;background:#fff;border:1px solid #e6e6e3;padding:4px 8px;border-radius:5px;">[TEAM_PHOTO]</span></div>
+        <div style="padding:30px 30px 34px;">
+          <span style="display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">★ Ranking · 2º ano</span>
+          <h3 style="margin:14px 0 10px;font-size:24px;font-weight:700;letter-spacing:-.01em;">Top Mega Brasil Sudeste</h3>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:#5c6268;">Pelo segundo ano consecutivo, entre as top 5 agências de comunicação da região sudeste — resultado que valida a consistência da nossa presença no mercado e a credibilidade junto aos parceiros.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT SECTION CTA ============ -->
+<section style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <a href="/estrategia" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#14161a;color:#fff;border-radius:16px;padding:clamp(34px,4vw,56px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 12px;">Próxima seção · 02 / 06</p>
+        <h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Estratégia &amp; Governança</h2>
+      </div>
+      <span style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#83c0b3;color:#14241b;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.1);" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;margin-bottom:22px;">
+          <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
+        </div>
+        <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p>
+        <a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;transition:color .2s ease;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <a href="#" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">in</a>
+          <a href="#" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">ig</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p>
+        <a href="/" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Home</a>
+        <a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Sobre este relatório</a>
+        <a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);transition:color .2s ease;" style-hover="color:#fff;">Índice GRI</a>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);">
+      <span>© 2026 BH Press Comunicação e Sustentabilidade</span>
+      <span>Relatório de Impacto 2026 · ano-base 2025</span>
+    </div>
+  </div>
+  <div style="height:6px;display:flex;">
+    <span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span>
+  </div>
+</footer>
+
+</div>
+
+<!-- ============ MODAL: SEGMENTOS ============ -->
+<sc-if value="{{ segOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeSeg }}" style="position:fixed;inset:0;z-index:90;background:rgba(8,10,14,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;animation:pageIn .25s ease both;">
+    <div onClick="{{ stop }}" style="background:#fff;border-radius:18px;max-width:760px;width:100%;max-height:86vh;overflow:auto;padding:clamp(30px,4vw,46px);position:relative;">
+      <button type="button" onClick="{{ closeSeg }}" aria-label="Fechar" style="position:absolute;top:20px;right:22px;width:40px;height:40px;border:1px solid #e6e6e3;background:#fff;border-radius:9px;font-size:20px;cursor:pointer;color:#14161a;">×</button>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#00269f;margin:0 0 14px;">Segmentos atendidos em 2025</p>
+      <h3 style="margin:0 0 10px;font-size:clamp(26px,3vw,38px);font-weight:800;letter-spacing:-.02em;">Mais de 40 clientes, 13 segmentos.</h3>
+      <p style="margin:0 0 28px;font-size:17px;line-height:1.6;color:#5c6268;max-width:54ch;">Em 2025, nosso atendimento foi dedicado a mais de 40 clientes dos seguintes segmentos:</p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px;">
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Mineração</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Siderurgia</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Construção</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Logística</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Água</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Energia</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Bancário</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Social</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Papel e celulose</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Agrícola</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Educação</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Saúde</span>
+        <span style="font-size:15px;font-weight:500;color:#1a1d22;background:#f6f6f5;border:1px solid #ececea;padding:9px 16px;border-radius:30px;">Tecnologia</span>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { navOpen:false, segOpen:false, tab:0 };
+
+  renderVals(){
+    return {
+      navOpen: this.state.navOpen,
+      segOpen: this.state.segOpen,
+      toggleNav: ()=> this.setState(s=>({navOpen:!s.navOpen})),
+      closeNav: ()=> this.setState({navOpen:false}),
+      openSeg: ()=> this.setState({segOpen:true}),
+      closeSeg: ()=> this.setState({segOpen:false}),
+      stop: (e)=> e.stopPropagation(),
+      setTab0: ()=> this.selectTab(0),
+      setTab1: ()=> this.selectTab(1),
+      setTab2: ()=> this.selectTab(2),
+      setTab3: ()=> this.selectTab(3),
+    };
+  }
+
+  selectTab(i){
+    this.setState({ tab:i });
+    const panels = document.querySelectorAll('#tabpanels [data-panel]');
+    panels.forEach(p=>{ p.style.display = (parseInt(p.getAttribute('data-panel'),10)===i) ? (p.getAttribute('data-disp')||'block') : 'none'; });
+    const btns = document.querySelectorAll('.tabbtn');
+    btns.forEach(b=>{
+      const on = parseInt(b.getAttribute('data-tab'),10)===i;
+      b.style.color = on ? '#fff' : 'rgba(255,255,255,.6)';
+      b.style.borderBottomColor = on ? '#fff' : 'transparent';
+    });
+  }
+
+  componentDidMount(){
+    this.initReveal();
+    this.initParallax();
+    this.initNavLinks();
+    this.initScrollVideos();
+    this.initScrollRotate();
+    this.selectTab(0);
+    document.addEventListener('keydown', this._esc = (e)=>{ if(e.key==='Escape') this.setState({segOpen:false, navOpen:false}); });
+  }
+
+  componentWillUnmount(){ if(this._esc) document.removeEventListener('keydown', this._esc); }
+
+  initReveal(){
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const counted = new Set();
+    const runCount = (el)=>{
+      const t = el.querySelector('[data-count]');
+      if(!t || counted.has(t)) return;
+      counted.add(t);
+      const target = parseFloat(t.getAttribute('data-count'))||0;
+      const suffix = t.getAttribute('data-suffix')||'';
+      const dur = 1300; const start = performance.now();
+      const tick = (now)=>{
+        const p = Math.min(1,(now-start)/dur);
+        const eased = 1-Math.pow(1-p,3);
+        t.textContent = Math.round(target*eased)+suffix;
+        if(p<1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const reveal = (el)=>{
+      const d = parseInt(el.getAttribute('data-delay')||'0',10);
+      el.style.transitionDelay = d+'ms';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      runCount(el);
+    };
+    if(!('IntersectionObserver' in window)){ els.forEach(reveal); return; }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
+    }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(el=>{
+      const r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight*0.92){ reveal(el); }
+      else io.observe(el);
+    });
+    setTimeout(()=>els.forEach(reveal), 2400);
+  }
+
+  initParallax(){
+    const els = Array.from(document.querySelectorAll('[data-parallax]'));
+    if(!els.length) return;
+    let ticking = false;
+    const update = ()=>{
+      const vh = window.innerHeight;
+      els.forEach(el=>{
+        const f = parseFloat(el.getAttribute('data-parallax'))||0.12;
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height/2 - vh/2;
+        el.style.transform = 'translate3d(0,'+(center*-f).toFixed(1)+'px,0)';
+      });
+      ticking = false;
+    };
+    const onScroll = ()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll, { passive:true });
+    update();
+  }
+
+  initScrollRotate(){
+    const els = Array.from(document.querySelectorAll('[data-scroll-rotate]'));
+    if(!els.length) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let ticking = false;
+    const update = ()=>{
+      const y = window.scrollY || window.pageYOffset || 0;
+      els.forEach(el=>{
+        const f = parseFloat(el.getAttribute('data-scroll-rotate')) || 0.05;
+        el.style.transform = 'rotate(' + (y * f).toFixed(2) + 'deg)'; // desce=horário, sobe=anti-horário
+      });
+      ticking = false;
+    };
+    const onScroll = ()=>{ if(!ticking){ ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    update();
+  }
+
+  initScrollVideos(){
+    const vids = Array.from(document.querySelectorAll('.dc-scroll-video'));
+    if(!vids.length) return;
+    const play = (v)=>{ const p = v.play(); if(p && p.catch) p.catch(()=>{}); };
+    // loop a partir de um ponto custom (data-loop-start em segundos)
+    vids.forEach(v=>{
+      v.muted = true;
+      const ls = parseFloat(v.getAttribute('data-loop-start'));
+      if(isNaN(ls)) return;
+      const seekStart = ()=>{ try{ v.currentTime = ls; }catch(e){} };
+      v.addEventListener('loadedmetadata', seekStart);       // já entra no ponto certo
+      v.addEventListener('ended', ()=>{ seekStart(); play(v); }); // reinicia em ls (loop manual)
+    });
+    if(!('IntersectionObserver' in window)){ vids.forEach(v=>play(v)); return; }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        const v = e.target; v.muted = true;          // garante autoplay permitido
+        if(e.isIntersecting) play(v); else v.pause(); // toca ao entrar, pausa ao sair
+      });
+    }, { threshold:0.25 });
+    vids.forEach(v=>io.observe(v));
+  }
+
+  initNavLinks(){
+    const page = document.getElementById('page');
+    document.querySelectorAll('a[data-nav]').forEach(a=>{
+      const href = a.getAttribute('href');
+      if(!href || href.charAt(0)==='#') return;
+      a.addEventListener('click', (e)=>{
+        if(e.metaKey||e.ctrlKey||e.shiftKey) return;
+        e.preventDefault();
+        if(page){ page.style.transition='opacity .38s ease'; page.style.opacity='0'; }
+        setTimeout(()=>{ window.location.href = href; }, 360);
+      });
+    });
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '/function rootNameForDocument/{f=1} f{print NR\": \"$0} f&&/^\\\\s*}/{c++; if\\(c>=1\\){exit}}' support.js)",
+      "Bash(awk '/function dcNameFromPath/{f=1} f{print; n++} f&&n>14{exit}' support.js)",
+      "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type} size=%{size_download}\\\\n\" -r 0-1 \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video-quem-somos-comp.mp4\")",
+      "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type} length=%{size_download} bytes\\\\n\" \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video.mp4\" --max-time 60)",
+      "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type}\\\\n\" -r 0-1 \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-video-bcorp.mp4\")"
+    ]
+  }
+}

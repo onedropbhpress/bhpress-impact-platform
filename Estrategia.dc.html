@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#ffffff;color:#14161a;font-family:'Hanken Grotesk',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  ::selection{background:#1a3834;color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}[data-reveal]{opacity:1 !important;transform:none !important;}*{animation-duration:.001ms !important;}}
+  @media (max-width:900px){
+    .hdr-nav{display:none !important;}
+    .hdr-burger{display:flex !important;}
+    .split-2{grid-template-columns:1fr !important;}
+    .kpi-grid{grid-template-columns:1fr 1fr !important;}
+    .mat-grid{grid-template-columns:1fr 1fr !important;}
+    .foot-grid{grid-template-columns:1fr 1fr !important;}
+  }
+  @media (max-width:620px){
+    .kpi-grid{grid-template-columns:1fr !important;}
+    .mat-grid{grid-template-columns:1fr !important;}
+    .foot-grid{grid-template-columns:1fr !important;}
+    .tabs-bar{overflow-x:auto;}
+    .org-row{flex-direction:column !important;}
+  }
+  /* Mega menu */
+  .mega-wrap{position:relative;display:flex;align-items:center;}
+  .mega-panel{position:fixed;left:0;right:0;top:65px;background:#fff;border-top:1px solid #ececea;padding:22px 40px 28px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .22s cubic-bezier(.16,1,.3,1),transform .22s cubic-bezier(.16,1,.3,1);z-index:55;box-shadow:0 12px 40px rgba(0,0,0,.07);}
+  .mega-panel.is-open{opacity:1;pointer-events:auto;transform:translateY(0);}
+  @keyframes megaGrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .mega-panel::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#00269f,#3f9c63,#caa400,#c2602f,#00269f);background-size:300% 100%;animation:megaGrad 4s ease infinite;}
+  .mega-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:40px;}
+  .mega-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9aa0a6;white-space:nowrap;flex-shrink:0;}
+  .mega-sep{width:1px;height:28px;background:#e6e6e3;flex-shrink:0;}
+  .mega-links{display:flex;flex-direction:column;gap:0;}
+  .mega-links a{font-size:14px;font-weight:500;color:#3d4248;padding:7px 14px;border-radius:8px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none;}
+  .mega-links a:hover{background:#f4f4f2;color:#14161a;}
+  .nav-chev{font-size:9px;opacity:.45;margin-left:2px;display:inline-block;transition:transform .22s ease;}
+  .mega-wrap.is-open .nav-chev{transform:rotate(180deg);}
+</style>
+</helmet>
+
+<div id="page" style="animation:pageIn .8s ease both;">
+
+<header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e6e6e3;">
+  <div style="max-width:1240px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;gap:24px;">
+    <a href="/" data-nav style="display:flex;align-items:center;">
+      <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:32px;display:block;">
+    </a>
+    <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:2px;">
+      <div class="mega-wrap" data-menu="mega-qs">
+        <a href="/quem-somos" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Quem Somos <span class="nav-chev">▾</span></a>
+      </div>
+      <div class="mega-wrap" data-menu="mega-est">
+        <a href="/estrategia" data-nav style="font-size:14px;font-weight:600;color:#1a3834;padding:8px 12px;border-radius:6px;background:rgba(26,56,52,.08);">Estratégia <span class="nav-chev">▾</span></a>
+      </div>
+      <div class="mega-wrap" data-menu="mega-pss">
+        <a href="/pessoas" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Pessoas <span class="nav-chev">▾</span></a>
+      </div>
+      <div class="mega-wrap" data-menu="mega-cli">
+        <a href="/clientes" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Clientes <span class="nav-chev">▾</span></a>
+      </div>
+      <div class="mega-wrap" data-menu="mega-amb">
+        <a href="/ambiente" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Ambiente <span class="nav-chev">▾</span></a>
+      </div>
+      <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 13px;border-radius:7px;transition:background .2s ease;">Sobre</a>
+    </nav>
+    <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span></button>
+  </div>
+</header>
+<div class="mega-panel" id="mega-qs">
+  <div class="mega-inner">
+    <span class="mega-label">Quem Somos</span>
+    <div class="mega-sep"></div>
+    <div class="mega-links">
+      <a href="/quem-somos#trajetoria" data-nav>Nossa trajetória</a>
+      <a href="/quem-somos#proposito" data-nav>Nosso propósito</a>
+      <a href="/quem-somos#valores" data-nav>Nossos valores</a>
+      <a href="/quem-somos#o-que-fazemos" data-nav>O que fazemos</a>
+      <a href="/quem-somos#empresa-b" data-nav>Transformação / Empresa B</a>
+      <a href="/quem-somos#participacao" data-nav>Participação institucional</a>
+      <a href="/quem-somos#reconhecimento" data-nav>Reconhecimento e impacto</a>
+    </div>
+  </div>
+</div>
+<div class="mega-panel" id="mega-est">
+  <div class="mega-inner">
+    <span class="mega-label">Estratégia</span>
+    <div class="mega-sep"></div>
+    <div class="mega-links">
+      <a href="/estrategia#estrategia-gov" data-nav>Estratégia &amp; Governança</a>
+      <a href="/estrategia#compromissos" data-nav>Compromissos BH Press 2030</a>
+      <a href="/estrategia#materialidade" data-nav>Materialidade</a>
+    </div>
+  </div>
+</div>
+<div class="mega-panel" id="mega-pss">
+  <div class="mega-inner">
+    <span class="mega-label">Pessoas</span>
+    <div class="mega-sep"></div>
+    <div class="mega-links">
+      <a href="/pessoas#emprego" data-nav>Emprego e cadeia de valor</a>
+      <a href="/pessoas#diversidade" data-nav>Diversidade e equidade</a>
+      <a href="/pessoas#capacitacao" data-nav>Capacitação e educação</a>
+    </div>
+  </div>
+</div>
+<div class="mega-panel" id="mega-cli">
+  <div class="mega-inner">
+    <span class="mega-label">Clientes</span>
+    <div class="mega-sep"></div>
+    <div class="mega-links">
+      <a href="/clientes#confianca" data-nav>Relações de confiança</a>
+      <a href="/clientes#valor-gerado" data-nav>Valor gerado</a>
+      <a href="/clientes#gestao-contratos" data-nav>Gestão de contratos</a>
+      <a href="/clientes#indicadores" data-nav>Indicadores</a>
+    </div>
+  </div>
+</div>
+<div class="mega-panel" id="mega-amb">
+  <div class="mega-inner">
+    <span class="mega-label">Ambiente</span>
+    <div class="mega-sep"></div>
+    <div class="mega-links">
+      <a href="/ambiente#ambiente-trabalho" data-nav>Ambiente de trabalho</a>
+      <a href="/ambiente#agenda-climatica" data-nav>Agenda climática</a>
+      <a href="/ambiente#indicadores-ambiente" data-nav>Indicadores</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var t=null,oId=null;
+  function mmOpen(id){
+    clearTimeout(t);
+    if(oId&&oId!==id){var op=document.getElementById(oId),ow=document.querySelector('[data-menu="'+oId+'"]');if(op)op.classList.remove('is-open');if(ow)ow.classList.remove('is-open');}
+    var p=document.getElementById(id),w=document.querySelector('[data-menu="'+id+'"]');
+    if(p)p.classList.add('is-open');if(w)w.classList.add('is-open');
+    oId=id;
+  }
+  function mmClose(){
+    t=setTimeout(function(){
+      if(oId){var p=document.getElementById(oId),w=document.querySelector('[data-menu="'+oId+'"]');if(p)p.classList.remove('is-open');if(w)w.classList.remove('is-open');oId=null;}
+    },120);
+  }
+  document.addEventListener('mouseover',function(e){
+    var wrap=e.target.closest?e.target.closest('.mega-wrap[data-menu]'):null;
+    if(wrap){mmOpen(wrap.getAttribute('data-menu'));return;}
+    if(e.target.closest&&e.target.closest('.mega-panel')){clearTimeout(t);}
+  });
+  document.addEventListener('mouseout',function(e){
+    var rt=e.relatedTarget;
+    var fromWrap=e.target.closest?e.target.closest('.mega-wrap[data-menu]'):null;
+    var fromPanel=e.target.closest?e.target.closest('.mega-panel'):null;
+    var toWrap=rt&&rt.closest?rt.closest('.mega-wrap[data-menu]'):null;
+    var toPanel=rt&&rt.closest?rt.closest('.mega-panel'):null;
+    if((fromWrap||fromPanel)&&!toWrap&&!toPanel){mmClose();}
+  });
+})();
+</script>
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:2px;">
+    <button type="button" onClick="{{ closeNav }}" aria-label="Fechar" style="position:absolute;top:24px;right:32px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;font-size:20px;cursor:pointer;">×</button>
+    <a href="/" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Home</a>
+    <a href="/quem-somos" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
+    <a href="/estrategia" data-nav style="color:#83c0b3;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Estratégia &amp; Governança</a>
+    <a href="/pessoas" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Pessoas</a>
+    <a href="/clientes" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Clientes</a>
+    <a href="/ambiente" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Ambiente</a>
+    <a href="/sobre" data-nav style="color:rgba(255,255,255,.7);font-size:26px;font-weight:700;padding:12px 0;">Sobre este relatório</a>
+  </div>
+</sc-if>
+
+<!-- HERO -->
+<section style="position:relative;padding:170px 0 0;background:#fff;overflow:hidden;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;gap:14px;margin-bottom:30px;">
+      <a href="/" data-nav style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;" style-hover="color:#1a3834;">Home</a><span style="color:#cfcfcc;">/</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">Seção 02 / 06</span>
+    </div>
+    <h1 data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:0;font-size:clamp(46px,7.4vw,108px);font-weight:800;letter-spacing:-.035em;line-height:.94;">Estratégia &amp;<br>Governança</h1>
+    <p data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:34px 0 0;font-size:clamp(19px,2.1vw,25px);line-height:1.5;color:#3d4248;max-width:62ch;">A Agenda ESG / BH Press 2030, a evolução da nossa governança corporativa e a transformação digital com inteligência artificial — três frentes que estruturam como decidimos e como geramos impacto.</p>
+  </div>
+  <div data-reveal data-delay="260" style="opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);margin-top:70px;position:relative;height:clamp(300px,42vw,520px);overflow:hidden;">
+    <div data-parallax="0.12" style="position:absolute;inset:-10% 0;"><img src="assets/webp-estrategia/img-bp-estrategia-hero.webp" alt="Estratégia e Governança" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:5px;background:#1a3834;"></div>
+  </div>
+</section>
+
+<!-- TABS -->
+<section id="estrategia-gov" style="background:#fff;padding:clamp(60px,8vw,96px) 0 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div class="tabs-bar" style="display:flex;gap:8px;border-bottom:1px solid #e6e6e3;position:sticky;top:64px;background:#fff;z-index:30;">
+      <button type="button" data-tab="0" onClick="{{ setTab0 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Agenda ESG</button>
+      <button type="button" data-tab="1" onClick="{{ setTab1 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Governança</button>
+      <button type="button" data-tab="2" onClick="{{ setTab2 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Transformação digital</button>
+    </div>
+  </div>
+</section>
+
+<div id="tabpanels">
+
+<!-- ===== PANEL 0 — AGENDA ESG ===== -->
+<div id="agenda-esg" data-panel="0" data-disp="block">
+  <section style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,84px);align-items:start;" class="split-2">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);position:sticky;top:130px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Intencionalidade</p>
+        <h2 style="margin:0 0 22px;font-size:clamp(30px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">A sustentabilidade como critério estruturante do negócio.</h2>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-23 · 3-1 · 3-2</span>
+      </div>
+      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
+        <p style="margin:0 0 28px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">A Agenda ESG da BH Press foi estruturada como resultado de um processo de posicionamento e evolução do negócio. Esse movimento se materializou no <strong style="font-weight:700;">BH Press 2030</strong>, iniciativa que orientou, ao longo dos últimos anos, a incorporação progressiva da sustentabilidade às decisões estratégicas da empresa.</p>
+        <h3 style="margin:0 0 18px;font-size:20px;font-weight:700;">Estruturação</h3>
+        <p style="margin:0 0 18px;font-size:17px;line-height:1.6;color:#3d4248;">Ao longo desse ciclo, a sustentabilidade deixou de ser um eixo complementar e passou a ser um critério estruturante para:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:36px;" class="mat-grid">
+          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">01</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Definição de portfólio de serviços</span></div>
+          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">02</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Posicionamento institucional</span></div>
+          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">03</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Relacionamento com clientes e parceiros</span></div>
+          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">04</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Organização interna e desenvolvimento de capacidades</span></div>
+        </div>
+        <div style="background:#1a3834;color:#fff;border-radius:14px;padding:30px 32px;">
+          <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#9fd6ad;">Nova razão social</h3>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(255,255,255,.85);">Em 2025, essa agenda ganhou mais consistência com a mudança de razão social para <strong style="color:#fff;">BH Press Comunicação e Sustentabilidade</strong> e com a certificação de Empresa B. Esses movimentos nos posicionam em um patamar mais estruturado de atuação, com clareza sobre nosso papel no avanço da agenda ESG no ambiente empresarial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap BH Press 2030 -->
+  <section id="compromissos" style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:62ch;margin-bottom:44px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Compromissos da agenda BH Press 2030</p>
+        <h2 style="margin:0;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Sete compromissos, conectados aos ODS.</h2>
+      </div>
+      <div data-reveal data-delay="100" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:16px 28px;border-bottom:1px solid #e6e6e3;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;">
+          <span>Compromisso</span><span style="text-align:right;">ODS</span><span style="text-align:right;min-width:120px;">Status 2025</span>
+        </div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">100% dos profissionais treinados contra a discriminação</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 5 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Todos os profissionais treinados para identificar e combater violência de gênero</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 5</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Processos seletivos priorizando inclusão como critério de desempate</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 5 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">25% de pessoas negras em cargos de gestão</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 5 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Aumento da representatividade de colaboradores que pertencem a grupos de diversidade</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Definição e acompanhamento da grade de treinamento para lideranças</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Construção do Conselho de Administração</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 8</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Materialidade -->
+  <section id="materialidade" style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:64ch;margin-bottom:44px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Materialidade</p>
+        <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Cinco temas materiais orientam tudo.</h2>
+        <p style="margin:0 0 16px;font-size:18px;line-height:1.6;color:#3d4248;">Nosso primeiro estudo de materialidade, com base nas diretrizes da GRI e em consulta às nossas partes interessadas, foi realizado em 2024. O processo definiu cinco temas materiais, que seguem orientando nossa estratégia, nossa gestão e a prestação de contas sobre nossos impactos.</p>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><a href="#" style="display:inline-flex;align-items:center;gap:9px;color:#1a3834;font-weight:600;font-size:15px;border-bottom:2px solid #1a3834;padding-bottom:2px;">Conheça o processo completo no Relatório de Impacto 2024 <span>→</span></a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 3-1 · 3-2</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;" class="mat-grid">
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #ff9965;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M1</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Emprego e cadeia de valor</p></div>
+        <div data-reveal data-delay="60" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #ff9965;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M2</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Diversidade, equidade e não discriminação</p></div>
+        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #ff9965;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M3</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Capacitação e educação</p></div>
+        <div data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #caa400;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M4</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Clientes, gestão de contratos e privacidade de dados</p></div>
+        <div data-reveal data-delay="240" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #3f9c63;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M5</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Saúde, segurança e meio ambiente</p></div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-top:30px;background:#fff;border:1px dashed #d4d4d0;border-left:3px solid #1a3834;border-radius:12px;padding:28px 30px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;margin:0 0 16px;">Onde precisamos evoluir · compromissos futuros</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <span style="font-size:15px;color:#2a2e33;background:#f6f6f5;border:1px solid #ececea;padding:9px 15px;border-radius:8px;">Consolidação de base histórica de indicadores</span>
+          <span style="font-size:15px;color:#2a2e33;background:#f6f6f5;border:1px solid #ececea;padding:9px 15px;border-radius:8px;">Definição de metas quantitativas</span>
+          <span style="font-size:15px;color:#2a2e33;background:#f6f6f5;border:1px solid #ececea;padding:9px 15px;border-radius:8px;">Integração de dados entre áreas</span>
+          <span style="font-size:15px;color:#2a2e33;background:#f6f6f5;border:1px solid #ececea;padding:9px 15px;border-radius:8px;">Mensuração de impacto indireto (clientes)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PANEL 1 — GOVERNANÇA ===== -->
+<div id="governanca" data-panel="1" data-disp="block" style="display:none;">
+  <section style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:64ch;margin-bottom:42px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Governança em evolução</p>
+        <h2 style="margin:0 0 22px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;">Uma transição de liderança, com continuidade de estratégia.</h2>
+        <p style="margin:0 0 16px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Em 2025, vivemos mudanças importantes em nossa estrutura de governança, com a aposentadoria de uma das sócias-fundadoras da agência. Com essa transição, <strong style="font-weight:700;">Dulcemar da Costa</strong>, também sócia-fundadora e diretora da BH Press, passou a assumir a função de CEO, liderando a continuidade da estratégia da agência e o fortalecimento do nosso posicionamento como empresa de comunicação e sustentabilidade.</p>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-9 a 2-16 · 2-23 · 2-24</span>
+      </div>
+
+      <!-- Organograma interativo -->
+      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:16px;padding:clamp(30px,4vw,52px);">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 30px;text-align:center;">Estrutura de governança · passe o cursor para detalhes</p>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div class="org-box" tabindex="0" style="position:relative;background:#1a3834;color:#fff;border-radius:12px;padding:20px 34px;text-align:center;cursor:default;min-width:240px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9fd6ad;">Instância máxima</span>
+            <p style="margin:6px 0 0;font-size:20px;font-weight:700;">Diretoria</p>
+            <div class="org-tip" style="position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);width:280px;background:#14161a;color:#fff;font-size:13px;line-height:1.5;padding:14px 16px;border-radius:10px;opacity:0;visibility:hidden;transition:opacity .2s ease;z-index:5;box-shadow:0 18px 40px -16px rgba(0,0,0,.5);">Supervisão e decisão: orienta a estratégia, define metas e indicadores, aprova políticas e planos de ação, acompanha riscos e impactos e supervisiona a evolução da gestão e da agenda ESG.</div>
+          </div>
+          <div style="width:2px;height:30px;background:#cfd6d3;"></div>
+          <div class="org-box" tabindex="0" style="position:relative;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:18px 30px;text-align:center;cursor:default;min-width:300px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a3834;">CEO</span>
+            <p style="margin:6px 0 2px;font-size:18px;font-weight:700;color:#14161a;">Dulcemar da Costa</p>
+            <p style="margin:0;font-size:13px;color:#5c6268;">Sócia-administradora · responsável legal *</p>
+          </div>
+          <div style="width:2px;height:30px;background:#cfd6d3;"></div>
+          <div class="org-row" style="display:flex;gap:24px;width:100%;justify-content:center;">
+            <div class="org-box" tabindex="0" style="position:relative;flex:1;max-width:340px;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:22px 26px;cursor:default;">
+              <p style="margin:0 0 6px;font-size:17px;font-weight:700;color:#14161a;">Área administrativo-financeira</p>
+              <p style="margin:0;font-size:14px;color:#5c6268;line-height:1.5;">Orçamento, contratos, pessoas, conformidade.</p>
+            </div>
+            <div class="org-box" tabindex="0" style="position:relative;flex:1;max-width:340px;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:22px 26px;cursor:default;">
+              <p style="margin:0 0 6px;font-size:17px;font-weight:700;color:#14161a;">Área técnica</p>
+              <p style="margin:0;font-size:14px;color:#5c6268;line-height:1.5;">Clientes, parceiros, execução técnica, inovação e sustentabilidade.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin:30px 0 0;font-size:13px;line-height:1.55;color:#7a8077;border-top:1px solid #e2e6e3;padding-top:18px;"><span style="color:#1a3834;font-weight:600;">*</span> Ana Amélia Gouvêa se desligou da sociedade da BH Press em outubro/2025, quando a responsabilidade legal pela empresa ficou somente a cargo da sócia-administradora Dulcemar da Costa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Responsabilidades + accordion políticas -->
+  <section style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:start;" class="split-2">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Responsabilidades compartilhadas</p>
+        <p style="margin:0 0 18px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Nossa governança é conduzida pela Diretoria, instância máxima de supervisão e decisão da BH Press. Ela orienta a estratégia, define metas e indicadores, aprova políticas e planos de ação, acompanha riscos e impactos e supervisiona a evolução da gestão e da agenda ESG.</p>
+        <p style="margin:0 0 18px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">A Diretoria conta com o apoio das áreas administrativo-financeira e técnica, que contribuem para transformar as decisões estratégicas em práticas de gestão — orçamento, contratos, pessoas, clientes, parceiros, conformidade, execução técnica, inovação e sustentabilidade.</p>
+        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Para orientar a gestão, contamos com políticas e declarações internas disponíveis na intranet, que apoiam a gestão dos temas materiais, a tomada de decisão e a atuação das equipes no dia a dia.</p>
+        <p style="margin:22px 0 0;font-size:13px;color:#5c6268;">Relacionado: <a href="/clientes" data-nav style="color:#1a3834;font-weight:600;border-bottom:1px solid #1a3834;">Clientes · Privacidade de dados</a></p>
+      </div>
+      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 14px;">Políticas e declarações internas</p>
+        <div id="acc" style="display:flex;flex-direction:column;gap:8px;">
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Declaração de Compromisso com a Proteção Ambiental</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Declaração de Proibição do Trabalho Infantil e Trabalho Forçado ou Compulsório</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política contra Assédios</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Denúncias</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Direitos Humanos</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Incentivo ao Uso de Produtos e Práticas Ambientais nos Escritórios Virtuais</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Não Discriminação</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Privacidade e Uso de Dados</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Sustentabilidade Ambiental</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política Interna de Uso de Ferramentas de Inteligência Artificial</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demais blocos governança -->
+  <section style="background:#fff;padding:clamp(60px,8vw,110px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="mat-grid">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:30px;">
+        <h3 style="margin:0 0 12px;font-size:18px;font-weight:700;">Gestão de impactos e transparência</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#5c6268;">Também é responsabilidade da Diretoria acompanhar os impactos de nossa atuação e validar as informações reportadas no Relatório de Impacto. Esse processo fortalece a prestação de contas e orienta a melhoria contínua da nossa atuação.</p>
+      </div>
+      <div data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:13px;padding:30px;">
+        <h3 style="margin:0 0 12px;font-size:18px;font-weight:700;">Ética e conflitos de interesse</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#5c6268;">Mantemos uma governança próxima e participativa, baseada no diálogo entre sócias, lideranças e equipes. Situações sensíveis, críticas ou com potencial impacto ético, reputacional, financeiro ou operacional são encaminhadas à Diretoria.</p>
+      </div>
+      <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#1a3834;color:#fff;border-radius:13px;padding:30px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9fd6ad;margin:0 0 12px;">Compromissos futuros</p>
+        <h3 style="margin:0 0 12px;font-size:18px;font-weight:700;">Para onde queremos avançar</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.82);">Seguimos aprimorando nossa governança para sustentar o crescimento da agência, fortalecer processos internos, ampliar a rastreabilidade das decisões e consolidar práticas alinhadas à nossa atuação.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PANEL 2 — TRANSFORMAÇÃO DIGITAL ===== -->
+<div id="transformacao-digital" data-panel="2" data-disp="block" style="display:none;">
+  <section style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:70ch;margin-bottom:40px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Transformação digital</p>
+        <h2 style="margin:0 0 22px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;">Mais intencional, mais estruturada.</h2>
+        <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em 2025, avançamos na transformação digital de forma mais intencional e estruturada, como parte do amadurecimento da gestão e da consolidação da agenda BH Press 2030. O processo incluiu diagnóstico dos fluxos de trabalho, apoio de consultoria externa, formação de um grupo de trabalho com profissionais de diferentes áreas e revisão de processos, modelos de trabalho e políticas internas.</p>
+        <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">A partir desse movimento, estruturamos o ambiente Microsoft como padrão de comunicação, gestão à vista e colaboração interna. A iniciativa contribuiu para reduzir a dispersão de informações, melhorar o registro de documentos e alinhamentos e dar mais clareza aos fluxos de trabalho.</p>
+        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em outubro, realizamos o <strong style="font-weight:700;">Dia D da Transformação Digital</strong>, com a participação de toda a equipe, para compartilhar combinados, orientações e próximos passos. Mais do que uma mudança tecnológica, essa jornada fortaleceu a governança, a eficiência operacional e a cultura de melhoria da agência.</p>
+      </div>
+      <!-- KPI dashboard -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;" class="kpi-grid">
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:14px;padding:28px;"><span data-count="100" data-suffix="%" style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#1a3834;line-height:1;">100%</span><p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:#3d4248;">da equipe treinada no uso do Microsoft Teams, Planner, canais, equipes e chats.</p></div>
+        <div data-reveal data-delay="70" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:14px;padding:28px;"><span style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#9aa0a6;line-height:1;">xx</span><p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:#3d4248;">canais ou equipes estruturados para organizar fluxos de comunicação e projetos internos.</p></div>
+        <div data-reveal data-delay="140" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:14px;padding:28px;"><span style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#9aa0a6;line-height:1;">xx</span><p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:#3d4248;">documentos ou fluxos internos centralizados em ambientes digitais de colaboração.</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#1a3834;color:#fff;border-radius:14px;padding:28px;"><span data-count="100" data-suffix="%" style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#9fd6ad;line-height:1;">100%</span><p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:rgba(255,255,255,.82);">da equipe utilizando o Teams como ambiente principal de comunicação e colaboração interna.</p></div>
+        <div data-reveal data-delay="70" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:14px;padding:28px;"><span style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#9aa0a6;line-height:1;">xx</span><p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:#3d4248;">iniciativas de melhoria de processos apoiadas pela transformação digital em 2025.</p></div>
+        <div data-reveal data-delay="140" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:14px;padding:28px;"><span style="font-size:46px;font-weight:800;letter-spacing:-.03em;color:#9aa0a6;line-height:1;">xx</span><p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:#3d4248;">horas de orientação ou capacitação interna dedicadas ao uso de ferramentas digitais.</p></div>
+      </div>
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-top:26px;background:#fff;border:1px dashed #d4d4d0;border-left:3px solid #1a3834;border-radius:12px;padding:26px 30px;max-width:80ch;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;margin:0 0 12px;">Desafios e próximos passos</p>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#3d4248;">Sabemos que a transformação digital exige mais do que a adoção de ferramentas. Nosso principal desafio tem sido consolidar novos hábitos de trabalho, com fluxos mais padronizados, informações mais acessíveis e disciplina no registro de decisões, documentos e aprendizados. Em 2026, queremos avançar na capacitação das equipes, na integração entre ferramentas digitais e no uso de dados para apoiar a gestão, os projetos e a prestação de contas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IA em soluções digitais — case + timeline -->
+  <section style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:66ch;margin-bottom:48px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 18px;">IA em soluções digitais</p>
+        <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;">Inteligência artificial a serviço de entregas mais ágeis.</h2>
+        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:rgba(255,255,255,.78);">Em 2025, avançamos no uso de ferramentas de inteligência artificial para apoiar processos internos e soluções digitais — ampliando a autonomia da equipe na criação de códigos e no desenvolvimento de sites e aplicações, reduzindo etapas operacionais e apoiando entregas mais ágeis.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(34px,5vw,70px);align-items:start;" class="split-2">
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
+          <div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:18px;background:#0c0e12;"><img src="assets/webp-estrategia/img-estrategia-plat-pcj.webp" alt="Plataforma Revista Gestão das Bacias PCJ" style="width:100%;height:auto;display:block;"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:6px;">Case · Revista Gestão das Bacias PCJ</span></div>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.72);">Um exemplo foi o site da Revista Gestão das Bacias PCJ, em que o uso de IA apoiou o desenvolvimento de uma solução digital sob medida.</p>
+        </div>
+        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0 0 24px;">Jornada Claude Partner Network</p>
+          <div style="position:relative;padding-left:28px;border-left:2px solid rgba(255,255,255,.15);display:flex;flex-direction:column;gap:26px;">
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #0c0e12;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">Início da adesão · 2026</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Programa oficial da Anthropic voltado a organizações que apoiam empresas na adoção de IA em escala.</p></div>
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #0c0e12;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">Elegibilidade concluída ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Etapas de elegibilidade do programa cumpridas.</p></div>
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #0c0e12;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">10 colaboradores formados ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Formação concluída na Partner Academy.</p></div>
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:transparent;border:2px solid #9fd6ad;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">Rumo à certificação CCA-F</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Claude Certified Architect – Foundations. A formalização da parceria ocorrerá após o cumprimento de todos os requisitos do programa.</p></div>
+          </div>
+          <p style="margin:26px 0 0;font-size:13px;color:rgba(255,255,255,.5);">Relacionado: <a href="/pessoas" data-nav style="color:#ffb98c;font-weight:600;border-bottom:1px solid #ffb98c;">Pessoas · Capacitação ESG</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</div>
+
+<!-- NEXT -->
+<section style="background:#f6f6f5;padding:clamp(60px,8vw,110px) 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <a href="/pessoas" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#14161a;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Próxima seção · 03 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Pessoas</h2></div>
+      <span style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#ff9965;color:#14161a;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.1);" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;margin-bottom:22px;">
+          <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
+        </div>
+        <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
+      </div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p><a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a><div style="display:flex;gap:10px;margin-top:20px;"><a href="#" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;" style-hover="background:rgba(255,255,255,.12);">in</a><a href="#" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;" style-hover="background:rgba(255,255,255,.12);">ig</a></div></div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p><a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;" style-hover="color:#fff;">Quem Somos</a><a href="/pessoas" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;" style-hover="color:#fff;">Pessoas</a><a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);" style-hover="color:#fff;">Sobre este relatório</a></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);"><span>© 2026 BH Press Comunicação e Sustentabilidade</span><span>Relatório de Impacto 2026 · ano-base 2025</span></div>
+  </div>
+  <div style="height:6px;display:flex;"><span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span></div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { navOpen:false };
+
+  renderVals(){
+    return {
+      navOpen: this.state.navOpen,
+      toggleNav: ()=> this.setState(s=>({navOpen:!s.navOpen})),
+      closeNav: ()=> this.setState({navOpen:false}),
+      setTab0: ()=> this.selectTab(0),
+      setTab1: ()=> this.selectTab(1),
+      setTab2: ()=> this.selectTab(2),
+    };
+  }
+
+  selectTab(i){
+    const panels = document.querySelectorAll('#tabpanels [data-panel]');
+    panels.forEach(p=>{
+      const on = parseInt(p.getAttribute('data-panel'),10)===i;
+      p.style.display = on ? (p.getAttribute('data-disp')||'block') : 'none';
+      if(on){ this.revealWithin(p); }
+    });
+    document.querySelectorAll('.tabbtn').forEach(b=>{
+      const on = parseInt(b.getAttribute('data-tab'),10)===i;
+      b.style.color = on ? '#1a3834' : '#5c6268';
+      b.style.borderBottomColor = on ? '#1a3834' : 'transparent';
+    });
+    window.scrollTo({ top: Math.max(0, this.tabsTop()-80), behavior:'smooth' });
+  }
+
+  tabsTop(){
+    const bar = document.querySelector('.tabs-bar');
+    return bar ? bar.getBoundingClientRect().top + window.scrollY : 0;
+  }
+
+  revealWithin(root){
+    root.querySelectorAll('[data-reveal]').forEach(el=>{
+      const d = parseInt(el.getAttribute('data-delay')||'0',10);
+      el.style.transitionDelay = d+'ms';
+      el.style.opacity='1'; el.style.transform='none';
+      this.runCount(el);
+    });
+  }
+
+  runCount(el){
+    const t = el.querySelector('[data-count]');
+    if(!t || this._counted.has(t)) return;
+    this._counted.add(t);
+    const target = parseFloat(t.getAttribute('data-count'))||0;
+    const suffix = t.getAttribute('data-suffix')||'';
+    const dur=1300, start=performance.now();
+    const tick=(now)=>{ const p=Math.min(1,(now-start)/dur); const e=1-Math.pow(1-p,3); t.textContent=Math.round(target*e)+suffix; if(p<1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+
+  componentDidMount(){
+    this._counted = new Set();
+    this.initReveal();
+    this.initParallax();
+    this.initNavLinks();
+    this.initAccordion();
+    this.initOrg();
+    this.selectTab(0);
+    window.scrollTo(0,0);
+  }
+
+  initReveal(){
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const reveal = (el)=>{ const d=parseInt(el.getAttribute('data-delay')||'0',10); el.style.transitionDelay=d+'ms'; el.style.opacity='1'; el.style.transform='none'; this.runCount(el); };
+    if(!('IntersectionObserver' in window)){ els.forEach(reveal); return; }
+    const io = new IntersectionObserver((ents)=>{ ents.forEach(e=>{ if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } }); }, { threshold:0.1, rootMargin:'0px 0px -6% 0px' });
+    els.forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top<window.innerHeight*0.92 && r.bottom>0){ reveal(el); } else io.observe(el); });
+    setTimeout(()=>document.querySelectorAll('#tabpanels [data-panel]:not([style*="display: none"]) [data-reveal], [data-panel="0"] [data-reveal]').forEach(reveal), 2600);
+  }
+
+  initParallax(){
+    const els = Array.from(document.querySelectorAll('[data-parallax]'));
+    if(!els.length) return;
+    let ticking=false;
+    const update=()=>{ const vh=window.innerHeight; els.forEach(el=>{ const f=parseFloat(el.getAttribute('data-parallax'))||0.12; const r=el.getBoundingClientRect(); const c=r.top+r.height/2-vh/2; el.style.transform='translate3d(0,'+(c*-f).toFixed(1)+'px,0)'; }); ticking=false; };
+    const onScroll=()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+    update();
+  }
+
+  initAccordion(){
+    document.querySelectorAll('.acc-item').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const ic = btn.querySelector('.acc-ic');
+        const open = btn.getAttribute('data-open')==='1';
+        btn.setAttribute('data-open', open?'0':'1');
+        btn.style.background = open ? '#fff' : '#1a3834';
+        btn.style.color = open ? '#1a1d22' : '#fff';
+        btn.style.borderColor = open ? '#ececea' : '#1a3834';
+        if(ic){ ic.style.transform = open ? 'rotate(0deg)' : 'rotate(45deg)'; ic.style.color = open ? '#1a3834' : '#9fd6ad'; }
+      });
+    });
+  }
+
+  initOrg(){
+    document.querySelectorAll('.org-box').forEach(box=>{
+      const tip = box.querySelector('.org-tip');
+      if(!tip) return;
+      const show=()=>{ tip.style.opacity='1'; tip.style.visibility='visible'; };
+      const hide=()=>{ tip.style.opacity='0'; tip.style.visibility='hidden'; };
+      box.addEventListener('mouseenter', show);
+      box.addEventListener('mouseleave', hide);
+      box.addEventListener('focus', show);
+      box.addEventListener('blur', hide);
+    });
+  }
+
+  initNavLinks(){
+    const page = document.getElementById('page');
+    document.querySelectorAll('a[data-nav]').forEach(a=>{
+      const href=a.getAttribute('href');
+      if(!href||href.charAt(0)==='#') return;
+      a.addEventListener('click',(e)=>{ if(e.metaKey||e.ctrlKey||e.shiftKey) return; e.preventDefault(); if(page){ page.style.transition='opacity .38s ease'; page.style.opacity='0'; } setTimeout(()=>{ window.location.href=href; },360); });
+    });
+  }
+}
+</script>
+</body>
+</html>

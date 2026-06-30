@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -45,6 +45,8 @@
   .mega-links a:hover{background:#f4f4f2;color:#14161a;}
   .nav-chev{font-size:9px;opacity:.45;margin-left:2px;display:inline-block;transition:transform .22s ease;}
   .mega-wrap.is-open .nav-chev{transform:rotate(180deg);}
+  .type-title{clip-path:inset(0 100% 0 0);transition:clip-path 1.4s cubic-bezier(0.25,1,0.5,1),opacity .8s ease !important;}
+  .type-title.is-revealed{clip-path:inset(0 0 0 0);}
 </style>
 </helmet>
 
@@ -53,7 +55,7 @@
 <header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e6e6e3;">
   <div style="max-width:1240px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;gap:24px;">
     <a href="/" data-nav style="display:flex;align-items:center;">
-      <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:32px;display:block;">
+      <img src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:32px;display:block;">
     </a>
     <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:2px;">
       <div class="mega-wrap" data-menu="mega-qs">
@@ -74,6 +76,9 @@
       <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 13px;border-radius:7px;transition:background .2s ease;">Sobre</a>
     </nav>
     <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span></button>
+  </div>
+  <div id="scroll-progress-container" style="position:absolute;bottom:-2px;left:0;right:0;height:2px;background:transparent;">
+    <div id="scroll-progress-bar" style="height:100%;width:0%;background:#00269f;transition:width 0.1s linear;will-change:width;"></div>
   </div>
 </header>
 <div class="mega-panel" id="mega-qs">
@@ -290,7 +295,7 @@
 <!-- NEXT -->
 <section style="background:#f6f6f5;padding:clamp(60px,8vw,110px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-    <a href="/sobre" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#14161a;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
+    <a href="/sobre" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
       <div><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Transparência · 06 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Sobre este relatório</h2></div>
       <span style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#fff;color:#14161a;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
     </a>
@@ -298,21 +303,53 @@
 </section>
 
 <!-- FOOTER -->
-<footer style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
+<footer style="background:#00269f;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
     <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.1);" class="foot-grid">
       <div>
         <div style="display:flex;align-items:center;margin-bottom:22px;">
-          <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
+          <img src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
         </div>
         <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
+      <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:66px;display:block;margin-top:20px;">
       </div>
-      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p><a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a><div style="display:flex;gap:10px;margin-top:20px;"><a href="#" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;" style-hover="background:rgba(255,255,255,.12);">in</a><a href="#" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;" style-hover="background:rgba(255,255,255,.12);">ig</a></div></div>
-      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p><a href="/clientes" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;" style-hover="color:#fff;">Clientes</a><a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;" style-hover="color:#fff;">Quem Somos</a><a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);" style-hover="color:#fff;">Sobre este relatório</a></div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p>
+        <p style="margin:0 0 14px;font-size:15px;color:rgba(255,255,255,.75);line-height:1.5;">Dúvidas sobre como reportamos nossos impactos, mande uma mensagem pra gente:<br><a href="mailto:bhpress@bhpress.com.br" style="color:#fff;font-weight:600;text-decoration:underline;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a></p>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <a href="https://bhpress.com.br/" target="_blank" aria-label="Site" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">
+            <img src="assets/webp-bp-logos/site-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);">
+          </a>
+          <a href="https://www.linkedin.com/company/bhpresscomunica" target="_blank" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">
+            <img src="assets/webp-bp-logos/linkedin-bp-log.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);">
+          </a>
+          <a href="https://www.instagram.com/bhpresscomunica/" target="_blank" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">
+            <img src="assets/webp-bp-logos/ig-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);">
+          </a>
+          <a href="https://www.youtube.com/@BHPresscomunica" target="_blank" aria-label="Youtube" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">
+            <img src="assets/webp-bp-logos/utube-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);">
+          </a>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p>
+        <a href="/" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Home</a>
+        <a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Quem Somos</a>
+        <a href="/estrategia" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Estratégia &amp; Governança</a>
+        <a href="/pessoas" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Pessoas</a>
+        <a href="/clientes" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Clientes</a>
+        <a href="/ambiente" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Ambiente</a>
+        <a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);transition:color .2s ease;" style-hover="color:#fff;">Sobre este relatório</a>
+      </div>
     </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);"><span>© 2026 BH Press Comunicação e Sustentabilidade</span><span>Relatório de Impacto 2026 · ano-base 2025</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);">
+      <span>© 2026 BH Press Comunicação e Sustentabilidade</span>
+      <span>Relatório de Impacto 2026 · ano-base 2025</span>
+    </div>
   </div>
-  <div style="height:6px;display:flex;"><span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span></div>
+  <div style="height:6px;display:flex;">
+    <span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span>
+  </div>
 </footer>
 
 </div>
@@ -346,6 +383,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount(){
+    this.initScrollProgress();
     this.initReveal();
     this.initParallax();
     this.initNavLinks();
@@ -354,6 +392,18 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount(){ if(this._esc) document.removeEventListener('keydown', this._esc); }
+
+    initScrollProgress(){
+    const bar = document.getElementById('scroll-progress-bar');
+    if(!bar) return;
+    const update = () => {
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? (scrollPos / docHeight) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  }
 
   initReveal(){
     const els = Array.from(document.querySelectorAll('[data-reveal]'));

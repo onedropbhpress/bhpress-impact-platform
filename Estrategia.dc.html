@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -56,7 +56,7 @@
 <header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e6e6e3;">
   <div style="max-width:1240px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;gap:24px;">
     <a href="/" data-nav style="display:flex;align-items:center;">
-      <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:32px;display:block;">
+      <img src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:32px;display:block;">
     </a>
     <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:2px;">
       <div class="mega-wrap" data-menu="mega-qs">
@@ -77,6 +77,9 @@
       <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 13px;border-radius:7px;transition:background .2s ease;">Sobre</a>
     </nav>
     <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span></button>
+  </div>
+  <div id="scroll-progress-container" style="position:absolute;bottom:-2px;left:0;right:0;height:2px;background:transparent;">
+    <div id="scroll-progress-bar" style="height:100%;width:0%;background:#00269f;transition:width 0.1s linear;will-change:width;"></div>
   </div>
 </header>
 <div class="mega-panel" id="mega-qs">
@@ -225,21 +228,21 @@
         <h3 style="margin:0 0 18px;font-size:20px;font-weight:700;">Estruturação</h3>
         <p style="margin:0 0 18px;font-size:17px;line-height:1.6;color:#3d4248;">Ao longo desse ciclo, a sustentabilidade deixou de ser um eixo complementar e passou a ser um critério estruturante para:</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:36px;" class="mat-grid">
-          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">01</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Definição de portfólio de serviços</span></div>
-          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">02</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Posicionamento institucional</span></div>
-          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">03</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Relacionamento com clientes e parceiros</span></div>
-          <div style="display:flex;gap:12px;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">04</span><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Organização interna e desenvolvimento de capacidades</span></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;flex-shrink:0;padding-top:1px;">01</span><svg style="flex-shrink:0;margin-top:1px;" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#1a3834" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="10" rx="2"/><path d="M6 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><line x1="2" y1="11" x2="16" y2="11"/></svg><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Definição de portfólio de serviços</span></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;flex-shrink:0;padding-top:1px;">02</span><svg style="flex-shrink:0;margin-top:1px;" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#1a3834" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><circle cx="9" cy="9" r="3"/><line x1="9" y1="2" x2="9" y2="6"/><line x1="9" y1="12" x2="9" y2="16"/><line x1="2" y1="9" x2="6" y2="9"/><line x1="12" y1="9" x2="16" y2="9"/></svg><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Posicionamento institucional</span></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;flex-shrink:0;padding-top:1px;">03</span><svg style="flex-shrink:0;margin-top:1px;" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#1a3834" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="5.5" r="2"/><circle cx="12.5" cy="5.5" r="2"/><path d="M1 14c0-2.2 2-4 4.5-4s4.5 1.8 4.5 4"/><path d="M9 14c0-2.2 2-4 4.5-4s4.5 1.8 4.5 4"/></svg><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Relacionamento com clientes e parceiros</span></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;background:#f6f6f5;border:1px solid #ececea;border-radius:10px;padding:16px 18px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;flex-shrink:0;padding-top:1px;">04</span><svg style="flex-shrink:0;margin-top:1px;" width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#1a3834" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="4" height="3" rx="1"/><rect x="1" y="13" width="4" height="3" rx="1"/><rect x="13" y="13" width="4" height="3" rx="1"/><line x1="9" y1="5" x2="9" y2="9.5"/><line x1="9" y1="9.5" x2="3" y2="13"/><line x1="9" y1="9.5" x2="15" y2="13"/></svg><span style="font-size:15px;line-height:1.45;color:#2a2e33;">Organização interna e desenvolvimento de capacidades</span></div>
         </div>
-        <div style="background:#1a3834;color:#fff;border-radius:14px;padding:30px 32px;">
-          <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#9fd6ad;">Nova razão social</h3>
-          <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(255,255,255,.85);">Em 2025, essa agenda ganhou mais consistência com a mudança de razão social para <strong style="color:#fff;">BH Press Comunicação e Sustentabilidade</strong> e com a certificação de Empresa B. Esses movimentos nos posicionam em um patamar mais estruturado de atuação, com clareza sobre nosso papel no avanço da agenda ESG no ambiente empresarial.</p>
+        <div style="background:#fade71;color:#14161a;border-radius:14px;padding:30px 32px;">
+          <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#1a3834;">Nova razão social</h3>
+          <p style="margin:0;font-size:17px;line-height:1.6;color:#2a2e33;">Em 2025, essa agenda ganhou mais consistência com a mudança de razão social para <strong style="color:#14161a;">BH Press Comunicação e Sustentabilidade</strong> e com a certificação de Empresa B. Esses movimentos nos posicionam em um patamar mais estruturado de atuação, com clareza sobre nosso papel no avanço da agenda ESG no ambiente empresarial.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Roadmap BH Press 2030 -->
-  <section id="compromissos" style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
+  <section id="compromissos" style="background:#fade71;padding:clamp(70px,9vw,120px) 0;">
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
       <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:62ch;margin-bottom:44px;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Compromissos da agenda BH Press 2030</p>
@@ -249,13 +252,13 @@
         <div style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:16px 28px;border-bottom:1px solid #e6e6e3;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;">
           <span>Compromisso</span><span style="text-align:right;">ODS</span><span style="text-align:right;min-width:120px;">Status 2025</span>
         </div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">100% dos profissionais treinados contra a discriminação</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 5 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Todos os profissionais treinados para identificar e combater violência de gênero</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 5</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Processos seletivos priorizando inclusão como critério de desempate</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 5 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">25% de pessoas negras em cargos de gestão</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 5 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Aumento da representatividade de colaboradores que pertencem a grupos de diversidade</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Definição e acompanhamento da grade de treinamento para lideranças</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 4 · 8 · 10</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Construção do Conselho de Administração</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;text-align:right;">ODS 8</span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">100% dos profissionais treinados contra a discriminação</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Todos os profissionais treinados para identificar e combater violência de gênero</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Processos seletivos priorizando inclusão como critério de desempate</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">25% de pessoas negras em cargos de gestão</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Aumento da representatividade de colaboradores que pertencem a grupos de diversidade</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Definição e acompanhamento da grade de treinamento para lideranças</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Construção do Conselho de Administração</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
       </div>
     </div>
   </section>
@@ -270,11 +273,26 @@
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><a href="#" style="display:inline-flex;align-items:center;gap:9px;color:#1a3834;font-weight:600;font-size:15px;border-bottom:2px solid #1a3834;padding-bottom:2px;">Conheça o processo completo no Relatório de Impacto 2024 <span>→</span></a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 3-1 · 3-2</span></div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;" class="mat-grid">
-        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #ff9965;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M1</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Emprego e cadeia de valor</p></div>
-        <div data-reveal data-delay="60" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #ff9965;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M2</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Diversidade, equidade e não discriminação</p></div>
-        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #ff9965;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M3</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Capacitação e educação</p></div>
-        <div data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #caa400;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M4</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Clientes, gestão de contratos e privacidade de dados</p></div>
-        <div data-reveal data-delay="240" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #3f9c63;border-radius:13px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;">M5</span><p style="margin:auto 0 0;font-size:16px;font-weight:600;line-height:1.35;color:#1a1d22;">Saúde, segurança e meio ambiente</p></div>
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="28" height="20" rx="3"/><path d="M14 14v-4a6 6 0 0 1 12 0v4"/><line x1="20" y1="21" x2="20" y2="27"/><line x1="17" y1="24" x2="23" y2="24"/></svg>
+          <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Emprego e cadeia de valor</p>
+        </div>
+        <div data-reveal data-delay="60" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="5"/><circle cx="26" cy="14" r="5"/><path d="M5 32c0-5 4-8 9-8"/><path d="M26 24c5 0 9 3 9 8"/><path d="M17 32c0-3.3 2-6 5-7"/><path d="M20 25a6 6 0 0 1 6 7"/></svg>
+          <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Diversidade, equidade e não discriminação</p>
+        </div>
+        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 32 C8 20 14 10 20 8 C26 10 32 20 32 32"/><line x1="12" y1="22" x2="28" y2="22"/><line x1="14" y1="27" x2="26" y2="27"/><circle cx="20" cy="8" r="2.5"/></svg>
+          <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Capacitação e educação</p>
+        </div>
+        <div data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 L33 12 V22 C33 28.6 27.4 34.4 20 36 C12.6 34.4 7 28.6 7 22 V12 Z"/><path d="M14 20 l4 4 8-8"/></svg>
+          <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Clientes, gestão de contratos e privacidade de dados</p>
+        </div>
+        <div data-reveal data-delay="240" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 34 C20 34 7 26 7 16 a6 6 0 0 1 13-1.5 6 6 0 0 1 13 1.5 C33 26 20 34 20 34Z"/><path d="M20 9 C20 6 22 4 25 4"/><path d="M27 6 C30 5 33 7 33 10"/></svg>
+          <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Saúde, segurança e meio ambiente</p>
+        </div>
       </div>
       <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-top:30px;background:#fff;border:1px dashed #d4d4d0;border-left:3px solid #1a3834;border-radius:12px;padding:28px 30px;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;margin:0 0 16px;">Onde precisamos evoluir · compromissos futuros</p>
@@ -333,8 +351,8 @@
   </section>
 
   <!-- Responsabilidades + accordion políticas -->
-  <section style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
-    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:start;" class="split-2">
+  <section style="background:#fade71;padding:clamp(70px,9vw,120px) 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:stretch;" class="split-2">
       <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
         <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Responsabilidades compartilhadas</p>
         <p style="margin:0 0 18px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Nossa governança é conduzida pela Diretoria, instância máxima de supervisão e decisão da BH Press. Ela orienta a estratégia, define metas e indicadores, aprova políticas e planos de ação, acompanha riscos e impactos e supervisiona a evolução da gestão e da agenda ESG.</p>
@@ -342,19 +360,77 @@
         <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Para orientar a gestão, contamos com políticas e declarações internas disponíveis na intranet, que apoiam a gestão dos temas materiais, a tomada de decisão e a atuação das equipes no dia a dia.</p>
         <p style="margin:22px 0 0;font-size:13px;color:#5c6268;">Relacionado: <a href="/clientes" data-nav style="color:#1a3834;font-weight:600;border-bottom:1px solid #1a3834;">Clientes · Privacidade de dados</a></p>
       </div>
-      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 14px;">Políticas e declarações internas</p>
-        <div id="acc" style="display:flex;flex-direction:column;gap:8px;">
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Declaração de Compromisso com a Proteção Ambiental</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Declaração de Proibição do Trabalho Infantil e Trabalho Forçado ou Compulsório</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política contra Assédios</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Denúncias</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Direitos Humanos</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Incentivo ao Uso de Produtos e Práticas Ambientais nos Escritórios Virtuais</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Não Discriminação</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Privacidade e Uso de Dados</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política de Sustentabilidade Ambiental</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
-          <button type="button" class="acc-item" style="text-align:left;background:#fff;border:1px solid #ececea;border-radius:10px;padding:16px 18px;cursor:pointer;font-family:inherit;font-size:15px;font-weight:500;color:#1a1d22;display:flex;justify-content:space-between;align-items:center;gap:12px;"><span>Política Interna de Uso de Ferramentas de Inteligência Artificial</span><span class="acc-ic" style="color:#1a3834;font-size:18px;transition:transform .25s ease;">+</span></button>
+      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);min-width:0;display:flex;flex-direction:column;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 14px;flex-shrink:0;">Políticas e declarações internas</p>
+        <!-- Carousel políticas -->
+        <div style="position:relative;padding:0 100px;flex:1;display:flex;flex-direction:column;">
+          <!-- Deck bilateral: ghost cards em ambos os lados via box-shadow -->
+          <div style="border-radius:24px;box-shadow:0 10px 36px rgba(0,0,0,.10),-10px 8px 0 0 rgba(255,255,255,.80),10px 8px 0 0 rgba(255,255,255,.80),-18px 15px 0 0 rgba(255,255,255,.46),18px 15px 0 0 rgba(255,255,255,.46);flex:1;display:flex;flex-direction:column;">
+            <div style="overflow:hidden;border-radius:24px;flex:1;display:flex;flex-direction:column;">
+              <div class="pol-track" style="display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;height:100%;">
+                <!-- 1 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M44 8C44 8 44 24 34 34C24 44 8 46 8 46C8 46 8 30 18 20C28 10 44 8 44 8Z"/><line x1="8" y1="46" x2="42" y2="10"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Declaração de Compromisso com a Proteção Ambiental</p>
+                </div>
+                <!-- 2 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M26 4L8 11V26C8 37 16 46 26 50C36 46 44 37 44 26V11L26 4Z"/><line x1="18" y1="18" x2="34" y2="34"/><line x1="34" y1="18" x2="18" y2="34"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Declaração de Proibição do Trabalho Infantil e Trabalho Forçado ou Compulsório</p>
+                </div>
+                <!-- 3 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V31M26 12V31M33 15V31C33 38 26 44 26 44C26 44 14 38 14 31V21C14 18 16 16 19 16"/><path d="M33 15C33 15 40 15 40 21V31"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política contra Assédios</p>
+                </div>
+                <!-- 4 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20H17L34 10V42L17 32H10V20Z"/><path d="M17 32L19 45"/><path d="M38 15C42 18 44 22 44 26C44 30 42 34 38 37"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Denúncias</p>
+                </div>
+                <!-- 5 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="15" r="6"/><circle cx="33" cy="15" r="6"/><path d="M5 48C5 40 11 34 19 34C27 34 33 40 33 48"/><path d="M33 34C41 34 47 40 47 48"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Direitos Humanos</p>
+                </div>
+                <!-- 6 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="42" height="28" rx="2"/><line x1="17" y1="46" x2="35" y2="46"/><line x1="26" y1="38" x2="26" y2="46"/><path d="M36 16C36 16 36 24 30 30C24 36 18 37 18 37C18 37 18 29 24 23C30 17 36 16 36 16Z"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Incentivo ao Uso de Produtos e Práticas Ambientais nos Escritórios Virtuais</p>
+                </div>
+                <!-- 7 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="26" cy="26" r="19"/><line x1="16" y1="21" x2="36" y2="21"/><line x1="16" y1="31" x2="36" y2="31"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Não Discriminação</p>
+                </div>
+                <!-- 8 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="24" width="30" height="21" rx="3"/><path d="M17 24V17C17 12 35 12 35 17V24"/><circle cx="26" cy="35" r="3"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Privacidade e Uso de Dados</p>
+                </div>
+                <!-- 9 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="26" cy="26" r="19"/><path d="M26 7C26 7 17 16 17 26C17 36 26 45 26 45"/><path d="M26 7C26 7 35 16 35 26C35 36 26 45 26 45"/><line x1="8" y1="21" x2="44" y2="21"/><line x1="8" y1="31" x2="44" y2="31"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Sustentabilidade Ambiental</p>
+                </div>
+                <!-- 10 -->
+                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="10" width="32" height="32" rx="5"/><line x1="19" y1="10" x2="19" y2="7"/><line x1="26" y1="10" x2="26" y2="7"/><line x1="33" y1="10" x2="33" y2="7"/><line x1="19" y1="45" x2="19" y2="42"/><line x1="26" y1="45" x2="26" y2="42"/><line x1="33" y1="45" x2="33" y2="42"/><line x1="10" y1="19" x2="7" y2="19"/><line x1="10" y1="26" x2="7" y2="26"/><line x1="10" y1="33" x2="7" y2="33"/><line x1="42" y1="19" x2="45" y2="19"/><line x1="42" y1="26" x2="45" y2="26"/><line x1="42" y1="33" x2="45" y2="33"/><rect x="19" y="19" width="14" height="14" rx="2"/></svg>
+                  <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política Interna de Uso de Ferramentas de Inteligência Artificial</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Seta anterior -->
+          <button class="pol-prev" type="button" aria-label="Anterior" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid #00269f;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.1);transition:background .18s;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#00269f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11,3.5 5.5,9 11,14.5"/></svg>
+          </button>
+          <!-- Seta próxima -->
+          <button class="pol-next" type="button" aria-label="Próximo" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid #00269f;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.1);transition:background .18s;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#00269f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7,3.5 12.5,9 7,14.5"/></svg>
+          </button>
+          <!-- Dots -->
+          <div class="pol-dots" style="display:flex;gap:7px;align-items:center;justify-content:center;margin-top:32px;"></div>
         </div>
       </div>
     </div>
@@ -371,10 +447,10 @@
         <h3 style="margin:0 0 12px;font-size:18px;font-weight:700;">Ética e conflitos de interesse</h3>
         <p style="margin:0;font-size:15px;line-height:1.6;color:#5c6268;">Mantemos uma governança próxima e participativa, baseada no diálogo entre sócias, lideranças e equipes. Situações sensíveis, críticas ou com potencial impacto ético, reputacional, financeiro ou operacional são encaminhadas à Diretoria.</p>
       </div>
-      <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#1a3834;color:#fff;border-radius:13px;padding:30px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9fd6ad;margin:0 0 12px;">Compromissos futuros</p>
-        <h3 style="margin:0 0 12px;font-size:18px;font-weight:700;">Para onde queremos avançar</h3>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.82);">Seguimos aprimorando nossa governança para sustentar o crescimento da agência, fortalecer processos internos, ampliar a rastreabilidade das decisões e consolidar práticas alinhadas à nossa atuação.</p>
+      <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#fade71;color:#14161a;border-radius:13px;padding:30px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;margin:0 0 12px;">Compromissos futuros</p>
+        <h3 style="margin:0 0 12px;font-size:18px;font-weight:700;color:#14161a;">Para onde queremos avançar</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#2a2e33;">Seguimos aprimorando nossa governança para sustentar o crescimento da agência, fortalecer processos internos, ampliar a rastreabilidade das decisões e consolidar práticas alinhadas à nossa atuação.</p>
       </div>
     </div>
   </section>
@@ -408,27 +484,27 @@
   </section>
 
   <!-- IA em soluções digitais — case + timeline -->
-  <section style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,120px) 0;">
+  <section style="background:#fade71;color:#14161a;padding:clamp(70px,9vw,120px) 0;">
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
       <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:66ch;margin-bottom:48px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 18px;">IA em soluções digitais</p>
-        <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;">Inteligência artificial a serviço de entregas mais ágeis.</h2>
-        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:rgba(255,255,255,.78);">Em 2025, avançamos no uso de ferramentas de inteligência artificial para apoiar processos internos e soluções digitais — ampliando a autonomia da equipe na criação de códigos e no desenvolvimento de sites e aplicações, reduzindo etapas operacionais e apoiando entregas mais ágeis.</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#5c6268;margin:0 0 18px;">IA em soluções digitais</p>
+        <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:#14161a;">Inteligência artificial a serviço de entregas mais ágeis.</h2>
+        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:#2a2e33;">Em 2025, avançamos no uso de ferramentas de inteligência artificial para apoiar processos internos e soluções digitais — ampliando a autonomia da equipe na criação de códigos e no desenvolvimento de sites e aplicações, reduzindo etapas operacionais e apoiando entregas mais ágeis.</p>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(34px,5vw,70px);align-items:start;" class="split-2">
         <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
-          <div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:18px;background:#0c0e12;"><img src="assets/webp-estrategia/img-estrategia-plat-pcj.webp" alt="Plataforma Revista Gestão das Bacias PCJ" style="width:100%;height:auto;display:block;"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:6px;">Case · Revista Gestão das Bacias PCJ</span></div>
-          <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.72);">Um exemplo foi o site da Revista Gestão das Bacias PCJ, em que o uso de IA apoiou o desenvolvimento de uma solução digital sob medida.</p>
+          <div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:18px;background:#14161a;"><img src="assets/webp-estrategia/img-estrategia-plat-pcj.webp" alt="Plataforma Revista Gestão das Bacias PCJ" style="width:100%;height:auto;display:block;"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:6px;">Case · Revista Gestão das Bacias PCJ</span></div>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:#3d4248;">Um exemplo foi o site da Revista Gestão das Bacias PCJ, em que o uso de IA apoiou o desenvolvimento de uma solução digital sob medida.</p>
         </div>
         <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
-          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0 0 24px;">Jornada Claude Partner Network</p>
-          <div style="position:relative;padding-left:28px;border-left:2px solid rgba(255,255,255,.15);display:flex;flex-direction:column;gap:26px;">
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #0c0e12;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">Início da adesão · 2026</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Programa oficial da Anthropic voltado a organizações que apoiam empresas na adoção de IA em escala.</p></div>
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #0c0e12;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">Elegibilidade concluída ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Etapas de elegibilidade do programa cumpridas.</p></div>
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #0c0e12;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">10 colaboradores formados ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Formação concluída na Partner Academy.</p></div>
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:transparent;border:2px solid #9fd6ad;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;">Rumo à certificação CCA-F</p><p style="margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);">Claude Certified Architect – Foundations. A formalização da parceria ocorrerá após o cumprimento de todos os requisitos do programa.</p></div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5c6268;margin:0 0 24px;">Jornada Claude Partner Network</p>
+          <div style="position:relative;padding-left:28px;border-left:2px solid rgba(0,0,0,.2);display:flex;flex-direction:column;gap:26px;">
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #fade71;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">Início da adesão · 2026</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Programa oficial da Anthropic voltado a organizações que apoiam empresas na adoção de IA em escala.</p></div>
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #fade71;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">Elegibilidade concluída ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Etapas de elegibilidade do programa cumpridas.</p></div>
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #fade71;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">10 colaboradores formados ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Formação concluída na Partner Academy.</p></div>
+            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:transparent;border:2px solid #1a3834;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">Rumo à certificação CCA-F</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Claude Certified Architect – Foundations. A formalização da parceria ocorrerá após o cumprimento de todos os requisitos do programa.</p></div>
           </div>
-          <p style="margin:26px 0 0;font-size:13px;color:rgba(255,255,255,.5);">Relacionado: <a href="/pessoas" data-nav style="color:#ffb98c;font-weight:600;border-bottom:1px solid #ffb98c;">Pessoas · Capacitação ESG</a></p>
+          <p style="margin:26px 0 0;font-size:13px;color:#5c6268;">Relacionado: <a href="/pessoas" data-nav style="color:#1a3834;font-weight:600;border-bottom:1px solid #1a3834;">Pessoas · Capacitação ESG</a></p>
         </div>
       </div>
     </div>
@@ -440,7 +516,7 @@
 <!-- NEXT -->
 <section style="background:#f6f6f5;padding:clamp(60px,8vw,110px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-    <a href="/pessoas" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#14161a;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
+    <a href="/pessoas" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
       <div><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Próxima seção · 03 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Pessoas</h2></div>
       <span style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#ff9965;color:#14161a;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
     </a>
@@ -448,17 +524,27 @@
 </section>
 
 <!-- FOOTER -->
-<footer style="background:#0c0e12;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
+<footer style="background:#00269f;color:#fff;padding:clamp(70px,9vw,110px) 0 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
     <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;padding-bottom:64px;border-bottom:1px solid rgba(255,255,255,.1);" class="foot-grid">
       <div>
         <div style="display:flex;align-items:center;margin-bottom:22px;">
-          <img src="https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/logo-bp-cs-impact.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
+          <img src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
         </div>
         <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
+        <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:66px;display:block;margin-top:20px;">
       </div>
-      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p><a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a><div style="display:flex;gap:10px;margin-top:20px;"><a href="#" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;" style-hover="background:rgba(255,255,255,.12);">in</a><a href="#" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;" style-hover="background:rgba(255,255,255,.12);">ig</a></div></div>
-      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p><a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;" style-hover="color:#fff;">Quem Somos</a><a href="/pessoas" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;" style-hover="color:#fff;">Pessoas</a><a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);" style-hover="color:#fff;">Sobre este relatório</a></div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p><a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a><div style="display:flex;gap:10px;margin-top:20px;"><a href="https://bhpress.com.br/" target="_blank" aria-label="Site" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/site-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a><a href="https://www.linkedin.com/company/bhpresscomunica" target="_blank" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/linkedin-bp-log.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a><a href="https://www.instagram.com/bhpresscomunica/" target="_blank" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/ig-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a><a href="https://www.youtube.com/@BHPresscomunica" target="_blank" aria-label="Youtube" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/utube-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a></div></div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p>
+        <a href="/" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Home</a>
+        <a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Quem Somos</a>
+        <a href="/estrategia" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Estratégia &amp; Governança</a>
+        <a href="/pessoas" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Pessoas</a>
+        <a href="/clientes" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Clientes</a>
+        <a href="/ambiente" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Ambiente</a>
+        <a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);transition:color .2s ease;" style-hover="color:#fff;">Sobre este relatório</a>
+      </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);"><span>© 2026 BH Press Comunicação e Sustentabilidade</span><span>Relatório de Impacto 2026 · ano-base 2025</span></div>
   </div>
@@ -524,13 +610,27 @@ class Component extends DCLogic {
 
   componentDidMount(){
     this._counted = new Set();
+    this.initScrollProgress();
     this.initReveal();
     this.initParallax();
     this.initNavLinks();
     this.initAccordion();
+    this.initCarousel();
     this.initOrg();
     this.selectTab(0);
     window.scrollTo(0,0);
+  }
+
+  initScrollProgress(){
+    const bar = document.getElementById('scroll-progress-bar');
+    if(!bar) return;
+    const update = () => {
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? (scrollPos / docHeight) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, {passive:true});
+    update();
   }
 
   initReveal(){
@@ -559,12 +659,68 @@ class Component extends DCLogic {
         const ic = btn.querySelector('.acc-ic');
         const open = btn.getAttribute('data-open')==='1';
         btn.setAttribute('data-open', open?'0':'1');
-        btn.style.background = open ? '#fff' : '#1a3834';
+        btn.style.background = open ? '#fade71' : '#1a3834';
         btn.style.color = open ? '#1a1d22' : '#fff';
-        btn.style.borderColor = open ? '#ececea' : '#1a3834';
+        btn.style.borderColor = open ? 'rgba(0,0,0,.12)' : '#1a3834';
         if(ic){ ic.style.transform = open ? 'rotate(0deg)' : 'rotate(45deg)'; ic.style.color = open ? '#1a3834' : '#9fd6ad'; }
       });
     });
+  }
+
+  initCarousel(){
+    const track = document.querySelector('.pol-track');
+    const prevBtn = document.querySelector('.pol-prev');
+    const nextBtn = document.querySelector('.pol-next');
+    const dotsWrap = document.querySelector('.pol-dots');
+    if(!track) return;
+    const cards = Array.from(track.children);
+    const total = cards.length;
+    let cur = 0;
+
+    // hide native scrollbar via JS just in case
+    track.style.setProperty('-webkit-overflow-scrolling','touch');
+
+    // build dots
+    cards.forEach((_,i)=>{
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.setAttribute('aria-label','Ir para item '+(i+1));
+      d.style.cssText = 'width:6px;height:6px;border-radius:50%;border:none;background:#d4d4d0;cursor:pointer;padding:0;transition:background .25s,width .25s,border-radius .25s;flex-shrink:0;';
+      d.addEventListener('click',()=>goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function updateUI(){
+      Array.from(dotsWrap.children).forEach((d,i)=>{
+        const active = i===cur;
+        d.style.background = active ? '#00269f' : '#d4d4d0';
+        d.style.width = active ? '20px' : '6px';
+        d.style.borderRadius = active ? '3px' : '50%';
+      });
+      if(prevBtn) prevBtn.style.opacity = cur===0 ? '.35' : '1';
+      if(nextBtn) nextBtn.style.opacity = cur===total-1 ? '.35' : '1';
+    }
+
+    function goTo(i){
+      cur = Math.max(0, Math.min(total-1, i));
+      track.scrollTo({left: cur * track.offsetWidth, behavior:'smooth'});
+      updateUI();
+    }
+
+    if(prevBtn) prevBtn.addEventListener('click',()=>goTo(cur-1));
+    if(nextBtn) nextBtn.addEventListener('click',()=>goTo(cur+1));
+
+    // sync dots on manual swipe
+    let scrollTimer;
+    track.addEventListener('scroll',()=>{
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(()=>{
+        const i = Math.round(track.scrollLeft / Math.max(1, track.offsetWidth));
+        if(i!==cur){ cur=i; updateUI(); }
+      }, 80);
+    },{passive:true});
+
+    updateUI();
   }
 
   initOrg(){

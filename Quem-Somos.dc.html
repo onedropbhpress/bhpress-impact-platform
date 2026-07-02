@@ -282,6 +282,12 @@
         .mega-wrap.is-open .nav-chev {
           transform: rotate(180deg);
         }
+        /* Outline degradê animado — Filiação cards */
+        #participacao [data-panel="0"] > div{position:relative;}
+        #participacao [data-panel="0"] > div::before{content:"";position:absolute;inset:-1.5px;border-radius:14px;padding:1.5px;background:linear-gradient(90deg,#00269f,#3f9c63,#fade71,#ff9965,#ff6757,#00269f);background-size:300% 100%;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s ease;pointer-events:none;}
+        #participacao [data-panel="0"] > div:hover::before{opacity:1;animation:valBorderFlow 3s linear infinite;}
+        @media(prefers-reduced-motion:reduce){#participacao [data-panel="0"] > div:hover::before{animation:none;}}
+        .mega-wrap > a:hover{color:#00269f !important;font-weight:700 !important;text-decoration:underline !important;text-underline-offset:3px;background:transparent !important;}
       </style>
     </helmet>
 
@@ -296,8 +302,7 @@
           <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:4px;">
             <div class="mega-wrap" data-menu="mega-qs">
               <a href="/quem-somos" data-nav
-                style="font-size:14px;font-weight:600;color:#00269f;padding:8px 13px;border-radius:6px;background:rgba(0,38,159,.07);">Quem
-                Somos <span class="nav-chev">▾</span></a>
+                style="font-size:14px;font-weight:700;color:#00269f;padding:8px 13px;border-radius:6px;text-decoration:underline;text-underline-offset:3px;">Quem Somos <span class="nav-chev">▾</span></a>
             </div>
             <div class="mega-wrap" data-menu="mega-est">
               <a href="/estrategia" data-nav
@@ -319,9 +324,7 @@
                 style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 13px;border-radius:6px;transition:background .2s ease;">Ambiente
                 <span class="nav-chev">▾</span></a>
             </div>
-            <a href="/sobre" data-nav
-              style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 14px;border-radius:7px;transition:background .2s ease;">←
-              Home</a>
+            <a href="/sobre" data-nav style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#fff;background:#00269f;border:none;padding:8px 18px;border-radius:100px;transition:opacity .2s ease;">Sobre este relatório</a>
           </nav>
           <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu"
             style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
@@ -329,6 +332,9 @@
               style="width:18px;height:2px;background:#14161a;display:block;"></span><span
               style="width:18px;height:2px;background:#14161a;display:block;"></span>
           </button>
+        </div>
+        <div id="scroll-progress-container" style="position:absolute;bottom:-2px;left:0;right:0;height:2px;background:transparent;">
+          <div id="scroll-progress-bar" style="height:100%;width:0%;background:#00269f;transition:width 0.1s linear;will-change:width;"></div>
         </div>
       </header>
       <div class="mega-panel" id="mega-qs">
@@ -680,32 +686,34 @@
               <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">O que fazemos</p>
               <h2 style="margin:0 0 28px;font-size:clamp(30px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Soluções que constroem posicionamentos genuínos.</h2>
               <div style="background:#fff;border:1px solid #ececea;border-radius:14px;overflow:hidden;">
-                <button type="button" onClick="{{ toggleSeg }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;background:transparent;border:none;cursor:pointer;text-align:left;">
+                <button id="seg-btn" type="button" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;background:transparent;border:none;cursor:pointer;text-align:left;">
                   <div>
                     <p style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#00269f;margin:0 0 6px;">Segmentos atendidos em 2025</p>
                     <p style="margin:0;font-size:18px;font-weight:700;letter-spacing:-.01em;color:#14161a;">Mais de 40 clientes, 13 segmentos.</p>
                   </div>
-                  <span style="flex-shrink:0;width:32px;height:32px;border:1px solid #e6e6e3;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#5c6268;transition:transform .25s ease;">&#9662;</span>
+                  <span id="seg-chevron" style="flex-shrink:0;width:32px;height:32px;border:1px solid #e6e6e3;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#5c6268;transition:transform .35s cubic-bezier(.16,1,.3,1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
                 </button>
-                <sc-if value="{{ segOpen }}" hint-placeholder-val="{{ false }}">
+                <div id="seg-body" style="max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1);">
                   <div style="padding:0 24px 24px;">
                     <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#5c6268;border-top:1px solid #ececea;padding-top:18px;">Em 2025, nosso atendimento foi dedicado a mais de 40 clientes dos seguintes segmentos:</p>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;">
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Mineração</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Bancário</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Siderurgia</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Social</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Construção</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Papel e celulose</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Logística &amp; Infra</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Agr&iacute;cola</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>&Aacute;gua &amp; Saneamento</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Educa&ccedil;&atilde;o</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Energia &amp; Utilities</span>
-                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:6px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>Sa&uacute;de</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Mineração</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Bancário</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Siderurgia</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Social</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>Construção</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Papel e celulose</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Logística &amp; Infra</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>Agr&iacute;cola</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M10.1 2.18a10 10 0 0 1 3.8 0"/><path d="M17.6 3.71a10 10 0 0 1 2.69 2.69"/><path d="M21.82 10.1a10 10 0 0 1 0 3.8"/><path d="M20.29 17.6a10 10 0 0 1-2.69 2.69"/><path d="M13.9 21.82a10 10 0 0 1-3.8 0"/><path d="M6.4 20.29a10 10 0 0 1-2.69-2.69"/><path d="M2.18 13.9a10 10 0 0 1 0-3.8"/><path d="M3.71 6.4a10 10 0 0 1 2.69-2.69"/></svg>&Aacute;gua &amp; Saneamento</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;border-bottom:1px solid #f0f0ee;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Educa&ccedil;&atilde;o</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>Energia &amp; Utilities</span>
+                      <span style="font-size:14px;font-weight:500;color:#2a2e33;padding:7px 0;display:flex;align-items:center;gap:9px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sa&uacute;de</span>
                     </div>
                   </div>
-                </sc-if>
+                </div>
               </div>
             </div>
 
@@ -767,19 +775,28 @@
       <!-- ============ TRANSFORMAÇÃO / EMPRESA B ============ -->
       <section id="empresa-b" style="background:#fff;padding:clamp(80px,11vw,140px) 0;">
         <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-          <div data-reveal
-            style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:64ch;margin-bottom:48px;">
-            <p
-              style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">
-              Transformação</p>
-            <p style="margin:0 0 22px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">O marco de 30
-              anos refletiu o momento atual da BH Press: uma agência que utiliza a experiência acumulada e segue em
-              movimento para responder aos desafios da comunicação. Esse movimento também se conecta à consolidação da
-              nossa agenda de sustentabilidade.</p>
-            <p style="margin:0;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Em 2025, conquistamos a
-              certificação de Empresa B, tornando-nos a primeira agência de comunicação de Minas Gerais a integrar esse
-              movimento global. A conquista representa a consolidação de um modelo de atuação que busca equilibrar
-              resultados econômicos com a geração de valor para a sociedade.</p>
+          <!-- text + graph two-column -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;margin-bottom:48px;">
+            <div data-reveal
+              style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
+              <p
+                style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">
+                Transformação</p>
+              <p style="margin:0 0 22px;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">O marco de 30
+                anos refletiu o momento atual da BH Press: uma agência que utiliza a experiência acumulada e segue em
+                movimento para responder aos desafios da comunicação. Esse movimento também se conecta à consolidação da
+                nossa agenda de sustentabilidade.</p>
+              <p style="margin:0;font-size:clamp(18px,1.7vw,21px);line-height:1.62;color:#2a2e33;">Em 2025, conquistamos a
+                certificação de Empresa B, tornando-nos a primeira agência de comunicação de Minas Gerais a integrar esse
+                movimento global. A conquista representa a consolidação de um modelo de atuação que busca equilibrar
+                resultados econômicos com a geração de valor para a sociedade.</p>
+            </div>
+            <div data-reveal data-delay="160"
+              style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
+              <div data-parallax="0.07" style="margin:-8% 0;will-change:transform;">
+                <img src="assets/webp-graphs/img-bp-graphs (6).webp" alt="Gráfico de transformação" style="width:100%;height:auto;display:block;">
+              </div>
+            </div>
           </div>
           <div data-reveal data-delay="120"
             style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);position:relative;background:#1a3834;color:#fff;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.2fr 1fr;gap:0;"
@@ -939,8 +956,8 @@
                     conceitos complexos para diferentes públicos.</p>
                   <a href="https://bhpress.com.br/wp-content/uploads/2025/08/Glossario_COP_30_BHPress-2.pdf"
                     target="_blank" rel="noopener"
-                    style="display:inline-flex;align-items:center;gap:10px;background:#caa400;color:#14161a;font-weight:700;font-size:15px;padding:16px 26px;border-radius:10px;white-space:nowrap;transition:transform .2s ease;"
-                    style-hover="transform:translateY(-2px);">↓ Baixar glossário</a>
+                    style="display:inline-flex;align-items:center;gap:10px;background:#00269f;color:#fff;font-weight:700;font-size:15px;padding:16px 26px;border-radius:10px;white-space:nowrap;transition:transform .2s ease;"
+                    style-hover="transform:translateY(-2px);"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Baixar glossário</a>
                 </div>
                 <div style="display:flex;justify-content:center;">
                   <img src="assets/webp-glossario/img-bp-glossario.webp"
@@ -1006,20 +1023,18 @@
       <!-- ============ NEXT SECTION CTA ============ -->
       <section style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
         <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-          <a href="/estrategia" data-nav data-reveal
-            style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,56px);transition:transform .25s ease;"
+          <a href="/estrategia" data-nav data-reveal id="cta-next-link"
+            style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,56px);position:relative;overflow:hidden;"
             style-hover="transform:translateY(-3px);">
-            <div>
-              <p
-                style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 12px;">
-                Próxima seção · 02 / 06</p>
-              <h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Estratégia
-                &amp; Governança</h2>
+            <video id="cta-next-vid" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;z-index:0;mix-blend-mode:luminosity;">
+              <source src="assets/video-bp-clientes/video-liderança.mp4" type="video/mp4">
+            </video>
+            <div style="position:relative;z-index:1;">
+              <p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 12px;">Próxima seção · 02 / 06</p>
+              <h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Estratégia &amp; Governança</h2>
             </div>
-            <span
-              style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar
-              <span
-                style="width:50px;height:50px;border-radius:50%;background:#83c0b3;color:#14241b;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
+            <span style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar
+              <span style="width:50px;height:50px;border-radius:50%;background:#83c0b3;color:#14241b;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></span>
           </a>
         </div>
       </section>
@@ -1037,7 +1052,7 @@
               </div>
               <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação
                 e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
-              <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:66px;display:block;margin-top:20px;">
+              <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:86px;display:block;margin-top:20px;">
             </div>
             <div>
               <p
@@ -1142,13 +1157,41 @@ class Component extends DCLogic {
     this.initReveal();
     this.initParallax();
     this.initNavLinks();
+    this.initSegAccordion();
+    this.initCtaVideo();
     this.initScrollVideos();
     this.initScrollRotate();
     this.selectTab(0);
+    this.initScrollProgress();
     document.addEventListener('keydown', this._esc = (e)=>{ if(e.key==='Escape') this.setState({segOpen:false, navOpen:false}); });
   }
 
   componentWillUnmount(){ if(this._esc) document.removeEventListener('keydown', this._esc); }
+
+  initScrollProgress(){
+    const bar = document.getElementById('scroll-progress-bar');
+    if(!bar) return;
+    const update = () => {
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? (scrollPos / docHeight) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  }
+
+  initSegAccordion(){
+    const btn = document.getElementById('seg-btn');
+    const body = document.getElementById('seg-body');
+    const chevron = document.getElementById('seg-chevron');
+    if(!btn || !body) return;
+    let open = false;
+    btn.addEventListener('click', ()=>{
+      open = !open;
+      body.style.maxHeight = open ? body.scrollHeight + 'px' : '0';
+      if(chevron) chevron.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+    });
+  }
 
   initReveal(){
     const els = Array.from(document.querySelectorAll('[data-reveal]'));
@@ -1260,6 +1303,19 @@ class Component extends DCLogic {
         setTimeout(()=>{ window.location.href = href; }, 360);
       });
     });
+  }
+
+  initCtaVideo(){
+    const vid = document.getElementById('cta-next-vid');
+    if(!vid) return;
+    const io = new IntersectionObserver((ents)=>{
+      if(ents[0].isIntersecting){
+        vid.play().catch(()=>{});
+        vid.style.opacity='0.32';
+        io.disconnect();
+      }
+    },{threshold:0.3});
+    io.observe(vid.parentElement);
   }
 }
 </script>

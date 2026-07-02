@@ -5,7 +5,10 @@
       "Bash(awk '/function dcNameFromPath/{f=1} f{print; n++} f&&n>14{exit}' support.js)",
       "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type} size=%{size_download}\\\\n\" -r 0-1 \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video-quem-somos-comp.mp4\")",
       "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type} length=%{size_download} bytes\\\\n\" \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video.mp4\" --max-time 60)",
-      "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type}\\\\n\" -r 0-1 \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-video-bcorp.mp4\")"
+      "Bash(curl -s -o /dev/null -w \"status=%{http_code} type=%{content_type}\\\\n\" -r 0-1 \"https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-video-bcorp.mp4\")",
+      "Bash(cd \"/c/Users/PedroHenriqueBatista/OneDrive - BH PRESS/Documentos/BH_Press/Institucional/Plataforma de Impactos 2026/claude-design/bhpress-impact-platform\" && grep -no '#[0-9a-fA-F]\\\\{6\\\\}' Clientes.dc.html | sort | uniq -c | sort -rn | head -50)",
+      "Bash(cp \"C:/Users/PedroHenriqueBatista/OneDrive - BH PRESS/Documentos/BH_Press/Institucional/Plataforma de Impactos 2026/Assets/imgs/graphs/1x/Ativo 20-8.png\" \"C:/Users/PedroHenriqueBatista/OneDrive - BH PRESS/Documentos/BH_Press/Institucional/Plataforma de Impactos 2026/claude-design/bhpress-impact-platform/assets/webp-graphs/img-bp-graphs-materialidade.png\" && echo \"OK\")",
+      "Bash(dir \"C:/Users/PedroHenriqueBatista/OneDrive - BH PRESS/Documentos/BH_Press/Institucional/Plataforma de Impactos 2026/claude-design/bhpress-impact-platform/assets/webp-bp-cop\")"
     ]
   }
 }

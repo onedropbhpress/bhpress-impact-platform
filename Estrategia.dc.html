@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <style>
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -48,6 +49,23 @@
   .mega-links a:hover{background:#f4f4f2;color:#14161a;}
   .nav-chev{font-size:9px;opacity:.45;margin-left:2px;display:inline-block;transition:transform .22s ease;}
   .mega-wrap.is-open .nav-chev{transform:rotate(180deg);}
+  @keyframes gradBorderFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+  /* Carrossel políticas — deck border + pastel backgrounds */
+  #pol-deck{position:relative;}
+  #pol-deck::before{content:"";position:absolute;inset:-2px;border-radius:26px;padding:2px;background:linear-gradient(90deg,#00269f,#3f9c63,#fade71,#ff9965,#ff6757,#00269f);background-size:300% 100%;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:gradBorderFlow 3s linear infinite;pointer-events:none;z-index:1;}
+  @media(prefers-reduced-motion:reduce){#pol-deck::before{animation:none;}}
+  .pol-card{background:#fff;}
+  #materialidade .mat-grid > div{position:relative;}
+  #materialidade .mat-grid > div::before{content:"";position:absolute;inset:-1.5px;border-radius:14px;padding:1.5px;background:linear-gradient(90deg,#00269f,#3f9c63,#fade71,#ff9965,#ff6757,#00269f);background-size:300% 100%;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s ease;pointer-events:none;}
+  #materialidade .mat-grid > div:hover::before{opacity:1;animation:gradBorderFlow 3s linear infinite;}
+  @media(prefers-reduced-motion:reduce){#materialidade .mat-grid > div:hover::before{animation:none;}}
+  /* Org chart — expand on hover */
+  .org-box{transition:box-shadow .28s ease,border-color .28s ease;}
+  .org-expand{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .44s cubic-bezier(.16,1,.3,1),opacity .3s ease,margin-top .3s ease;}
+  .org-box:hover .org-expand,.org-box:focus .org-expand{max-height:280px;opacity:1;margin-top:14px;}
+  .org-chip-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .org-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.65);border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:7px 11px;font-size:12px;font-weight:500;color:#2a2e33;}
+  .mega-wrap > a:hover{color:#00269f !important;font-weight:700 !important;text-decoration:underline !important;text-underline-offset:3px;background:transparent !important;}
 </style>
 </helmet>
 
@@ -63,7 +81,7 @@
         <a href="/quem-somos" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Quem Somos <span class="nav-chev">▾</span></a>
       </div>
       <div class="mega-wrap" data-menu="mega-est">
-        <a href="/estrategia" data-nav style="font-size:14px;font-weight:600;color:#1a3834;padding:8px 12px;border-radius:6px;background:rgba(26,56,52,.08);">Estratégia <span class="nav-chev">▾</span></a>
+        <a href="/estrategia" data-nav style="font-size:14px;font-weight:700;color:#00269f;padding:8px 12px;border-radius:6px;text-decoration:underline;text-underline-offset:3px;">Estratégia <span class="nav-chev">▾</span></a>
       </div>
       <div class="mega-wrap" data-menu="mega-pss">
         <a href="/pessoas" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Pessoas <span class="nav-chev">▾</span></a>
@@ -74,7 +92,7 @@
       <div class="mega-wrap" data-menu="mega-amb">
         <a href="/ambiente" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Ambiente <span class="nav-chev">▾</span></a>
       </div>
-      <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 13px;border-radius:7px;transition:background .2s ease;">Sobre</a>
+      <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#fff;background:#00269f;border:none;padding:8px 18px;border-radius:100px;transition:opacity .2s ease;">Sobre este relatório</a>
     </nav>
     <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span></button>
   </div>
@@ -246,19 +264,25 @@
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
       <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:62ch;margin-bottom:44px;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Compromissos da agenda BH Press 2030</p>
-        <h2 style="margin:0;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Sete compromissos, conectados aos ODS.</h2>
+        <h2 style="margin:0;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Nossa Agenda 2030</h2>
       </div>
       <div data-reveal data-delay="100" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;">
         <div style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:16px 28px;border-bottom:1px solid #e6e6e3;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;">
-          <span>Compromisso</span><span style="text-align:right;">ODS</span><span style="text-align:right;min-width:120px;">Status 2025</span>
+          <span>Compromisso 2030</span><span style="text-align:right;">ODS</span><span style="text-align:right;min-width:185px;">Status 2025</span>
         </div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">100% dos profissionais treinados contra a discriminação</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Todos os profissionais treinados para identificar e combater violência de gênero</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Processos seletivos priorizando inclusão como critério de desempate</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">25% de pessoas negras em cargos de gestão</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Aumento da representatividade de colaboradores que pertencem a grupos de diversidade</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Definição e acompanhamento da grade de treinamento para lideranças</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
-        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Construção do Conselho de Administração</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;border:1px dashed #d9d9d6;padding:4px 9px;border-radius:5px;white-space:nowrap;">a reportar</span></span></div>
+        <div id="rm-collapse" style="position:relative;overflow:hidden;max-height:200px;transition:max-height .55s cubic-bezier(.16,1,.3,1);">
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">100% dos profissionais treinados contra a discriminação</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#92400e;background:#fef3c7;border:1px solid #f59e0b;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Em andamento</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Todos os profissionais treinados para identificar e combater violência de gênero</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#92400e;background:#fef3c7;border:1px solid #f59e0b;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Em andamento · 85%</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:start;"><span style="font-size:16px;font-weight:500;color:#1a1d22;padding-top:3px;">Processos seletivos priorizando inclusão como critério de desempate</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;padding-top:3px;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#14532d;background:#dcfce7;border:1px solid #4ade80;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Implantado</span><span style="font-size:11px;color:#5c6268;text-align:right;max-width:22ch;line-height:1.4;">Política implantada e orientando todos os processos</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">25% de pessoas negras em cargos de gestão</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods5.png" alt="ODS 5" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#92400e;background:#fef3c7;border:1px solid #f59e0b;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Em andamento</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:start;"><span style="font-size:16px;font-weight:500;color:#1a1d22;padding-top:3px;">Aumento da representatividade de colaboradores que pertencem a grupos de diversidade</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;padding-top:3px;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#92400e;background:#fef3c7;border:1px solid #f59e0b;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Em andamento</span><span style="font-size:11px;color:#5c6268;text-align:right;line-height:1.4;">Censo interno previsto para 2026</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;border-bottom:1px solid #f0f0ee;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Definição e acompanhamento da grade de treinamento para lideranças</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods4.png" alt="ODS 4" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"><img src="assets/webp-ods/ods10.png" alt="ODS 10" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#92400e;background:#fef3c7;border:1px solid #f59e0b;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Em andamento</span></span></div>
+        <div class="rm-row" style="display:grid;grid-template-columns:1fr auto auto;gap:20px;padding:20px 28px;align-items:center;"><span style="font-size:16px;font-weight:500;color:#1a1d22;">Construção do Conselho de Administração</span><span style="display:flex;align-items:center;gap:5px;justify-content:flex-end;"><img src="assets/webp-ods/ods8.png" alt="ODS 8" style="width:34px;height:34px;border-radius:4px;"></span><span style="text-align:right;"><span style="display:inline-flex;align-items:center;gap:5px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:#374151;background:#f3f4f6;border:1px solid #d1d5db;padding:5px 10px;border-radius:6px;white-space:nowrap;"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Não iniciado</span></span></div>
+          <div id="rm-fade" style="position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to top,#fff 20%,rgba(255,255,255,0) 100%);pointer-events:none;transition:opacity .35s ease;z-index:2;"></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <button id="rm-toggle" style="font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;color:#1a3834;background:transparent;border:2px solid rgba(26,56,52,.35);border-radius:20px;padding:10px 24px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">Ver todos os 7 compromissos <span id="rm-arrow" style="display:inline-flex;align-items:center;transition:transform .35s;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
       </div>
     </div>
   </section>
@@ -266,31 +290,39 @@
   <!-- Materialidade -->
   <section id="materialidade" style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:64ch;margin-bottom:44px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Materialidade</p>
-        <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Cinco temas materiais orientam tudo.</h2>
-        <p style="margin:0 0 16px;font-size:18px;line-height:1.6;color:#3d4248;">Nosso primeiro estudo de materialidade, com base nas diretrizes da GRI e em consulta às nossas partes interessadas, foi realizado em 2024. O processo definiu cinco temas materiais, que seguem orientando nossa estratégia, nossa gestão e a prestação de contas sobre nossos impactos.</p>
-        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><a href="#" style="display:inline-flex;align-items:center;gap:9px;color:#1a3834;font-weight:600;font-size:15px;border-bottom:2px solid #1a3834;padding-bottom:2px;">Conheça o processo completo no Relatório de Impacto 2024 <span>→</span></a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 3-1 · 3-2</span></div>
+      <!-- text + graph two-column -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;margin-bottom:44px;" class="mat-split">
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Materialidade</p>
+          <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Cinco temas materiais orientam tudo.</h2>
+          <p style="margin:0 0 16px;font-size:18px;line-height:1.6;color:#3d4248;">Nosso primeiro estudo de materialidade, com base nas diretrizes da GRI e em consulta às nossas partes interessadas, foi realizado em 2024. O processo definiu cinco temas materiais, que seguem orientando nossa estratégia, nossa gestão e a prestação de contas sobre nossos impactos.</p>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><a href="#" style="display:inline-flex;align-items:center;gap:9px;color:#1a3834;font-weight:600;font-size:15px;border-bottom:2px solid #1a3834;padding-bottom:2px;">Conheça o processo completo no Relatório de Impacto 2024 <span>→</span></a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 3-1 · 3-2</span></div>
+        </div>
+        <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
+          <div data-parallax="0.07" style="margin:-8% 0;will-change:transform;">
+            <img src="assets/webp-graphs/img-bp-graphs-materialidade.png" alt="Gráfico de materialidade" style="width:100%;height:auto;display:block;">
+          </div>
+        </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;" class="mat-grid">
         <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="28" height="20" rx="3"/><path d="M14 14v-4a6 6 0 0 1 12 0v4"/><line x1="20" y1="21" x2="20" y2="27"/><line x1="17" y1="24" x2="23" y2="24"/></svg>
+          <i data-lucide="briefcase" width="40" height="40" stroke="#00269f" stroke-width="1.6" style="display:block;flex-shrink:0;" aria-hidden="true"></i>
           <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Emprego e cadeia de valor</p>
         </div>
         <div data-reveal data-delay="60" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="14" r="5"/><circle cx="26" cy="14" r="5"/><path d="M5 32c0-5 4-8 9-8"/><path d="M26 24c5 0 9 3 9 8"/><path d="M17 32c0-3.3 2-6 5-7"/><path d="M20 25a6 6 0 0 1 6 7"/></svg>
+          <i data-lucide="users" width="40" height="40" stroke="#00269f" stroke-width="1.6" style="display:block;flex-shrink:0;" aria-hidden="true"></i>
           <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Diversidade, equidade e não discriminação</p>
         </div>
         <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 32 C8 20 14 10 20 8 C26 10 32 20 32 32"/><line x1="12" y1="22" x2="28" y2="22"/><line x1="14" y1="27" x2="26" y2="27"/><circle cx="20" cy="8" r="2.5"/></svg>
+          <i data-lucide="graduation-cap" width="40" height="40" stroke="#00269f" stroke-width="1.6" style="display:block;flex-shrink:0;" aria-hidden="true"></i>
           <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Capacitação e educação</p>
         </div>
         <div data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 L33 12 V22 C33 28.6 27.4 34.4 20 36 C12.6 34.4 7 28.6 7 22 V12 Z"/><path d="M14 20 l4 4 8-8"/></svg>
+          <i data-lucide="shield-check" width="40" height="40" stroke="#00269f" stroke-width="1.6" style="display:block;flex-shrink:0;" aria-hidden="true"></i>
           <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Clientes, gestão de contratos e privacidade de dados</p>
         </div>
         <div data-reveal data-delay="240" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-top:3px solid #00269f;border-radius:13px;padding:28px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:18px;">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#00269f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 34 C20 34 7 26 7 16 a6 6 0 0 1 13-1.5 6 6 0 0 1 13 1.5 C33 26 20 34 20 34Z"/><path d="M20 9 C20 6 22 4 25 4"/><path d="M27 6 C30 5 33 7 33 10"/></svg>
+          <i data-lucide="leaf" width="40" height="40" stroke="#00269f" stroke-width="1.6" style="display:block;flex-shrink:0;" aria-hidden="true"></i>
           <p style="margin:0;font-size:15px;font-weight:600;line-height:1.38;color:#1a1d22;">Saúde, segurança e meio ambiente</p>
         </div>
       </div>
@@ -319,33 +351,127 @@
       </div>
 
       <!-- Organograma interativo -->
-      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:16px;padding:clamp(30px,4vw,52px);">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 30px;text-align:center;">Estrutura de governança · passe o cursor para detalhes</p>
+      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fade71;border-radius:16px;padding:clamp(30px,4vw,52px);">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;opacity:.55;margin:0 0 30px;text-align:center;">Estrutura de governança · passe o cursor para expandir</p>
         <div style="display:flex;flex-direction:column;align-items:center;">
-          <div class="org-box" tabindex="0" style="position:relative;background:#1a3834;color:#fff;border-radius:12px;padding:20px 34px;text-align:center;cursor:default;min-width:240px;">
+          <!-- Diretoria -->
+          <div class="org-box" tabindex="0" style="background:#1a3834;color:#fff;border-radius:12px;padding:20px 34px;text-align:center;cursor:default;min-width:320px;max-width:400px;width:100%;">
             <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9fd6ad;">Instância máxima</span>
             <p style="margin:6px 0 0;font-size:20px;font-weight:700;">Diretoria</p>
-            <div class="org-tip" style="position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%);width:280px;background:#14161a;color:#fff;font-size:13px;line-height:1.5;padding:14px 16px;border-radius:10px;opacity:0;visibility:hidden;transition:opacity .2s ease;z-index:5;box-shadow:0 18px 40px -16px rgba(0,0,0,.5);">Supervisão e decisão: orienta a estratégia, define metas e indicadores, aprova políticas e planos de ação, acompanha riscos e impactos e supervisiona a evolução da gestão e da agenda ESG.</div>
-          </div>
-          <div style="width:2px;height:30px;background:#cfd6d3;"></div>
-          <div class="org-box" tabindex="0" style="position:relative;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:18px 30px;text-align:center;cursor:default;min-width:300px;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a3834;">CEO</span>
-            <p style="margin:6px 0 2px;font-size:18px;font-weight:700;color:#14161a;">Dulcemar da Costa</p>
-            <p style="margin:0;font-size:13px;color:#5c6268;">Sócia-administradora · responsável legal *</p>
-          </div>
-          <div style="width:2px;height:30px;background:#cfd6d3;"></div>
-          <div class="org-row" style="display:flex;gap:24px;width:100%;justify-content:center;">
-            <div class="org-box" tabindex="0" style="position:relative;flex:1;max-width:340px;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:22px 26px;cursor:default;">
-              <p style="margin:0 0 6px;font-size:17px;font-weight:700;color:#14161a;">Área administrativo-financeira</p>
-              <p style="margin:0;font-size:14px;color:#5c6268;line-height:1.5;">Orçamento, contratos, pessoas, conformidade.</p>
+            <div class="org-expand" style="text-align:left;">
+              <p style="margin:0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.75);">Orienta a estratégia, define metas e indicadores, aprova políticas e planos de ação, acompanha riscos e impactos e supervisiona a evolução da gestão e da agenda ESG.</p>
             </div>
-            <div class="org-box" tabindex="0" style="position:relative;flex:1;max-width:340px;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:22px 26px;cursor:default;">
-              <p style="margin:0 0 6px;font-size:17px;font-weight:700;color:#14161a;">Área técnica</p>
-              <p style="margin:0;font-size:14px;color:#5c6268;line-height:1.5;">Clientes, parceiros, execução técnica, inovação e sustentabilidade.</p>
+          </div>
+          <!-- T-junction connector -->
+          <div style="position:relative;width:100%;max-width:740px;height:30px;">
+            <div style="position:absolute;top:0;left:50%;width:2px;height:13px;background:#c9b800;transform:translateX(-50%);"></div>
+            <div style="position:absolute;top:13px;left:26%;right:26%;height:2px;background:#c9b800;"></div>
+            <div style="position:absolute;top:13px;left:26%;width:2px;height:17px;background:#c9b800;transform:translateX(-50%);"></div>
+            <div style="position:absolute;top:13px;right:26%;width:2px;height:17px;background:#c9b800;transform:translateX(50%);"></div>
+          </div>
+          <!-- Two-column pillars -->
+          <div style="display:flex;gap:24px;width:100%;max-width:740px;align-items:stretch;">
+            <!-- LEFT: Administrativo-Financeiro -->
+            <div style="flex:1;border:1.5px solid #c8d7f0;background:#f5f7fb;border-radius:14px;padding:16px 16px 20px;">
+              <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;">
+                <span style="width:7px;height:7px;border-radius:50%;background:#00269f;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#00269f;">Administrativo-Financeiro</span>
+              </div>
+              <!-- Dulcemar -->
+              <div class="org-box" tabindex="0" style="background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:16px;cursor:default;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <img src="assets/webp-ceo-message-video-thumb/1x/dulcemar-bp.png" alt="Dulcemar da Costa" style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid #e2e6e3;">
+                  <div>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1a3834;display:block;margin-bottom:2px;">Sócia-administradora</span>
+                    <p style="margin:0 0 2px;font-size:15px;font-weight:700;color:#14161a;">Dulcemar da Costa</p>
+                    <p style="margin:0;font-size:12px;color:#5c6268;">CEO · Responsável legal <span style="color:#00269f;font-weight:700;">★</span></p>
+                  </div>
+                </div>
+                <p style="margin:12px 0 0;font-size:12.5px;font-weight:600;color:#00269f;line-height:1.4;">Liderança e supervisão integral da Área Administrativo-Financeira</p>
+                <div class="org-expand">
+                  <p style="margin:0;font-size:13px;line-height:1.6;color:#5c6268;">Supervisão executiva direta do orçamento, contratos, gestão de pessoas, conformidade, representação societária e alinhamento estratégico.</p>
+                </div>
+              </div>
+              <!-- Connector -->
+              <div style="width:2px;height:20px;background:#c9b800;margin:0 auto;"></div>
+              <!-- Área admin-fin -->
+              <div class="org-box" tabindex="0" style="background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:18px;cursor:default;">
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#c2602f;margin:0 0 8px;display:flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="12" width="4" height="10"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="4" width="4" height="18"/></svg> Finanças &amp; Pessoas</p>
+                <p style="margin:0 0 5px;font-size:15px;font-weight:700;color:#14161a;">Área administrativo-financeira</p>
+                <p style="margin:0;font-size:13px;color:#5c6268;line-height:1.5;">Orçamento, contratos, pessoas, conformidade.</p>
+                <div class="org-expand">
+                  <div class="org-chip-grid">
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c2602f" stroke-width="2"><rect x="2" y="12" width="4" height="10"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="4" width="4" height="18"/></svg> Orçamento</div>
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c2602f" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg> Contratos</div>
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c2602f" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Pessoas</div>
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#c2602f" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Conformidade</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT: Área Técnica -->
+            <div style="flex:1;border:1.5px solid #c0ddd0;background:#f3faf6;border-radius:14px;padding:16px 16px 20px;">
+              <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;">
+                <span style="width:7px;height:7px;border-radius:50%;background:#3f9c63;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#1a6640;">Área Técnica</span>
+              </div>
+              <!-- Isabela + Lilian side by side -->
+              <div style="display:flex;gap:10px;">
+                <!-- Isabela -->
+                <div class="org-box" tabindex="0" style="flex:1;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:14px;cursor:default;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#1a3834;display:block;margin-bottom:8px;">Comitê Gestor</span>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                    <img src="assets/webp-ceo-message-video-thumb/1x/isabela-bp.png" alt="Isabela Scarioli" style="width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid #e2e6e3;">
+                    <div>
+                      <p style="margin:0 0 1px;font-size:13px;font-weight:700;color:#14161a;">Isabela Scarioli</p>
+                      <p style="margin:0;font-size:11px;color:#5c6268;">Liderança Sênior</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Lilian -->
+                <div class="org-box" tabindex="0" style="flex:1;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:14px;cursor:default;">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#1a3834;display:block;margin-bottom:8px;">Comitê Gestor</span>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                    <img src="assets/webp-ceo-message-video-thumb/1x/lilian-bp.png" alt="Lilian Ribas" style="width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid #e2e6e3;">
+                    <div>
+                      <p style="margin:0 0 1px;font-size:13px;font-weight:700;color:#14161a;">Lilian Ribas</p>
+                      <p style="margin:0;font-size:11px;color:#5c6268;">Liderança Sênior</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Bracket connector: two cards → one area -->
+              <div style="position:relative;height:28px;">
+                <div style="position:absolute;top:0;left:25%;width:2px;height:14px;background:#c9b800;transform:translateX(-50%);"></div>
+                <div style="position:absolute;top:0;right:25%;width:2px;height:14px;background:#c9b800;transform:translateX(50%);"></div>
+                <div style="position:absolute;top:14px;left:25%;right:25%;height:2px;background:#c9b800;"></div>
+                <div style="position:absolute;top:14px;left:50%;width:2px;height:14px;background:#c9b800;transform:translateX(-50%);"></div>
+              </div>
+              <!-- Área técnica -->
+              <div class="org-box" tabindex="0" style="background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:18px;cursor:default;">
+                <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#3f9c63;margin:0 0 8px;display:flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Impacto &amp; Operações</p>
+                <p style="margin:0 0 5px;font-size:15px;font-weight:700;color:#14161a;">Área técnica</p>
+                <div class="org-expand">
+                  <div class="org-chip-grid">
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3f9c63" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Clientes</div>
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3f9c63" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Parceiros</div>
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3f9c63" stroke-width="2"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/></svg> Execução</div>
+                    <div class="org-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3f9c63" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg> Inovação</div>
+                    <div class="org-chip" style="grid-column:1/-1;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3f9c63" stroke-width="2"><path d="M17 8C8 10 5.9 16.17 3.82 19.32A2 2 0 0 0 5.39 22c.18-.09.5-.27.71-.43 1.25-.97 1.95-1.71 3.7-2.29 1.26-.42 2.5-.76 3.2-1.28"/><path d="M17 8c0 0-3 4-8 4"/><path d="M17 8s4-2 5-6c0 0-3 0-5 1"/></svg> Sustentabilidade</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <p style="margin:30px 0 0;font-size:13px;line-height:1.55;color:#7a8077;border-top:1px solid #e2e6e3;padding-top:18px;"><span style="color:#1a3834;font-weight:600;">*</span> Ana Amélia Gouvêa se desligou da sociedade da BH Press em outubro/2025, quando a responsabilidade legal pela empresa ficou somente a cargo da sócia-administradora Dulcemar da Costa.</p>
+        <!-- Nota histórica -->
+        <div style="margin:24px 0 0;background:rgba(255,255,255,.55);border:1px solid rgba(26,56,52,.18);border-radius:10px;padding:14px 18px;display:flex;align-items:flex-start;gap:10px;">
+          <span style="font-size:15px;margin-top:1px;flex-shrink:0;opacity:.5;">ⓘ</span>
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;margin:0 0 5px;">Transição societária histórica</p>
+            <p style="margin:0;font-size:13px;line-height:1.55;color:#3d4248;"><span style="color:#c2602f;font-weight:700;">★</span> Ana Amélia Gouvêa se desligou da sociedade da BH Press em outubro/2025, quando a responsabilidade legal pela empresa ficou somente a cargo da sócia-administradora Dulcemar da Costa.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -365,57 +491,57 @@
         <!-- Carousel políticas -->
         <div style="position:relative;padding:0 100px;flex:1;display:flex;flex-direction:column;">
           <!-- Deck bilateral: ghost cards em ambos os lados via box-shadow -->
-          <div style="border-radius:24px;box-shadow:0 10px 36px rgba(0,0,0,.10),-10px 8px 0 0 rgba(255,255,255,.80),10px 8px 0 0 rgba(255,255,255,.80),-18px 15px 0 0 rgba(255,255,255,.46),18px 15px 0 0 rgba(255,255,255,.46);flex:1;display:flex;flex-direction:column;">
+          <div id="pol-deck" style="border-radius:24px;box-shadow:0 10px 36px rgba(0,0,0,.10),-10px 8px 0 0 rgba(255,255,255,.80),10px 8px 0 0 rgba(255,255,255,.80),-18px 15px 0 0 rgba(255,255,255,.46),18px 15px 0 0 rgba(255,255,255,.46);flex:1;display:flex;flex-direction:column;">
             <div style="overflow:hidden;border-radius:24px;flex:1;display:flex;flex-direction:column;">
               <div class="pol-track" style="display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;height:100%;">
                 <!-- 1 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M44 8C44 8 44 24 34 34C24 44 8 46 8 46C8 46 8 30 18 20C28 10 44 8 44 8Z"/><line x1="8" y1="46" x2="42" y2="10"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Declaração de Compromisso com a Proteção Ambiental</p>
                 </div>
                 <!-- 2 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M26 4L8 11V26C8 37 16 46 26 50C36 46 44 37 44 26V11L26 4Z"/><line x1="18" y1="18" x2="34" y2="34"/><line x1="34" y1="18" x2="18" y2="34"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Declaração de Proibição do Trabalho Infantil e Trabalho Forçado ou Compulsório</p>
                 </div>
                 <!-- 3 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V31M26 12V31M33 15V31C33 38 26 44 26 44C26 44 14 38 14 31V21C14 18 16 16 19 16"/><path d="M33 15C33 15 40 15 40 21V31"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política contra Assédios</p>
                 </div>
                 <!-- 4 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20H17L34 10V42L17 32H10V20Z"/><path d="M17 32L19 45"/><path d="M38 15C42 18 44 22 44 26C44 30 42 34 38 37"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Denúncias</p>
                 </div>
                 <!-- 5 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="15" r="6"/><circle cx="33" cy="15" r="6"/><path d="M5 48C5 40 11 34 19 34C27 34 33 40 33 48"/><path d="M33 34C41 34 47 40 47 48"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Direitos Humanos</p>
                 </div>
                 <!-- 6 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="42" height="28" rx="2"/><line x1="17" y1="46" x2="35" y2="46"/><line x1="26" y1="38" x2="26" y2="46"/><path d="M36 16C36 16 36 24 30 30C24 36 18 37 18 37C18 37 18 29 24 23C30 17 36 16 36 16Z"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Incentivo ao Uso de Produtos e Práticas Ambientais nos Escritórios Virtuais</p>
                 </div>
                 <!-- 7 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="26" cy="26" r="19"/><line x1="16" y1="21" x2="36" y2="21"/><line x1="16" y1="31" x2="36" y2="31"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Não Discriminação</p>
                 </div>
                 <!-- 8 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="24" width="30" height="21" rx="3"/><path d="M17 24V17C17 12 35 12 35 17V24"/><circle cx="26" cy="35" r="3"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Privacidade e Uso de Dados</p>
                 </div>
                 <!-- 9 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="26" cy="26" r="19"/><path d="M26 7C26 7 17 16 17 26C17 36 26 45 26 45"/><path d="M26 7C26 7 35 16 35 26C35 36 26 45 26 45"/><line x1="8" y1="21" x2="44" y2="21"/><line x1="8" y1="31" x2="44" y2="31"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política de Sustentabilidade Ambiental</p>
                 </div>
                 <!-- 10 -->
-                <div style="scroll-snap-align:start;background:#fff;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
-                  <svg width="68" height="68" viewBox="0 0 52 52" fill="none" stroke="#00269f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="10" width="32" height="32" rx="5"/><line x1="19" y1="10" x2="19" y2="7"/><line x1="26" y1="10" x2="26" y2="7"/><line x1="33" y1="10" x2="33" y2="7"/><line x1="19" y1="45" x2="19" y2="42"/><line x1="26" y1="45" x2="26" y2="42"/><line x1="33" y1="45" x2="33" y2="42"/><line x1="10" y1="19" x2="7" y2="19"/><line x1="10" y1="26" x2="7" y2="26"/><line x1="10" y1="33" x2="7" y2="33"/><line x1="42" y1="19" x2="45" y2="19"/><line x1="42" y1="26" x2="45" y2="26"/><line x1="42" y1="33" x2="45" y2="33"/><rect x="19" y="19" width="14" height="14" rx="2"/></svg>
+                <div class="pol-card" style="scroll-snap-align:start;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                   <p style="margin:0;font-size:17px;font-weight:600;line-height:1.5;color:#14161a;max-width:26ch;">Política Interna de Uso de Ferramentas de Inteligência Artificial</p>
                 </div>
               </div>
@@ -423,11 +549,11 @@
           </div>
           <!-- Seta anterior -->
           <button class="pol-prev" type="button" aria-label="Anterior" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid #00269f;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.1);transition:background .18s;">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#00269f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11,3.5 5.5,9 11,14.5"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="m15 18-6-6 6-6"/></svg>
           </button>
           <!-- Seta próxima -->
           <button class="pol-next" type="button" aria-label="Próximo" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid #00269f;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.1);transition:background .18s;">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#00269f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7,3.5 12.5,9 7,14.5"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#00269f"><path d="m9 18 6-6-6-6"/></svg>
           </button>
           <!-- Dots -->
           <div class="pol-dots" style="display:flex;gap:7px;align-items:center;justify-content:center;margin-top:32px;"></div>
@@ -460,12 +586,20 @@
 <div id="transformacao-digital" data-panel="2" data-disp="block" style="display:none;">
   <section style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:70ch;margin-bottom:40px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Transformação digital</p>
-        <h2 style="margin:0 0 22px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;">Mais intencional, mais estruturada.</h2>
-        <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em 2025, avançamos na transformação digital de forma mais intencional e estruturada, como parte do amadurecimento da gestão e da consolidação da agenda BH Press 2030. O processo incluiu diagnóstico dos fluxos de trabalho, apoio de consultoria externa, formação de um grupo de trabalho com profissionais de diferentes áreas e revisão de processos, modelos de trabalho e políticas internas.</p>
-        <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">A partir desse movimento, estruturamos o ambiente Microsoft como padrão de comunicação, gestão à vista e colaboração interna. A iniciativa contribuiu para reduzir a dispersão de informações, melhorar o registro de documentos e alinhamentos e dar mais clareza aos fluxos de trabalho.</p>
-        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em outubro, realizamos o <strong style="font-weight:700;">Dia D da Transformação Digital</strong>, com a participação de toda a equipe, para compartilhar combinados, orientações e próximos passos. Mais do que uma mudança tecnológica, essa jornada fortaleceu a governança, a eficiência operacional e a cultura de melhoria da agência.</p>
+      <!-- text + graph two-column -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;margin-bottom:60px;" class="td-split">
+        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Transformação digital</p>
+          <h2 style="margin:0 0 22px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;">Mais intencional, mais estruturada.</h2>
+          <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em 2025, avançamos na transformação digital de forma mais intencional e estruturada, como parte do amadurecimento da gestão e da consolidação da agenda BH Press 2030. O processo incluiu diagnóstico dos fluxos de trabalho, apoio de consultoria externa, formação de um grupo de trabalho com profissionais de diferentes áreas e revisão de processos, modelos de trabalho e políticas internas.</p>
+          <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">A partir desse movimento, estruturamos o ambiente Microsoft como padrão de comunicação, gestão à vista e colaboração interna. A iniciativa contribuiu para reduzir a dispersão de informações, melhorar o registro de documentos e alinhamentos e dar mais clareza aos fluxos de trabalho.</p>
+          <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em outubro, realizamos o <strong style="font-weight:700;">Dia D da Transformação Digital</strong>, com a participação de toda a equipe, para compartilhar combinados, orientações e próximos passos. Mais do que uma mudança tecnológica, essa jornada fortaleceu a governança, a eficiência operacional e a cultura de melhoria da agência.</p>
+        </div>
+        <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
+          <div data-parallax="0.07" style="margin:-8% 0;will-change:transform;">
+            <img src="assets/webp-graphs/img-bp-graphs (10).webp" alt="Gráfico de transformação digital" style="width:100%;height:auto;display:block;">
+          </div>
+        </div>
       </div>
       <!-- KPI dashboard -->
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;" class="kpi-grid">
@@ -486,26 +620,79 @@
   <!-- IA em soluções digitais — case + timeline -->
   <section style="background:#fade71;color:#14161a;padding:clamp(70px,9vw,120px) 0;">
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-      <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:66ch;margin-bottom:48px;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#5c6268;margin:0 0 18px;">IA em soluções digitais</p>
-        <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:#14161a;">Inteligência artificial a serviço de entregas mais ágeis.</h2>
-        <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:#2a2e33;">Em 2025, avançamos no uso de ferramentas de inteligência artificial para apoiar processos internos e soluções digitais — ampliando a autonomia da equipe na criação de códigos e no desenvolvimento de sites e aplicações, reduzindo etapas operacionais e apoiando entregas mais ágeis.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(34px,5vw,70px);align-items:start;" class="split-2">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,70px);align-items:stretch;">
+
+        <!-- COLUNA A: eyebrow + título + texto + mockup -->
         <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
-          <div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:18px;background:#14161a;"><img src="assets/webp-estrategia/img-estrategia-plat-pcj.webp" alt="Plataforma Revista Gestão das Bacias PCJ" style="width:100%;height:auto;display:block;"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:6px;">Case · Revista Gestão das Bacias PCJ</span></div>
-          <p style="margin:0;font-size:16px;line-height:1.6;color:#3d4248;">Um exemplo foi o site da Revista Gestão das Bacias PCJ, em que o uso de IA apoiou o desenvolvimento de uma solução digital sob medida.</p>
-        </div>
-        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
-          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5c6268;margin:0 0 24px;">Jornada Claude Partner Network</p>
-          <div style="position:relative;padding-left:28px;border-left:2px solid rgba(0,0,0,.2);display:flex;flex-direction:column;gap:26px;">
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #fade71;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">Início da adesão · 2026</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Programa oficial da Anthropic voltado a organizações que apoiam empresas na adoção de IA em escala.</p></div>
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #fade71;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">Elegibilidade concluída ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Etapas de elegibilidade do programa cumpridas.</p></div>
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:#3f9c63;border:3px solid #fade71;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">10 colaboradores formados ✓</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Formação concluída na Partner Academy.</p></div>
-            <div style="position:relative;"><span style="position:absolute;left:-35px;top:2px;width:14px;height:14px;border-radius:50%;background:transparent;border:2px solid #1a3834;"></span><p style="margin:0 0 4px;font-weight:700;font-size:16px;color:#14161a;">Rumo à certificação CCA-F</p><p style="margin:0;font-size:14px;line-height:1.55;color:#3d4248;">Claude Certified Architect – Foundations. A formalização da parceria ocorrerá após o cumprimento de todos os requisitos do programa.</p></div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#14161a;border:1.5px solid rgba(0,0,0,.28);padding:5px 12px;border-radius:20px;">IA em soluções digitais</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#5c6268;">· Case Prático 2025</span>
           </div>
-          <p style="margin:26px 0 0;font-size:13px;color:#5c6268;">Relacionado: <a href="/pessoas" data-nav style="color:#1a3834;font-weight:600;border-bottom:1px solid #1a3834;">Pessoas · Capacitação ESG</a></p>
+          <h2 style="margin:0 0 18px;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:#14161a;">Inteligência artificial a serviço de entregas mais ágeis.</h2>
+          <p style="margin:0 0 32px;font-size:clamp(16px,1.5vw,19px);line-height:1.62;color:#2a2e33;">Em 2025, avançamos no uso de ferramentas de inteligência artificial para apoiar processos internos e soluções digitais — ampliando a autonomia da equipe na criação de códigos e no desenvolvimento de sites e aplicações, reduzindo etapas operacionais e apoiando entregas mais ágeis.</p>
+          <div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:14px;background:#14161a;"><img src="assets/webp-estrategia/img-estrategia-plat-pcj.webp" alt="Plataforma Revista Gestão das Bacias PCJ" style="width:100%;height:auto;display:block;"><span style="position:absolute;bottom:14px;left:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:rgba(0,0,0,.4);padding:6px 10px;border-radius:6px;">Case · Revista Gestão das Bacias PCJ</span></div>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:#3d4248;text-align:center;">Um exemplo foi o site da <strong style="font-weight:700;">Revista Gestão das Bacias PCJ</strong>, em que o uso de IA apoiou o desenvolvimento de uma solução digital sob medida.</p>
         </div>
+
+        <!-- COLUNA B: card CPN com capa + timeline -->
+        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;">
+          <!-- capa -->
+          <div style="flex-shrink:0;height:220px;overflow:hidden;">
+            <img src="assets/webp-2025-highlights-cards/img-bp-highlights-5.webp" alt="Claude Partner Network" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+          </div>
+          <!-- conteúdo -->
+          <div style="padding:clamp(24px,2.8vw,36px);flex:1;display:flex;flex-direction:column;">
+            <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 8px;">Parceria Global · Anthropic</p>
+            <p style="margin:0 0 26px;font-size:19px;font-weight:700;color:#14161a;line-height:1.25;">Jornada Claude Partner Network</p>
+            <div style="display:flex;flex-direction:column;gap:20px;flex:1;">
+              <!-- item 1 -->
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#3f9c63;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div>
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;">
+                    <span style="font-weight:700;font-size:14px;color:#14161a;">Início da adesão · 2026</span>
+                    <span style="font-size:10px;color:#3f9c63;background:#edf7f1;border:1px solid #c3e8d0;padding:2px 7px;border-radius:10px;">Concluído ✓</span>
+                  </div>
+                  <p style="margin:0;font-size:13px;line-height:1.55;color:#5c6268;">Programa oficial da Anthropic voltado a organizações que apoiam empresas na adoção de IA em escala.</p>
+                </div>
+              </div>
+              <!-- item 2 -->
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#3f9c63;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div>
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;">
+                    <span style="font-weight:700;font-size:14px;color:#14161a;">Elegibilidade concluída</span>
+                    <span style="font-size:10px;color:#3f9c63;background:#edf7f1;border:1px solid #c3e8d0;padding:2px 7px;border-radius:10px;">Concluído ✓</span>
+                  </div>
+                  <p style="margin:0;font-size:13px;line-height:1.55;color:#5c6268;">Etapas de elegibilidade do programa cumpridas.</p>
+                </div>
+              </div>
+              <!-- item 3 -->
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#3f9c63;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <div>
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;">
+                    <span style="font-weight:700;font-size:14px;color:#14161a;">10 colaboradores formados</span>
+                    <span style="font-size:10px;color:#3f9c63;background:#edf7f1;border:1px solid #c3e8d0;padding:2px 7px;border-radius:10px;">Concluído ✓</span>
+                  </div>
+                  <p style="margin:0;font-size:13px;line-height:1.55;color:#5c6268;">Formação concluída na Partner Academy.</p>
+                </div>
+              </div>
+              <!-- item 4 — foco ativo -->
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#c2602f;margin-top:2px;"><path d="M10.1 2.18a10 10 0 0 1 3.8 0"/><path d="M17.6 3.71a10 10 0 0 1 2.69 2.69"/><path d="M21.82 10.1a10 10 0 0 1 0 3.8"/><path d="M20.29 17.6a10 10 0 0 1-2.69 2.69"/><path d="M13.9 21.82a10 10 0 0 1-3.8 0"/><path d="M6.4 20.29a10 10 0 0 1-2.69-2.69"/><path d="M2.18 13.9a10 10 0 0 1 0-3.8"/><path d="M3.71 6.4a10 10 0 0 1 2.69-2.69"/></svg>
+                <div>
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;">
+                    <span style="font-weight:700;font-size:14px;color:#14161a;">Rumo à certificação CCA-F</span>
+                    <span style="font-size:10px;color:#c2602f;background:#fdf0ea;border:1px solid #f0c8b0;padding:2px 7px;border-radius:10px;">Foco Ativo</span>
+                  </div>
+                  <p style="margin:0;font-size:13px;line-height:1.55;color:#5c6268;">Claude Certified Architect – Foundations. A formalização da parceria ocorrerá após o cumprimento de todos os requisitos do programa.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -516,9 +703,12 @@
 <!-- NEXT -->
 <section style="background:#f6f6f5;padding:clamp(60px,8vw,110px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-    <a href="/pessoas" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
-      <div><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Próxima seção · 03 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Pessoas</h2></div>
-      <span style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#ff9965;color:#14161a;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
+    <a href="/pessoas" data-nav data-reveal id="cta-next-link" style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);position:relative;overflow:hidden;" style-hover="transform:translateY(-3px);">
+      <video id="cta-next-vid" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity 1.2s ease;z-index:0;mix-blend-mode:luminosity;">
+        <source src="assets/video-bp-clientes/video-direitos-diversidade3.mp4" type="video/mp4">
+      </video>
+      <div style="position:relative;z-index:1;"><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Próxima seção · 03 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Pessoas</h2></div>
+      <span style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#ff9965;color:#14161a;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></span>
     </a>
   </div>
 </section>
@@ -532,7 +722,7 @@
           <img src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
         </div>
         <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
-        <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:66px;display:block;margin-top:20px;">
+        <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:86px;display:block;margin-top:20px;">
       </div>
       <div><p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p><a href="mailto:bhpress@bhpress.com.br" style="display:block;font-size:16px;margin-bottom:14px;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a><div style="display:flex;gap:10px;margin-top:20px;"><a href="https://bhpress.com.br/" target="_blank" aria-label="Site" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/site-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a><a href="https://www.linkedin.com/company/bhpresscomunica" target="_blank" aria-label="LinkedIn" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/linkedin-bp-log.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a><a href="https://www.instagram.com/bhpresscomunica/" target="_blank" aria-label="Instagram" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/ig-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a><a href="https://www.youtube.com/@BHPresscomunica" target="_blank" aria-label="Youtube" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);"><img src="assets/webp-bp-logos/utube-bp-logo.svg" alt="" style="width:20px;height:20px;display:block;filter:brightness(0) invert(1);"></a></div></div>
       <div>
@@ -610,11 +800,14 @@ class Component extends DCLogic {
 
   componentDidMount(){
     this._counted = new Set();
+    if(window.lucide) lucide.createIcons();
     this.initScrollProgress();
     this.initReveal();
     this.initParallax();
     this.initNavLinks();
+    this.initCtaVideo();
     this.initAccordion();
+    this.initCollapseCompromissos();
     this.initCarousel();
     this.initOrg();
     this.selectTab(0);
@@ -651,6 +844,23 @@ class Component extends DCLogic {
     window.addEventListener('scroll', onScroll, {passive:true});
     window.addEventListener('resize', onScroll, {passive:true});
     update();
+  }
+
+  initCollapseCompromissos(){
+    const el=document.getElementById('rm-collapse');
+    const fade=document.getElementById('rm-fade');
+    const btn=document.getElementById('rm-toggle');
+    if(!el||!btn) return;
+    let open=false;
+    const CH=200;
+    btn.addEventListener('click',()=>{
+      open=!open;
+      el.style.maxHeight=open?el.scrollHeight+'px':CH+'px';
+      if(fade) fade.style.opacity=open?'0':'1';
+      btn.innerHTML=open
+        ?'Recolher <span style="display:inline-block;transition:transform .35s;">↑</span>'
+        :'Ver todos os 7 compromissos <span style="display:inline-block;transition:transform .35s;">↓</span>';
+    });
   }
 
   initAccordion(){
@@ -743,6 +953,19 @@ class Component extends DCLogic {
       if(!href||href.charAt(0)==='#') return;
       a.addEventListener('click',(e)=>{ if(e.metaKey||e.ctrlKey||e.shiftKey) return; e.preventDefault(); if(page){ page.style.transition='opacity .38s ease'; page.style.opacity='0'; } setTimeout(()=>{ window.location.href=href; },360); });
     });
+  }
+
+  initCtaVideo(){
+    const vid = document.getElementById('cta-next-vid');
+    if(!vid) return;
+    const io = new IntersectionObserver((ents)=>{
+      if(ents[0].isIntersecting){
+        vid.play().catch(()=>{});
+        vid.style.opacity='0.32';
+        io.disconnect();
+      }
+    },{threshold:0.3});
+    io.observe(vid.parentElement);
   }
 }
 </script>

@@ -15,7 +15,7 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0;background:#ffffff;color:#14161a;font-family:'Hanken Grotesk',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
-  ::selection{background:#caa400;color:#241d00;}
+  ::selection{background:#3f9c63;color:#fff;}
   a{color:inherit;text-decoration:none;}
   @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}[data-reveal]{opacity:1 !important;transform:none !important;}*{animation-duration:.001ms !important;}}
@@ -47,6 +47,11 @@
   .mega-wrap.is-open .nav-chev{transform:rotate(180deg);}
   .type-title{clip-path:inset(0 100% 0 0);transition:clip-path 1.4s cubic-bezier(0.25,1,0.5,1),opacity .8s ease !important;}
   .type-title.is-revealed{clip-path:inset(0 0 0 0);}
+  /* slider carteira */
+  .cli-slider{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;outline:none;cursor:pointer;border:none;}
+  .cli-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#3f9c63;border:2.5px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.22);cursor:pointer;}
+  .cli-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#3f9c63;border:2.5px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.22);cursor:pointer;border:none;}
+  .mega-wrap > a:hover{color:#00269f !important;font-weight:700 !important;text-decoration:underline !important;text-underline-offset:3px;background:transparent !important;}
 </style>
 </helmet>
 
@@ -68,12 +73,12 @@
         <a href="/pessoas" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Pessoas <span class="nav-chev">▾</span></a>
       </div>
       <div class="mega-wrap" data-menu="mega-cli">
-        <a href="/clientes" data-nav style="font-size:14px;font-weight:600;color:#8a7000;padding:8px 12px;border-radius:6px;background:rgba(202,164,0,.15);">Clientes <span class="nav-chev">▾</span></a>
+        <a href="/clientes" data-nav style="font-size:14px;font-weight:700;color:#00269f;padding:8px 12px;border-radius:6px;text-decoration:underline;text-underline-offset:3px;">Clientes <span class="nav-chev">▾</span></a>
       </div>
       <div class="mega-wrap" data-menu="mega-amb">
         <a href="/ambiente" data-nav style="font-size:14px;font-weight:500;color:#5c6268;padding:8px 12px;border-radius:6px;transition:background .2s ease;">Ambiente <span class="nav-chev">▾</span></a>
       </div>
-      <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:#14161a;border:1px solid #d9d9d6;padding:8px 13px;border-radius:7px;transition:background .2s ease;">Sobre</a>
+      <a href="/sobre" data-nav style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#fff;background:#00269f;border:none;padding:8px 18px;border-radius:100px;transition:opacity .2s ease;">Sobre este relatório</a>
     </nav>
     <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid #d9d9d6;background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;"><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span><span style="width:18px;height:2px;background:#14161a;display:block;"></span></button>
   </div>
@@ -179,7 +184,7 @@
     <a href="/quem-somos" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
     <a href="/estrategia" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Estratégia &amp; Governança</a>
     <a href="/pessoas" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Pessoas</a>
-    <a href="/clientes" data-nav style="color:#e6c84d;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Clientes</a>
+    <a href="/clientes" data-nav style="color:#83cb96;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Clientes</a>
     <a href="/ambiente" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Ambiente</a>
     <a href="/sobre" data-nav style="color:rgba(255,255,255,.7);font-size:26px;font-weight:700;padding:12px 0;">Sobre este relatório</a>
   </div>
@@ -189,14 +194,14 @@
 <section style="position:relative;padding:170px 0 0;background:#fff;overflow:hidden;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
     <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;gap:14px;margin-bottom:30px;">
-      <a href="/" data-nav style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;" style-hover="color:#8a7000;">Home</a><span style="color:#cfcfcc;">/</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a7000;font-weight:600;">Seção 04 / 06</span>
+      <a href="/" data-nav style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9aa0a6;" style-hover="color:#2f7a4c;">Home</a><span style="color:#cfcfcc;">/</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#2f7a4c;font-weight:600;">Seção 04 / 06</span>
     </div>
     <h1 data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:0;font-size:clamp(54px,9vw,128px);font-weight:800;letter-spacing:-.035em;line-height:.92;">Clientes</h1>
     <p data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:34px 0 0;font-size:clamp(19px,2.1vw,25px);line-height:1.5;color:#3d4248;max-width:62ch;">O valor que geramos, a gestão de contratos e a privacidade e proteção de dados — o pilar de confiança comercial da agência.</p>
   </div>
   <div data-reveal data-delay="260" style="opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);margin-top:70px;position:relative;height:clamp(320px,46vw,560px);overflow:hidden;">
     <img src="assets/webp-clientes/img-pessoas-clientes-hero-3.webp" alt="Clientes BH Press" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
-    <div style="position:absolute;left:0;right:0;bottom:0;height:5px;background:#caa400;z-index:10;"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:5px;background:#3f9c63;z-index:10;"></div>
   </div>
 </section>
 
@@ -205,48 +210,180 @@
   <div style="max-width:1100px;margin:0 auto;padding:0 40px;">
     <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
       <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 24px;">Relações de confiança</p>
-      <p style="margin:0;font-size:clamp(24px,3vw,40px);font-weight:600;letter-spacing:-.01em;line-height:1.28;color:#14161a;">Lidamos com informações estratégicas dos nossos clientes. Por isso, a <span style="color:#8a7000;">confiança é um elemento central</span> nas nossas relações.</p>
+      <p style="margin:0;font-size:clamp(24px,3vw,40px);font-weight:600;letter-spacing:-.01em;line-height:1.28;color:#14161a;">Lidamos com informações estratégicas dos nossos clientes. Por isso, a <span style="color:#2f7a4c;">confiança é um elemento central</span> nas nossas relações.</p>
       <p style="margin:28px 0 0;font-size:18px;line-height:1.62;color:#3d4248;max-width:72ch;">Atentos a essa condição, buscamos praticar nossos valores — &ldquo;Somos confiáveis e, para nós, a integridade é inegociável&rdquo; — e construir relações próximas, transparentes e responsáveis, com entregas alinhadas aos objetivos de cada organização. Essa diretriz nos permite acompanhar demandas, ajustar rotas quando necessário e contribuir para decisões de comunicação mais consistentes.</p>
     </div>
   </div>
 </section>
 
 <!-- VALOR GERADO -->
-<section id="valor-gerado" style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
+<section id="valor-gerado" style="background:#83cb96;padding:clamp(70px,9vw,120px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
     <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:72ch;margin-bottom:44px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Valor gerado</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);margin:0 0 18px;">Valor gerado</p>
       <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Apoiamos agendas ESG cada vez mais maduras e exigentes.</h2>
       <p style="margin:0;font-size:18px;line-height:1.62;color:#2a2e33;">Como desdobramento da nossa própria evolução em comunicação e sustentabilidade, também apoiamos clientes em agendas ESG mais maduras. Esses temas passaram a exigir ações estruturadas e uma comunicação mais qualificada, coerente e baseada em evidências.</p>
     </div>
-    <!-- Tag cloud -->
-    <div data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:50px;">
-      <span style="font-size:clamp(20px,2.4vw,30px);font-weight:700;color:#14161a;background:#fff;border:1px solid #e6e6e3;border-radius:40px;padding:10px 22px;">Mudanças climáticas</span>
-      <span style="font-size:clamp(16px,1.8vw,22px);font-weight:600;color:#8a7000;background:#fff;border:1px solid #e7dca6;border-radius:40px;padding:9px 18px;">Biodiversidade</span>
-      <span style="font-size:clamp(18px,2.1vw,26px);font-weight:700;color:#14161a;background:#caa400;border-radius:40px;padding:10px 22px;">Diversidade e inclusão</span>
-      <span style="font-size:clamp(15px,1.6vw,20px);font-weight:600;color:#3d4248;background:#fff;border:1px solid #e6e6e3;border-radius:40px;padding:8px 16px;">Direitos humanos</span>
-      <span style="font-size:clamp(18px,2.1vw,26px);font-weight:700;color:#14161a;background:#fff;border:1px solid #e6e6e3;border-radius:40px;padding:10px 20px;">Governança</span>
-      <span style="font-size:clamp(15px,1.6vw,20px);font-weight:600;color:#3d4248;background:#fff;border:1px solid #e6e6e3;border-radius:40px;padding:8px 16px;">Transparência</span>
-      <span style="font-size:clamp(16px,1.9vw,24px);font-weight:700;color:#8a7000;background:#fff;border:1px solid #e7dca6;border-radius:40px;padding:9px 20px;">Impacto social</span>
-      <span style="font-size:clamp(15px,1.6vw,20px);font-weight:600;color:#3d4248;background:#fff;border:1px solid #e6e6e3;border-radius:40px;padding:8px 16px;">Saúde e segurança</span>
-      <span style="font-size:clamp(16px,1.8vw,22px);font-weight:600;color:#14161a;background:#fff;border:1px solid #e6e6e3;border-radius:40px;padding:9px 18px;">Desenvolvimento territorial</span>
-    </div>
-    <p data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin:0 0 30px;font-size:17px;line-height:1.6;color:#3d4248;max-width:80ch;">Apoiamos empresas, organizações da sociedade civil, institutos e lideranças de diferentes segmentos em projetos de relatórios de sustentabilidade e impacto, estratégia ESG, posicionamento institucional, assessoria de imprensa, comunicação interna, eventos e mobilização de stakeholders.</p>
-    <!-- Mini-processo -->
-    <div data-reveal data-delay="100" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #e6e6e3;border-radius:16px;padding:clamp(28px,4vw,42px);">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a7000;margin:0 0 24px;">Na produção de relatórios de sustentabilidade</p>
-      <div class="proc-row" style="display:flex;align-items:stretch;gap:0;">
-        <div style="flex:1;min-width:130px;text-align:center;padding:0 10px;"><span style="display:inline-flex;width:38px;height:38px;border-radius:50%;background:#caa400;color:#241d00;font-weight:700;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;">01</span><p style="margin:12px 0 0;font-size:14px;font-weight:600;line-height:1.4;color:#1a1d22;">Estruturação editorial</p></div>
-        <div style="display:flex;align-items:center;color:#caa400;font-size:18px;">→</div>
-        <div style="flex:1;min-width:130px;text-align:center;padding:0 10px;"><span style="display:inline-flex;width:38px;height:38px;border-radius:50%;background:#f1ecd6;color:#8a7000;font-weight:700;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;">02</span><p style="margin:12px 0 0;font-size:14px;font-weight:600;line-height:1.4;color:#1a1d22;">Entrevistas com lideranças</p></div>
-        <div style="display:flex;align-items:center;color:#caa400;font-size:18px;">→</div>
-        <div style="flex:1;min-width:130px;text-align:center;padding:0 10px;"><span style="display:inline-flex;width:38px;height:38px;border-radius:50%;background:#f1ecd6;color:#8a7000;font-weight:700;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;">03</span><p style="margin:12px 0 0;font-size:14px;font-weight:600;line-height:1.4;color:#1a1d22;">Análise técnica e indicadores</p></div>
-        <div style="display:flex;align-items:center;color:#caa400;font-size:18px;">→</div>
-        <div style="flex:1;min-width:130px;text-align:center;padding:0 10px;"><span style="display:inline-flex;width:38px;height:38px;border-radius:50%;background:#f1ecd6;color:#8a7000;font-weight:700;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;">04</span><p style="margin:12px 0 0;font-size:14px;font-weight:600;line-height:1.4;color:#1a1d22;">Redação e revisão</p></div>
-        <div style="display:flex;align-items:center;color:#caa400;font-size:18px;">→</div>
-        <div style="flex:1;min-width:130px;text-align:center;padding:0 10px;"><span style="display:inline-flex;width:38px;height:38px;border-radius:50%;background:#f1ecd6;color:#8a7000;font-weight:700;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:14px;">05</span><p style="margin:12px 0 0;font-size:14px;font-weight:600;line-height:1.4;color:#1a1d22;">Integração dados, narrativas e ESG</p></div>
+    <!-- Carrossel temático -->
+    <div data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);position:relative;margin:0 -40px;">
+      <div style="pointer-events:none;position:absolute;left:0;top:0;bottom:0;width:160px;background:linear-gradient(to right,#83cb96 30%,transparent);z-index:2;"></div>
+      <div style="pointer-events:none;position:absolute;right:0;top:0;bottom:0;width:160px;background:linear-gradient(to left,#83cb96 30%,transparent);z-index:2;"></div>
+      <div id="cli-carousel" style="display:flex;gap:18px;overflow-x:auto;padding:6px 160px 28px;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none;">
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-mudança-climatica.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Mudanças climáticas</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Agenda climática</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">COP30</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-biodiversidade.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Biodiversidade</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Meio ambiente</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">ESG</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-direitos-diversidade.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Diversidade e inclusão</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Social</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 405</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-direitos-humanos.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Direitos humanos</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Social</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 412</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-transparencia.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Governança</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Governança</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 2-12</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-liderança.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Transparência</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Comunicação</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 2-29</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-dev-social.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Impacto social</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Social</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 413</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-saude.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Saúde e segurança</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Social</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 403</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cli-card" style="flex:0 0 300px;height:440px;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;background:#1a3834;">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease;">
+            <source src="assets/video-bp-clientes/video-dev-social.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.25) 55%,rgba(0,0,0,.08) 100%);z-index:1;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 22px;z-index:2;">
+            <h3 style="margin:0 0 12px;font-size:19px;font-weight:700;color:#fff;line-height:1.2;">Desenvolvimento territorial</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">Social</span>
+                <span style="font-size:11px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border-radius:20px;padding:4px 12px;">GRI 413</span>
+              </div>
+              <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(6px);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0;">↗</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <p style="margin:26px 0 0;padding-top:20px;border-top:1px solid #f0f0ee;font-size:13px;color:#5c6268;">Relacionado: <a href="/pessoas" data-nav style="color:#8a7000;font-weight:600;border-bottom:1px solid #caa400;">Pessoas · Formação para relatórios</a> · <a href="/quem-somos" data-nav style="color:#8a7000;font-weight:600;border-bottom:1px solid #caa400;">Quem Somos · Frentes de atuação</a></p>
     </div>
   </div>
 </section>
@@ -255,61 +392,115 @@
 <section id="gestao-contratos" style="background:#fff;padding:clamp(70px,9vw,120px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,64px);align-items:stretch;" class="split-2">
     <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);background:#f6f6f5;border:1px solid #ececea;border-radius:16px;padding:clamp(30px,4vw,44px);display:flex;flex-direction:column;">
-      <span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a7000;border:1px solid #e7dca6;padding:6px 12px;border-radius:20px;">✓ Pesquisa de satisfação · 2025</span>
+      <span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:12px;color:#2f7a4c;border:1px solid rgba(63,156,99,.4);padding:6px 12px;border-radius:20px;">✓ Pesquisa de satisfação · 2025</span>
       <h3 style="margin:22px 0 14px;font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.01em;">Gestão de contratos e qualidade de entregas</h3>
       <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#3d4248;">Nossa gestão contratual envolve critérios éticos, segurança jurídica e respeito a cláusulas de confidencialidade, privacidade e responsabilidade profissional.</p>
       <p style="margin:0;font-size:16px;line-height:1.6;color:#3d4248;">Em 2025, seguimos acompanhando a qualidade das entregas em reuniões de rotina, alinhamentos periódicos e marcos específicos dos projetos. A escuta dos clientes é feita principalmente no acompanhamento cotidiano e na pesquisa final de avaliação de qualidade e satisfação, formalmente implantada no ciclo 2025.</p>
     </div>
-    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#14161a;color:#fff;border-radius:16px;padding:clamp(30px,4vw,44px);display:flex;flex-direction:column;">
-      <span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:12px;color:#e6c84d;border:1px solid rgba(230,200,77,.4);padding:6px 12px;border-radius:20px;">● Conformidade LGPD</span>
+    <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#83cb96;color:#14161a;border-radius:16px;padding:clamp(30px,4vw,44px);display:flex;flex-direction:column;">
+      <span style="display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;border:1px solid rgba(0,38,159,.4);padding:6px 12px;border-radius:20px;">● Conformidade LGPD</span>
       <h3 style="margin:22px 0 14px;font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-.01em;">Privacidade e proteção de dados</h3>
-      <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:rgba(255,255,255,.82);">Mantemos práticas internas de proteção de dados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). Isso inclui controle de acesso, monitoramento de documentos e atenção à confidencialidade das informações compartilhadas por colaboradores, clientes, parceiros, fornecedores e equipe.</p>
-      <p style="margin:0 0 18px;font-size:16px;line-height:1.6;color:rgba(255,255,255,.82);">Seguimos comprometidos em fortalecer a segurança da informação, aprimorar processos internos e manter a privacidade de dados como dimensão importante da nossa governança.</p>
-      <p style="margin:auto 0 0;font-size:13px;color:rgba(255,255,255,.6);">Relacionado: <a href="/estrategia" data-nav style="color:#e6c84d;font-weight:600;border-bottom:1px solid #e6c84d;">Estratégia · Políticas internas</a> · GRI 2-6 · 3-3 · 418-1</p>
+      <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:rgba(20,22,26,.82);">Mantemos práticas internas de proteção de dados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD). Isso inclui controle de acesso, monitoramento de documentos e atenção à confidencialidade das informações compartilhadas por colaboradores, clientes, parceiros, fornecedores e equipe.</p>
+      <p style="margin:0 0 18px;font-size:16px;line-height:1.6;color:rgba(20,22,26,.82);">Seguimos comprometidos em fortalecer a segurança da informação, aprimorar processos internos e manter a privacidade de dados como dimensão importante da nossa governança.</p>
+      <p style="margin:auto 0 0;font-size:13px;color:rgba(20,22,26,.6);">Relacionado: <a href="/estrategia" data-nav style="color:#00269f;font-weight:600;border-bottom:1px solid #00269f;">Estratégia · Políticas internas</a> · GRI 2-6 · 3-3 · 418-1</p>
     </div>
   </div>
 </section>
 
 <!-- INDICADORES + DONUT -->
-<section id="indicadores" style="background:#f6f6f5;padding:clamp(70px,9vw,120px) 0;">
+<section id="indicadores" style="background:#83cb96;padding:clamp(70px,9vw,120px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:34px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0;">Indicadores</p>
+
+    <!-- Header row -->
+    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-bottom:32px;">
+      <span style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.35);color:#1a3834;padding:5px 12px;border-radius:20px;margin-bottom:14px;">Indicadores anuais</span>
+      <h2 style="margin:0;font-size:clamp(24px,2.8vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.1;color:#14161a;">Painel de Evidências e Auditoria</h2>
     </div>
-    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:start;" class="split-2">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" class="kpi-grid">
-        <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #ececea;border-radius:14px;padding:26px;"><span style="font-size:42px;font-weight:800;letter-spacing:-.03em;color:#caa400;line-height:1;">xx</span><p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#3d4248;">contratos ativos com clientes em 2025.</p></div>
-        <div data-reveal data-delay="60" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #ececea;border-radius:14px;padding:26px;"><span style="font-size:42px;font-weight:800;letter-spacing:-.03em;color:#caa400;line-height:1;">xx</span><p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#3d4248;">relatórios de sustentabilidade e impacto apoiados.</p></div>
-        <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #ececea;border-radius:14px;padding:26px;"><span style="font-size:42px;font-weight:800;letter-spacing:-.03em;color:#caa400;line-height:1;">xx</span><p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#3d4248;">projetos de reputação desenvolvidos para clientes de diferentes setores.</p></div>
-        <div data-reveal data-delay="180" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #ececea;border-radius:14px;padding:26px;"><span style="font-size:42px;font-weight:800;letter-spacing:-.03em;color:#caa400;line-height:1;">xx</span><p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#3d4248;">eventos ou iniciativas de mobilização de stakeholders apoiados ao longo do ano.</p></div>
-        <div data-reveal data-delay="220" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);grid-column:1 / -1;background:#caa400;border-radius:14px;padding:26px 28px;display:flex;align-items:center;gap:18px;"><span style="font-size:52px;font-weight:800;letter-spacing:-.04em;color:#241d00;line-height:1;">0</span><p style="margin:0;font-size:16px;font-weight:600;line-height:1.45;color:#241d00;">incidentes relacionados à privacidade de dados registrados em 2025.</p></div>
-      </div>
-      <!-- Donut -->
-      <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fff;border:1px solid #ececea;border-radius:14px;padding:32px;text-align:center;">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9aa0a6;margin:0 0 24px;">Carteira de contratos</p>
-        <div style="width:200px;height:200px;margin:0 auto;border-radius:50%;background:conic-gradient(#caa400 0 58%,#e7dca6 58% 100%);display:flex;align-items:center;justify-content:center;position:relative;">
-          <div style="width:120px;height:120px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">2025</span><span style="font-size:15px;font-weight:700;color:#8a7000;">carteira</span></div>
+
+    <!-- 2-col grid -->
+    <div data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:start;" class="split-2">
+
+      <!-- Left: KPIs -->
+      <div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;" class="kpi-grid">
+          <div style="background:#fff;border-radius:16px;padding:26px 24px;">
+            <span style="font-size:46px;font-weight:800;letter-spacing:-.04em;color:#14161a;line-height:1;display:block;">{{ kpi1 }}</span>
+            <p style="margin:10px 0 0;font-size:13px;line-height:1.5;color:#5c6268;">contratos ativos com clientes em 2025.</p>
+          </div>
+          <div style="background:#fff;border-radius:16px;padding:26px 24px;">
+            <span style="font-size:46px;font-weight:800;letter-spacing:-.04em;color:#14161a;line-height:1;display:block;">{{ kpi2 }}</span>
+            <p style="margin:10px 0 0;font-size:13px;line-height:1.5;color:#5c6268;">relatórios de sustentabilidade e impacto apoiados.</p>
+          </div>
+          <div style="background:#fff;border-radius:16px;padding:26px 24px;">
+            <span style="font-size:46px;font-weight:800;letter-spacing:-.04em;color:#14161a;line-height:1;display:block;">{{ kpi3 }}</span>
+            <p style="margin:10px 0 0;font-size:13px;line-height:1.5;color:#5c6268;">projetos de reputação desenvolvidos para clientes de diferentes setores.</p>
+          </div>
+          <div style="background:#fff;border-radius:16px;padding:26px 24px;">
+            <span style="font-size:46px;font-weight:800;letter-spacing:-.04em;color:#14161a;line-height:1;display:block;">{{ kpi4 }}</span>
+            <p style="margin:10px 0 0;font-size:13px;line-height:1.5;color:#5c6268;">eventos ou iniciativas de mobilização de stakeholders apoiados ao longo do ano.</p>
+          </div>
+          <div style="grid-column:1 / -1;background:#00269f;border-radius:16px;padding:26px 28px;display:flex;align-items:center;gap:20px;">
+            <span style="font-size:56px;font-weight:800;letter-spacing:-.05em;color:#fff;line-height:1;flex-shrink:0;">0</span>
+            <p style="margin:0;font-size:15px;font-weight:600;line-height:1.45;color:#fff;">incidentes relacionados à privacidade de dados registrados em 2025.</p>
+          </div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px;text-align:left;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#1a1d22;"><span style="width:12px;height:12px;border-radius:3px;background:#caa400;"></span>Serviços contínuos</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:#8a7000;">xx%</span></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#1a1d22;"><span style="width:12px;height:12px;border-radius:3px;background:#e7dca6;"></span>Contratos por projeto</span><span style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:#8a7000;">xx%</span></div>
+      </div>
+
+      <!-- Right: Donut SVG -->
+      <div style="background:#fff;border-radius:16px;padding:32px 28px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9aa0a6;margin:0 0 28px;text-align:center;">Carteira de contratos</p>
+        <div style="position:relative;width:190px;height:190px;margin:0 auto 28px;">
+          <svg viewBox="0 0 120 120" style="width:190px;height:190px;display:block;transform:rotate(-90deg);">
+            <circle cx="60" cy="60" r="46" fill="none" stroke="#cfe9d4" stroke-width="13"/>
+            <circle cx="60" cy="60" r="46" fill="none" stroke="#3f9c63" stroke-width="13"
+              stroke-linecap="round"
+              stroke-dasharray="{{ carteiraArc }} {{ carteiraGap }}"
+              style="transition:stroke-dasharray .45s cubic-bezier(.16,1,.3,1);"/>
+          </svg>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+            <span style="display:block;font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;margin-bottom:3px;">2025</span>
+            <span style="display:block;font-size:14px;font-weight:700;color:#2f7a4c;letter-spacing:.02em;text-transform:uppercase;">Carteira</span>
+          </div>
         </div>
-        <p style="margin:18px 0 0;font-family:'JetBrains Mono',monospace;font-size:10px;color:#b0b0ac;">proporção ilustrativa · dados a reportar</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <span style="display:flex;align-items:center;gap:9px;font-size:13px;color:#1a1d22;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#3f9c63;flex-shrink:0;"></span>Serviços contínuos
+            </span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#2f7a4c;">{{ carteira }}%</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <span style="display:flex;align-items:center;gap:9px;font-size:13px;color:#1a1d22;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#cfe9d4;border:1px solid #b8dfc4;flex-shrink:0;"></span>Contratos por projeto
+            </span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#2f7a4c;">{{ carteiraRest }}%</span>
+          </div>
+        </div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 10px;">Ajustar divisão da carteira:</p>
+        <input type="range" class="cli-slider" min="0" max="100" value="{{ carteira }}" onInput="{{ setCarteira }}"
+          style="background:linear-gradient(to right,#3f9c63 {{ carteira }}%,#e6e6e3 {{ carteira }}%);">
+        <p style="margin:16px 0 0;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#b0b0ac;text-align:center;">Proporção ilustrativa · dados a reportar</p>
       </div>
     </div>
-    <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-top:20px;background:#fff;border:1px dashed #d4d4d0;border-left:3px solid #caa400;border-radius:12px;padding:28px 30px;max-width:80ch;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8a7000;margin:0 0 12px;">Onde queremos avançar · compromissos futuros</p>
-      <p style="margin:0;font-size:16px;line-height:1.6;color:#3d4248;">Nosso desafio é tornar a escuta dos clientes mais estruturada, com canais e processos formais para avaliar satisfação, qualidade das entregas e oportunidades de melhoria. Também vamos seguir aprimorando a gestão de contratos, a rastreabilidade das informações e as práticas de segurança e privacidade de dados, especialmente em um contexto de transformação digital e maior uso de ferramentas colaborativas.</p>
+
+    <!-- Callout -->
+    <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);margin-top:20px;background:rgba(255,255,255,.7);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.9);border-radius:16px;padding:28px 32px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#2f7a4c;margin:0 0 12px;">Onde queremos avançar · compromissos futuros</p>
+      <p style="margin:0;font-size:16px;line-height:1.65;color:#2a2e33;">Nosso desafio é tornar a escuta dos clientes mais estruturada, com canais e processos formais para avaliar satisfação, qualidade das entregas e oportunidades de melhoria. Também vamos seguir aprimorando a gestão de contratos, a rastreabilidade das informações e as práticas de segurança e privacidade de dados, especialmente em um contexto de transformação digital e maior uso de ferramentas colaborativas.</p>
     </div>
+
   </div>
 </section>
 
 <!-- NEXT -->
 <section style="background:#fff;padding:clamp(60px,8vw,110px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-    <a href="/ambiente" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);transition:transform .25s ease;" style-hover="transform:translateY(-3px);">
-      <div><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Próxima seção · 05 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Ambiente</h2></div>
-      <span style="display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#3f9c63;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;">→</span></span>
+    <a href="/ambiente" data-nav data-reveal id="cta-next-link" style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:#00269f;color:#fff;border-radius:16px;padding:clamp(34px,4vw,52px);position:relative;overflow:hidden;" style-hover="transform:translateY(-3px);">
+      <video id="cta-next-vid" muted loop playsinline preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;z-index:0;mix-blend-mode:luminosity;">
+        <source src="assets/video-bp-clientes/video-ambiente.mp4" type="video/mp4">
+      </video>
+      <div style="position:relative;z-index:1;"><p style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 10px;">Próxima seção · 05 / 06</p><h2 style="margin:0;font-size:clamp(26px,3.2vw,42px);font-weight:700;letter-spacing:-.02em;">Ambiente</h2></div>
+      <span style="position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;font-size:17px;font-weight:600;white-space:nowrap;">Continuar <span style="width:50px;height:50px;border-radius:50%;background:#3f9c63;color:#fff;display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></span>
     </a>
   </div>
 </section>
@@ -323,7 +514,7 @@
           <img src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:36px;display:block;filter:brightness(0) invert(1);">
         </div>
         <p style="margin:0;color:rgba(255,255,255,.6);font-size:16px;line-height:1.6;max-width:36ch;">Comunicação e Sustentabilidade. Construir e compartilhar sentidos para conectar negócios e pessoas.</p>
-      <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:66px;display:block;margin-top:20px;">
+      <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:86px;display:block;margin-top:20px;">
       </div>
       <div>
         <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p>
@@ -368,13 +559,26 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { navOpen:false };
+  state = { navOpen:false, carteira:68 };
 
   renderVals(){
+    const C = 289.03;
+    const arc = ((this.state.carteira/100)*C).toFixed(1);
+    const gap = (C - parseFloat(arc)).toFixed(1);
     return {
       navOpen: this.state.navOpen,
       toggleNav: ()=> this.setState(s=>({navOpen:!s.navOpen})),
       closeNav: ()=> this.setState({navOpen:false}),
+      carteira: this.state.carteira,
+      carteiraRest: 100 - this.state.carteira,
+      carteiraArc: arc,
+      carteiraGap: gap,
+      kpi1: 'xx', kpi2: 'xx', kpi3: 'xx', kpi4: 'xx',
+      setCarteira: (e)=> {
+        const v = parseInt(e.target.value);
+        e.target.style.background = `linear-gradient(to right,#3f9c63 ${v}%,#e6e6e3 ${v}%)`;
+        this.setState({carteira:v});
+      },
     };
   }
 
@@ -383,7 +587,41 @@ class Component extends DCLogic {
     this.initReveal();
     this.initParallax();
     this.initNavLinks();
+    this.initCarousel();
+    this.initCtaVideo();
     window.scrollTo(0,0);
+  }
+
+  initCarousel(){
+    document.querySelectorAll('.cli-card').forEach(card=>{
+      const vid = card.querySelector('video');
+      if(!vid) return;
+      /* captura thumb: ao receber metadata, salta p/ 1.5s e exibe o frame */
+      vid.addEventListener('loadedmetadata',()=>{
+        vid.currentTime = 1.5;
+      });
+      vid.addEventListener('seeked',()=>{
+        vid.style.opacity='1';
+      },{once:true});
+      card.addEventListener('mouseenter',()=>{
+        vid.play().catch(()=>{});
+        card.style.transform='scale(1.03)';
+        card.style.transition='transform .4s cubic-bezier(.16,1,.3,1)';
+      });
+      card.addEventListener('mouseleave',()=>{
+        vid.pause();
+        card.style.transform='scale(1)';
+        /* mantém o frame visível — não zera opacity */
+      });
+    });
+    /* drag-to-scroll */
+    const track = document.getElementById('cli-carousel');
+    if(!track) return;
+    let down=false, sx=0, sl=0;
+    track.addEventListener('mousedown',e=>{ down=true; sx=e.pageX-track.offsetLeft; sl=track.scrollLeft; track.style.cursor='grabbing'; });
+    track.addEventListener('mouseleave',()=>{ down=false; track.style.cursor=''; });
+    track.addEventListener('mouseup',()=>{ down=false; track.style.cursor=''; });
+    track.addEventListener('mousemove',e=>{ if(!down) return; e.preventDefault(); const x=e.pageX-track.offsetLeft; track.scrollLeft=sl-(x-sx); });
   }
 
     initScrollProgress(){
@@ -425,6 +663,19 @@ class Component extends DCLogic {
       if(!href||href.charAt(0)==='#') return;
       a.addEventListener('click',(e)=>{ if(e.metaKey||e.ctrlKey||e.shiftKey) return; e.preventDefault(); if(page){ page.style.transition='opacity .38s ease'; page.style.opacity='0'; } setTimeout(()=>{ window.location.href=href; },360); });
     });
+  }
+
+  initCtaVideo(){
+    const vid = document.getElementById('cta-next-vid');
+    if(!vid) return;
+    const io = new IntersectionObserver((ents)=>{
+      if(ents[0].isIntersecting){
+        vid.play().catch(()=>{});
+        vid.style.opacity='0.32';
+        io.disconnect();
+      }
+    },{threshold:0.3});
+    io.observe(vid.parentElement);
   }
 }
 </script>

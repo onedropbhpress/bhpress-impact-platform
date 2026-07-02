@@ -59,6 +59,9 @@
   .w-pill.is-active svg{stroke:#fff;}
   .mega-wrap > a:hover{color:#00269f !important;font-weight:700 !important;text-decoration:underline !important;text-underline-offset:3px;background:transparent !important;}
 </style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){var b=document.createElement('button');b.setAttribute('aria-label','Voltar ao topo');b.style.cssText='position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:#00269f;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,38,159,.28);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;transform:translateY(10px);';b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>';document.body.appendChild(b);b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};var t;window.addEventListener('scroll',function(){b.style.opacity='0';b.style.pointerEvents='none';b.style.transform='translateY(10px)';clearTimeout(t);t=setTimeout(function(){if(window.scrollY>300){b.style.opacity='1';b.style.pointerEvents='auto';b.style.transform='translateY(0)';}},700);},{passive:true});});
+</script>
 </helmet>
 
 <div id="page" style="animation:pageIn .8s ease both;">

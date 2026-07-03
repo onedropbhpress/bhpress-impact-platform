@@ -3,6 +3,7 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/loading", "destination": "/loading.html" },
     { "source": "/", "destination": "/Home.dc.html" },
     { "source": "/quem-somos", "destination": "/Quem-Somos.dc.html" },
     { "source": "/estrategia", "destination": "/Estrategia.dc.html" },

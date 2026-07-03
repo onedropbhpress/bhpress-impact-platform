@@ -673,7 +673,9 @@ class Component extends DCLogic {
     if(!vid) return;
     const io = new IntersectionObserver((ents)=>{
       if(ents[0].isIntersecting){
-        vid.play().catch(()=>{});
+        vid.muted = true;
+        const p = vid.play();
+        if(p) p.catch(()=>{ vid.addEventListener('canplay',()=>{ vid.muted=true; vid.play().catch(()=>{}); },{once:true}); });
         vid.style.opacity='0.32';
         io.disconnect();
       }

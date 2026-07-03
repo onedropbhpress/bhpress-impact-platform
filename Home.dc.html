@@ -478,12 +478,23 @@ class Component extends DCLogic {
   initHeroVideo(){
     const video = document.getElementById('heroVideo');
     if(!video) return;
-    video.muted = true; // garante autoplay permitido pelos navegadores
-    const tryPlay = ()=>{ const p = video.play(); if(p && p.catch) p.catch(()=>{}); };
-    tryPlay(); // hero é a abertura: toca imediatamente ao carregar
-    // re-tenta assim que houver dados (arquivo grande pode não estar pronto no mount)
-    video.addEventListener('loadeddata', tryPlay);
-    video.addEventListener('canplay', tryPlay);
+    video.muted = true;
+    let playing = false;
+    const tryPlay = ()=>{
+      if(playing) return;
+      video.muted = true;
+      const p = video.play();
+      if(p){
+        p.then(()=>{ playing = true; })
+         .catch(()=>{
+           // Dados ainda não prontos: aguarda canplay e tenta de novo
+           video.addEventListener('canplay', tryPlay, {once:true});
+         });
+      }
+    };
+    tryPlay();
+    video.addEventListener('loadeddata', tryPlay, {once:true});
+    video.addEventListener('canplay', tryPlay, {once:true});
 
     let ticking = false;
     const onScroll = () => {

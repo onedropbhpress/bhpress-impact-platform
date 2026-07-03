@@ -297,28 +297,39 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 
 <!-- AGENDA CLIMÁTICA -->
 <section id="agenda-climatica" style="position:relative;color:#fff;padding:clamp(70px,9vw,120px) 0;overflow:hidden;">
-  <video id="agenda-climatica-video" muted loop playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;">
-    <source src="assets/webp-ambient/video-ambient-overlay.mp4" type="video/mp4">
+  <video id="agenda-climatica-video" autoplay muted loop playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;">
+    <source src="assets/video-bp-clientes/video-ambiente.mp4" type="video/mp4">
   </video>
   <script>
-    (function(){
+    document.addEventListener('DOMContentLoaded', function(){
       var v = document.getElementById('agenda-climatica-video');
-      if (!v) return;
+      if(!v) return;
       v.muted = true;
+      var playing = false;
       function tryPlay(){
+        if(playing) return;
         v.muted = true;
         var p = v.play();
         if(p !== undefined){
-          p.catch(function(){
-            v.addEventListener('canplay', tryPlay, {once:true});
-          });
+          p.then(function(){ playing = true; })
+           .catch(function(){
+             v.addEventListener('canplay', tryPlay, {once:true});
+           });
         }
       }
-      tryPlay();
+      if('IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(entries){
+          if(entries[0].isIntersecting){ tryPlay(); }
+          else { if(!v.paused) v.pause(); }
+        }, {threshold:0.1});
+        io.observe(v);
+      } else {
+        tryPlay();
+      }
       v.addEventListener('loadeddata', tryPlay, {once:true});
       document.addEventListener('click', tryPlay, {once:true});
       document.addEventListener('touchstart', tryPlay, {once:true});
-    })();
+    });
   </script>
   <div style="position:absolute;inset:0;background:rgba(20,36,27,.82);z-index:1;"></div>
   <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:0 40px;">

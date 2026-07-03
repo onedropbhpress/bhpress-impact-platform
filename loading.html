@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BH Press · Plataforma de Impacto 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; background: #f7f7f5; }
+  body { font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* ── Fase clara ── */
+  #ldr-light {
+    position: fixed; inset: 0; z-index: 1;
+    background: #f7f7f5;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .ldr-eyebrow {
+    font-size: 13px; color: #9aa0a6; letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    opacity: 0; animation: ldr-up 0.5s ease 0.25s forwards;
+  }
+
+  .ldr-logo {
+    height: 36px; display: block;
+    opacity: 0; animation: ldr-up 0.5s ease 0.45s forwards;
+  }
+
+  #ldr-bar-wrap {
+    margin-top: 52px;
+    display: flex; flex-direction: column; align-items: center; gap: 13px;
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+
+  .ldr-label {
+    font-size: 14px; color: #6b7280; letter-spacing: 0.01em;
+  }
+
+  /* Track: tarja colorida faz o papel de barra de loading */
+  .ldr-track {
+    width: 220px; height: 5px;
+    border-radius: 3px;
+    background: #e6e6e3;
+    overflow: hidden;
+  }
+
+  .ldr-fill {
+    height: 100%; width: 0%;
+    border-radius: 3px;
+    background: linear-gradient(90deg,
+      #00269f   0%,   #00269f   12.5%,
+      #b3dde1  12.5%, #b3dde1   25%,
+      #83cb96  25%,   #83cb96   37.5%,
+      #fade71  37.5%, #fade71   50%,
+      #ff9965  50%,   #ff9965   62.5%,
+      #f3b6af  62.5%, #f3b6af   75%,
+      #ff6757  75%,   #ff6757   87.5%,
+      #1a3834  87.5%, #1a3834   100%
+    );
+    background-size: 220px 100%;
+    transition: width 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* ── Fase azul ── */
+  #ldr-blue {
+    position: fixed; inset: 0; z-index: 2;
+    background: #00269f;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+
+  #ldr-pronto {
+    font-size: clamp(36px, 6.5vw, 76px);
+    font-weight: 700; color: #fff;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+    border-right: 3px solid rgba(255,255,255,0.8);
+    padding-right: 4px;
+    animation: ldr-blink 0.55s step-end infinite;
+    min-height: 1.2em;
+  }
+
+  @keyframes ldr-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+
+  @keyframes ldr-blink {
+    0%, 100% { border-color: rgba(255,255,255,0.8); }
+    50%       { border-color: transparent; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Fase 1 · 2: logo + barra colorida -->
+<div id="ldr-light">
+  <p class="ldr-eyebrow">Plataforma de impactos</p>
+  <img class="ldr-logo" src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press">
+  <div id="ldr-bar-wrap">
+    <p class="ldr-label">Carregando sua experiência</p>
+    <div class="ldr-track">
+      <div class="ldr-fill" id="ldrFill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Fase 3: tela azul + "Pronto! :]" -->
+<div id="ldr-blue">
+  <span id="ldr-pronto"></span>
+</div>
+
+<script>
+(function(){
+  // ─── Pré-carrega assets pesados em background enquanto a animação roda ───
+  // Vídeos externos (Supabase) — os mais pesados e responsáveis pelo delay
+  var ASSETS = [
+    'https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video.mp4',
+    'https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-impact-hero-video-quem-somos-comp.mp4',
+    'https://uxsoknprhnurwxymloms.supabase.co/storage/v1/object/public/bhpress-impact/bp-video-bcorp.mp4'
+  ];
+
+  // Cria elementos <video> ocultos com preload="auto" — o browser baixa e guarda em cache
+  ASSETS.forEach(function(src) {
+    var v = document.createElement('video');
+    v.preload = 'auto';
+    v.muted   = true;
+    v.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;';
+    v.innerHTML = '<source src="' + src + '" type="video/mp4">';
+    document.body.appendChild(v);
+    v.load();
+  });
+
+  // ─── Sequência de animação ───────────────────────────────────────────────
+  var fill    = document.getElementById('ldrFill');
+  var barWrap = document.getElementById('ldr-bar-wrap');
+  var light   = document.getElementById('ldr-light');
+  var blue    = document.getElementById('ldr-blue');
+  var pronto  = document.getElementById('ldr-pronto');
+
+  // → Fase 2: aparece a barra (logo já está animando via CSS)
+  setTimeout(function() {
+    barWrap.style.opacity = '1';
+    setTimeout(function() { fill.style.width = '100%'; }, 40);
+  }, 750);
+
+  // → Fase 3: tela azul + digitação
+  setTimeout(function() {
+    blue.style.opacity = '1';
+    blue.style.pointerEvents = 'auto';
+    light.style.opacity = '0';
+
+    // Digita "Pronto! :]" caractere a caractere
+    var text = 'Pronto! :]';
+    var i = 0;
+    var typing = setInterval(function() {
+      if(i < text.length) {
+        pronto.textContent = text.slice(0, ++i);
+      } else {
+        clearInterval(typing);
+        setTimeout(function() {
+          pronto.style.animation = 'none';
+          pronto.style.borderColor = 'transparent';
+        }, 350);
+      }
+    }, 65);
+
+    // Navega para o site — assets já estão sendo baixados em paralelo
+    setTimeout(function() {
+      window.location.replace('/');
+    }, 1500);
+
+  }, 2240);
+})();
+</script>
+</body>
+</html>

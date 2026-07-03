@@ -168,6 +168,18 @@
           }
         }
 
+        @media (max-width:640px) {
+          .traj-circle-wrap {
+            display: none;
+          }
+          .empresa-b-graph {
+            display: none;
+          }
+          .empresa-b-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
         /* Mega menu */
         .mega-wrap {
           position: relative;
@@ -735,38 +747,32 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 
               <div style="background:#fff;border:1px solid #ececea;border-left:4px solid #00269f;border-radius:12px;padding:24px 22px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#00269f;margin-bottom:12px;display:block;">01</span>
-                <h4 style="margin:0 0 16px;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Estratégias de posicionamento institucional e reputação</h4>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">GRI 2-22 · 2-23 · 2-24</span>
+                <h4 style="margin:0;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Estratégias de posicionamento institucional e reputação</h4>
               </div>
 
               <div style="background:#fff;border:1px solid #ececea;border-left:4px solid #ff9965;border-radius:12px;padding:24px 22px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#c2602f;margin-bottom:12px;display:block;">02</span>
-                <h4 style="margin:0 0 16px;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Comunicação interna e cultura organizacional</h4>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">GRI 2-7 · 401 · 404</span>
+                <h4 style="margin:0;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Comunicação interna e cultura organizacional</h4>
               </div>
 
               <div style="background:#fff;border:1px solid #ececea;border-left:4px solid #caa400;border-radius:12px;padding:24px 22px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#8a7300;margin-bottom:12px;display:block;">03</span>
-                <h4 style="margin:0 0 16px;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Gestão de crises</h4>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">GRI 2-16 · 2-25 · 2-26</span>
+                <h4 style="margin:0;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Gestão de crises</h4>
               </div>
 
               <div style="background:#fff;border:1px solid #ececea;border-left:4px solid #83cb96;border-radius:12px;padding:24px 22px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#2d7a44;margin-bottom:12px;display:block;">04</span>
-                <h4 style="margin:0 0 16px;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Comunicação com comunidades</h4>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">GRI 413-1 · 413-2</span>
+                <h4 style="margin:0;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Comunicação com comunidades</h4>
               </div>
 
               <div style="background:#fff;border:1px solid #ececea;border-left:4px solid #b3dde1;border-radius:12px;padding:24px 22px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#1e6d7a;margin-bottom:12px;display:block;">05</span>
-                <h4 style="margin:0 0 16px;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Assessoria de imprensa e gestão de relacionamento com stakeholders</h4>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">GRI 2-29</span>
+                <h4 style="margin:0;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Assessoria de imprensa e gestão de relacionamento com stakeholders</h4>
               </div>
 
               <div style="background:#fff;border:1px solid #ececea;border-left:4px solid #1a3834;border-radius:12px;padding:24px 22px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#1a3834;margin-bottom:12px;display:block;">06</span>
-                <h4 style="margin:0 0 16px;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Relatórios de sustentabilidade e impacto e estruturação de agendas ESG</h4>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;">GRI 2-2 · 2-3 · 2-4 · IFRS S1 &amp; S2 · SASB</span>
+                <h4 style="margin:0;font-size:16px;font-weight:700;line-height:1.3;color:#14161a;">Relatórios de sustentabilidade e impacto e estruturação de agendas ESG</h4>
               </div>
 
             </div>
@@ -779,7 +785,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <section id="empresa-b" style="background:#fff;padding:clamp(80px,11vw,140px) 0;">
         <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
           <!-- text + graph two-column -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;margin-bottom:48px;">
+          <div class="empresa-b-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:center;margin-bottom:48px;">
             <div data-reveal
               style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
               <p
@@ -794,7 +800,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
                 movimento global. A conquista representa a consolidação de um modelo de atuação que busca equilibrar
                 resultados econômicos com a geração de valor para a sociedade.</p>
             </div>
-            <div data-reveal data-delay="160"
+            <div data-reveal data-delay="160" class="empresa-b-graph"
               style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
               <div data-parallax="0.07" style="margin:-8% 0;will-change:transform;">
                 <img src="assets/webp-graphs/img-bp-graphs (6).webp" alt="Gráfico de transformação" style="width:100%;height:auto;display:block;">

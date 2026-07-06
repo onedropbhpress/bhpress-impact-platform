@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <button type="button" data-tab="1" onClick="{{ setTab1 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Diversidade e equidade</button>
       <button type="button" data-tab="2" onClick="{{ setTab2 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Capacitação e educação</button>
     </div>
-    <select class="tabs-select" onchange="window._pesSelectTab(+this.value)">
+    <select class="tabs-select" onChange="{{ setTabSel }}">
       <option value="0">Emprego e cadeia de valor</option>
       <option value="1">Diversidade e equidade</option>
       <option value="2">Capacitação e educação</option>
@@ -500,6 +500,7 @@ class Component extends DCLogic {
       setTab0: ()=> this.selectTab(0),
       setTab1: ()=> this.selectTab(1),
       setTab2: ()=> this.selectTab(2),
+      setTabSel: (e)=> this.selectTab(+(e.target||e).value),
     };
   }
 

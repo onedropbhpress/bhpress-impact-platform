@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <button type="button" data-tab="1" onClick="{{ setTab1 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Governança</button>
       <button type="button" data-tab="2" onClick="{{ setTab2 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Transformação digital</button>
     </div>
-    <select class="tabs-select" onchange="window._esgSelectTab(+this.value)">
+    <select class="tabs-select" onChange="{{ setTabSel }}">
       <option value="0">Agenda ESG</option>
       <option value="1">Governança</option>
       <option value="2">Transformação digital</option>
@@ -789,6 +789,7 @@ class Component extends DCLogic {
       setTab0: ()=> this.selectTab(0),
       setTab1: ()=> this.selectTab(1),
       setTab2: ()=> this.selectTab(2),
+      setTabSel: (e)=> this.selectTab(+(e.target||e).value),
     };
   }
 

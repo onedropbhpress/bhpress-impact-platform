@@ -52,7 +52,15 @@
     .pol-wrap{padding:0 44px !important;}
     #pol-deck{aspect-ratio:1 !important;flex:none !important;width:100%;}
     .pol-card{padding:24px 20px;}
+    .pol-prev,.pol-next{display:none !important;}
+    .gov-nodes{flex-direction:column !important;align-items:flex-start !important;gap:20px !important;overflow-x:visible !important;}
   }
+  /* Org chart tooltip */
+  .gov-tip{position:relative;cursor:pointer;display:inline-flex;}
+  .gov-tip-box{position:absolute;right:0;top:calc(100% + 10px);width:280px;background:#1a3834;color:#fff;border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.65;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;transform:translateY(-4px);z-index:20;text-align:left;}
+  .gov-tip-box em{font-style:italic;}
+  .gov-tip-box::before{content:"";position:absolute;bottom:100%;right:10px;border:6px solid transparent;border-bottom-color:#1a3834;}
+  .gov-tip:hover .gov-tip-box,.gov-tip.is-open .gov-tip-box{opacity:1;pointer-events:auto;transform:translateY(0);}
   /* Mega menu */
   .mega-wrap{position:relative;display:flex;align-items:center;}
   .mega-panel{position:fixed;left:0;right:0;top:65px;background:#fff;border-top:1px solid #ececea;padding:22px 40px 28px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .22s cubic-bezier(.16,1,.3,1),transform .22s cubic-bezier(.16,1,.3,1);z-index:55;box-shadow:0 12px 40px rgba(0,0,0,.07);}
@@ -376,6 +384,8 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-9 a 2-16 · 2-23 · 2-24</span>
       </div>
 
+      <!-- ROLLBACK: remover display:none abaixo para restaurar o organograma original com fundo amarelo -->
+      <div style="display:none" data-rollback="org-chart-original">
       <!-- Organograma interativo -->
       <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);background:#fade71;border-radius:16px;padding:clamp(30px,4vw,52px);">
         <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;opacity:.55;margin:0 0 30px;text-align:center;">Estrutura de governança · passe o cursor para expandir</p>
@@ -497,6 +507,43 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
             <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#1a3834;margin:0 0 5px;">Transição societária histórica</p>
             <p style="margin:0;font-size:13px;line-height:1.55;color:#3d4248;"><span style="color:#c2602f;font-weight:700;">★</span> Ana Amélia Gouvêa se desligou da sociedade da BH Press em outubro/2025, quando a responsabilidade legal pela empresa ficou somente a cargo da sócia-administradora Dulcemar da Costa.</p>
           </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Organograma — versão simplificada (fundo branco) -->
+      <div data-reveal data-delay="80" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);margin-top:8px;display:flex;align-items:flex-start;gap:12px;">
+        <!-- Scroll wrapper externo: max-width deixa espaço para o botão tooltip -->
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;max-width:calc(100% - 32px);">
+          <div class="gov-nodes" style="display:flex;align-items:flex-start;gap:36px;padding:20px 4px 10px;">
+            <!-- Diretoria -->
+            <div style="flex-shrink:0;margin-top:32px;">
+              <span style="font-size:18px;font-weight:700;color:#14161a;white-space:nowrap;">Diretoria</span>
+            </div>
+            <!-- Dulcemar -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex-shrink:0;">
+              <div style="position:relative;">
+                <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);border:1.5px solid #35a9bb;border-radius:50px;padding:4px 16px;background:#fff;font-size:11px;color:#9aa0a6;font-family:'JetBrains Mono',monospace;letter-spacing:.03em;white-space:nowrap;z-index:2;">CEO e Responsável Legal</div>
+                <div style="border:2px solid #35a9bb;border-radius:16px;padding:28px 36px 20px;background:#fff;text-align:center;">
+                  <span style="font-size:18px;font-weight:700;color:#14161a;white-space:nowrap;">Dulcemar da Costa</span>
+                </div>
+              </div>
+              <div style="background:#35a9bb;color:#fff;border-radius:28px;padding:9px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;">Administrativo-Financeiro</div>
+            </div>
+            <!-- Isabela + Lilian -->
+            <div style="display:flex;flex-direction:column;align-items:stretch;gap:12px;flex-shrink:0;">
+              <div style="display:flex;align-items:flex-start;gap:36px;padding:28px 0 20px;">
+                <span style="font-size:18px;font-weight:700;color:#14161a;white-space:nowrap;">Isabela Scarioli</span>
+                <span style="font-size:18px;font-weight:700;color:#14161a;white-space:nowrap;">Lilian Ribas</span>
+              </div>
+              <div style="background:#162450;color:#fff;border-radius:28px;padding:9px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;text-align:center;">Área Técnica</div>
+            </div>
+          </div>
+        </div>
+        <!-- Tooltip FORA do overflow para não ser cortado -->
+        <div class="gov-tip" style="flex-shrink:0;margin-top:40px;" onclick="this.classList.toggle('is-open')">
+          <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid #b0b8c1;display:flex;align-items:center;justify-content:center;font-size:11px;font-style:italic;font-family:Georgia,serif;color:#9aa0a6;user-select:none;">i</div>
+          <div class="gov-tip-box">O comitê gestor atua com foco na ética, na responsabilidade e no cumprimento de padrões de <em>compliance</em> e responsabilidade social, alinhando nossas atividades a esses princípios.</div>
         </div>
       </div>
     </div>

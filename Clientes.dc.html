@@ -18,6 +18,10 @@
   ::selection{background:#3f9c63;color:#fff;}
   a{color:inherit;text-decoration:none;}
   @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes navIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes navOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-12px);}}
+  .mobile-nav-overlay{animation:navIn .32s cubic-bezier(.16,1,.3,1);}
+  .mobile-nav-overlay.is-closing{animation:navOut .26s cubic-bezier(.4,0,1,1) forwards;}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}[data-reveal]{opacity:1 !important;transform:none !important;}*{animation-duration:.001ms !important;}}
   @media (max-width:900px){
     .hdr-nav{display:none !important;}
@@ -53,8 +57,9 @@
   .cli-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#3f9c63;border:2.5px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.22);cursor:pointer;border:none;}
   .mega-wrap > a:hover{color:#00269f !important;font-weight:700 !important;text-decoration:underline !important;text-underline-offset:3px;background:transparent !important;}
 </style>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded',function(){var b=document.createElement('button');b.setAttribute('aria-label','Voltar ao topo');b.style.cssText='position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:#00269f;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,38,159,.28);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;transform:translateY(10px);';b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>';document.body.appendChild(b);b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};var t;window.addEventListener('scroll',function(){b.style.opacity='0';b.style.pointerEvents='none';b.style.transform='translateY(10px)';clearTimeout(t);t=setTimeout(function(){if(window.scrollY>300){b.style.opacity='1';b.style.pointerEvents='auto';b.style.transform='translateY(0)';}},700);},{passive:true});});
+document.addEventListener('DOMContentLoaded',function(){var b=document.createElement('button');b.setAttribute('aria-label','Voltar ao topo');b.style.cssText='position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:#00269f;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,38,159,.28),0 0 0 3px #fff;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;transform:translateY(10px);';b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>';document.body.appendChild(b);b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};var t;window.addEventListener('scroll',function(){b.style.opacity='0';b.style.pointerEvents='none';b.style.transform='translateY(10px)';clearTimeout(t);t=setTimeout(function(){if(window.scrollY>300){b.style.opacity='1';b.style.pointerEvents='auto';b.style.transform='translateY(0)';}},700);},{passive:true});});
 </script>
 </helmet>
 
@@ -181,7 +186,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 </script>
 
 <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:2px;">
+  <div class="mobile-nav-overlay" style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:2px;">
     <button type="button" onClick="{{ closeNav }}" aria-label="Fechar" style="position:absolute;top:24px;right:32px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;font-size:20px;cursor:pointer;">×</button>
     <a href="/" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Home</a>
     <a href="/quem-somos" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
@@ -559,6 +564,17 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 </footer>
 
 </div>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<style>
+  .vw-access-button{bottom:28px !important;left:28px !important;right:auto !important;}
+  @media(max-width:640px){.vw-access-button{bottom:16px !important;left:16px !important;}}
+</style>
+<script>if(window.VLibras)new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
@@ -571,7 +587,7 @@ class Component extends DCLogic {
     return {
       navOpen: this.state.navOpen,
       toggleNav: ()=> this.setState(s=>({navOpen:!s.navOpen})),
-      closeNav: ()=> this.setState({navOpen:false}),
+      closeNav: ()=>{ var nav=document.querySelector('.mobile-nav-overlay'); if(nav){nav.classList.add('is-closing');setTimeout(()=>this.setState({navOpen:false}),280);}else{this.setState({navOpen:false});} },
       carteira: this.state.carteira,
       carteiraRest: 100 - this.state.carteira,
       carteiraArc: arc,

@@ -19,6 +19,12 @@
   ::selection{background:#1a3834;color:#fff;}
   a{color:inherit;text-decoration:none;}
   @keyframes pageIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes navIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes navOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-12px);}}
+  .mobile-nav-overlay{animation:navIn .32s cubic-bezier(.16,1,.3,1);}
+  .mobile-nav-overlay.is-closing{animation:navOut .26s cubic-bezier(.4,0,1,1) forwards;}
+  .tabs-select{display:none;width:100%;padding:13px 16px;padding-right:44px;font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:15px;font-weight:600;color:#14161a;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235c6268' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 14px center;border:1px solid #e6e6e3;border-radius:10px;appearance:none;cursor:pointer;position:sticky;top:64px;z-index:30;box-shadow:0 2px 12px rgba(0,0,0,.07);outline:none;}
+  .tabs-select:focus{box-shadow:0 0 0 3px rgba(0,38,159,.14),0 2px 12px rgba(0,0,0,.07);border-color:#00269f;}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}[data-reveal]{opacity:1 !important;transform:none !important;}*{animation-duration:.001ms !important;}}
   @media (max-width:900px){
     .hdr-nav{display:none !important;}
@@ -32,11 +38,18 @@
     .kpi-grid{grid-template-columns:1fr !important;}
     .mat-grid{grid-template-columns:1fr !important;}
     .foot-grid{grid-template-columns:1fr !important;}
-    .tabs-bar{overflow-x:auto;}
+    .tabs-bar{display:none !important;}
+    .tabs-select{display:block;}
     .org-row{flex-direction:column !important;}
     .intenc-sticky{position:relative !important;top:auto !important;}
     .mat-graph{display:none !important;}
     .mat-split{grid-template-columns:1fr !important;}
+    .td-split{grid-template-columns:1fr !important;}
+    .td-graph{display:none !important;}
+    .ia-split{grid-template-columns:1fr !important;}
+    .pol-wrap{padding:0 44px;}
+    #pol-deck{aspect-ratio:1;flex:none;}
+    .pol-card{padding:24px 20px;}
   }
   /* Mega menu */
   .mega-wrap{position:relative;display:flex;align-items:center;}
@@ -70,8 +83,9 @@
   .org-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.65);border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:7px 11px;font-size:12px;font-weight:500;color:#2a2e33;}
   .mega-wrap > a:hover{color:#00269f !important;font-weight:700 !important;text-decoration:underline !important;text-underline-offset:3px;background:transparent !important;}
 </style>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded',function(){var b=document.createElement('button');b.setAttribute('aria-label','Voltar ao topo');b.style.cssText='position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:#00269f;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,38,159,.28);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;transform:translateY(10px);';b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>';document.body.appendChild(b);b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};var t;window.addEventListener('scroll',function(){b.style.opacity='0';b.style.pointerEvents='none';b.style.transform='translateY(10px)';clearTimeout(t);t=setTimeout(function(){if(window.scrollY>300){b.style.opacity='1';b.style.pointerEvents='auto';b.style.transform='translateY(0)';}},700);},{passive:true});});
+document.addEventListener('DOMContentLoaded',function(){var b=document.createElement('button');b.setAttribute('aria-label','Voltar ao topo');b.style.cssText='position:fixed;bottom:28px;right:28px;z-index:999;width:46px;height:46px;border-radius:50%;background:#00269f;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,38,159,.28),0 0 0 3px #fff;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;transform:translateY(10px);';b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>';document.body.appendChild(b);b.onclick=function(){window.scrollTo({top:0,behavior:'smooth'});};var t;window.addEventListener('scroll',function(){b.style.opacity='0';b.style.pointerEvents='none';b.style.transform='translateY(10px)';clearTimeout(t);t=setTimeout(function(){if(window.scrollY>300){b.style.opacity='1';b.style.pointerEvents='auto';b.style.transform='translateY(0)';}},700);},{passive:true});});
 </script>
 </helmet>
 
@@ -198,7 +212,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 </script>
 
 <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:2px;">
+  <div class="mobile-nav-overlay" style="position:fixed;inset:0;z-index:80;background:#0c0e12;display:flex;flex-direction:column;padding:80px 40px 40px;gap:2px;">
     <button type="button" onClick="{{ closeNav }}" aria-label="Fechar" style="position:absolute;top:24px;right:32px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;font-size:20px;cursor:pointer;">×</button>
     <a href="/" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Home</a>
     <a href="/quem-somos" data-nav style="color:#fff;font-size:26px;font-weight:700;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
@@ -233,6 +247,11 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <button type="button" data-tab="1" onClick="{{ setTab1 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Governança</button>
       <button type="button" data-tab="2" onClick="{{ setTab2 }}" class="tabbtn" style="appearance:none;background:transparent;border:none;border-bottom:2px solid transparent;color:#5c6268;font-family:inherit;font-size:15px;font-weight:600;padding:16px 18px;cursor:pointer;white-space:nowrap;">Transformação digital</button>
     </div>
+    <select class="tabs-select" onchange="window._esgSelectTab(+this.value)">
+      <option value="0">Agenda ESG</option>
+      <option value="1">Governança</option>
+      <option value="2">Transformação digital</option>
+    </select>
   </div>
 </section>
 
@@ -301,7 +320,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
           <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Materialidade</p>
           <h2 style="margin:0 0 18px;font-size:clamp(28px,3.6vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.06;">Cinco temas materiais orientam tudo.</h2>
           <p style="margin:0 0 16px;font-size:18px;line-height:1.6;color:#3d4248;">Nosso primeiro estudo de materialidade, com base nas diretrizes da GRI e em consulta às nossas partes interessadas, foi realizado em 2024. O processo definiu cinco temas materiais, que seguem orientando nossa estratégia, nossa gestão e a prestação de contas sobre nossos impactos.</p>
-          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><a href="#" style="display:inline-flex;align-items:center;gap:9px;color:#1a3834;font-weight:600;font-size:15px;border-bottom:2px solid #1a3834;padding-bottom:2px;">Conheça o processo completo no Relatório de Impacto 2024 <span>→</span></a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 3-1 · 3-2</span></div>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><a href="https://bhpress.com.br/wp-content/uploads/2025/08/Relatorio_de_Impacto_2025_BHPressComunicacaoeSustantabilidade_compressed.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:9px;color:#1a3834;font-weight:600;font-size:15px;border-bottom:2px solid #1a3834;padding-bottom:2px;">Conheça o processo completo no Relatório de Impacto 2024 <span>→</span></a><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 3-1 · 3-2</span></div>
         </div>
         <div data-reveal data-delay="160" class="mat-graph" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
           <div data-parallax="0.07" style="margin:-8% 0;will-change:transform;">
@@ -375,7 +394,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
             <div style="position:absolute;top:13px;right:26%;width:2px;height:17px;background:#c9b800;transform:translateX(50%);"></div>
           </div>
           <!-- Two-column pillars -->
-          <div style="display:flex;gap:24px;width:100%;max-width:740px;align-items:stretch;">
+          <div class="org-row" style="display:flex;gap:24px;width:100%;max-width:740px;align-items:stretch;">
             <!-- LEFT: Administrativo-Financeiro -->
             <div style="flex:1;border:1.5px solid #c8d7f0;background:#f5f7fb;border-radius:14px;padding:16px 16px 20px;">
               <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;">
@@ -421,7 +440,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
                 <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#1a6640;">Área Técnica</span>
               </div>
               <!-- Isabela + Lilian side by side -->
-              <div style="display:flex;gap:10px;">
+              <div class="org-row" style="display:flex;gap:10px;">
                 <!-- Isabela -->
                 <div class="org-box" tabindex="0" style="flex:1;background:#fff;border:1px solid #d4ddd9;border-radius:12px;padding:14px;cursor:default;">
                   <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#1a3834;display:block;margin-bottom:8px;">Comitê Gestor</span>
@@ -494,7 +513,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);min-width:0;display:flex;flex-direction:column;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a6;margin:0 0 14px;flex-shrink:0;">Políticas e declarações internas</p>
         <!-- Carousel políticas -->
-        <div style="position:relative;padding:0 100px;flex:1;display:flex;flex-direction:column;">
+        <div class="pol-wrap" style="position:relative;padding:0 100px;flex:1;display:flex;flex-direction:column;">
           <!-- Deck bilateral: ghost cards em ambos os lados via box-shadow -->
           <div id="pol-deck" style="border-radius:24px;box-shadow:0 10px 36px rgba(0,0,0,.10),-10px 8px 0 0 rgba(255,255,255,.80),10px 8px 0 0 rgba(255,255,255,.80),-18px 15px 0 0 rgba(255,255,255,.46),18px 15px 0 0 rgba(255,255,255,.46);flex:1;display:flex;flex-direction:column;">
             <div style="overflow:hidden;border-radius:24px;flex:1;display:flex;flex-direction:column;">
@@ -600,7 +619,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
           <p style="margin:0 0 16px;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">A partir desse movimento, estruturamos o ambiente Microsoft como padrão de comunicação, gestão à vista e colaboração interna. A iniciativa contribuiu para reduzir a dispersão de informações, melhorar o registro de documentos e alinhamentos e dar mais clareza aos fluxos de trabalho.</p>
           <p style="margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.62;color:#2a2e33;">Em outubro, realizamos o <strong style="font-weight:700;">Dia D da Transformação Digital</strong>, com a participação de toda a equipe, para compartilhar combinados, orientações e próximos passos. Mais do que uma mudança tecnológica, essa jornada fortaleceu a governança, a eficiência operacional e a cultura de melhoria da agência.</p>
         </div>
-        <div data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
+        <div data-reveal data-delay="160" class="td-graph" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);overflow:hidden;border-radius:14px;">
           <div data-parallax="0.07" style="margin:-8% 0;will-change:transform;">
             <img src="assets/webp-graphs/img-bp-graphs (10).webp" alt="Gráfico de transformação digital" style="width:100%;height:auto;display:block;">
           </div>
@@ -624,7 +643,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
   <!-- IA em soluções digitais — case + timeline -->
   <section style="background:#fade71;color:#14161a;padding:clamp(70px,9vw,120px) 0;">
     <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,70px);align-items:stretch;">
+      <div class="ia-split" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,70px);align-items:stretch;">
 
         <!-- COLUNA A: eyebrow + título + texto + mockup -->
         <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);">
@@ -746,6 +765,17 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 </footer>
 
 </div>
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<style>
+  .vw-access-button{bottom:28px !important;left:28px !important;right:auto !important;}
+  @media(max-width:640px){.vw-access-button{bottom:16px !important;left:16px !important;}}
+</style>
+<script>if(window.VLibras)new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
@@ -755,7 +785,7 @@ class Component extends DCLogic {
     return {
       navOpen: this.state.navOpen,
       toggleNav: ()=> this.setState(s=>({navOpen:!s.navOpen})),
-      closeNav: ()=> this.setState({navOpen:false}),
+      closeNav: ()=>{ var nav=document.querySelector('.mobile-nav-overlay'); if(nav){nav.classList.add('is-closing');setTimeout(()=>this.setState({navOpen:false}),280);}else{this.setState({navOpen:false});} },
       setTab0: ()=> this.selectTab(0),
       setTab1: ()=> this.selectTab(1),
       setTab2: ()=> this.selectTab(2),
@@ -815,6 +845,7 @@ class Component extends DCLogic {
     this.initCarousel();
     this.initOrg();
     this.selectTab(0);
+    window._esgSelectTab = (i)=>this.selectTab(i);
     window.scrollTo(0,0);
   }
 

@@ -524,6 +524,7 @@ class Component extends DCLogic {
   revealWithin(root){ root.querySelectorAll('[data-reveal]').forEach(el=>{ const d=parseInt(el.getAttribute('data-delay')||'0',10); el.style.transitionDelay=d+'ms'; el.style.opacity='1'; el.style.transform='none'; }); }
 
   componentDidMount(){
+    document.title = 'Plataforma de Impacto BH Press';
     if(window.lucide) lucide.createIcons();
     this.initTeamCounter();
     this.initScrollProgress();

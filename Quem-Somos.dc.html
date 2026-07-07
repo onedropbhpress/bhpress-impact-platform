@@ -1194,6 +1194,7 @@ class Component extends DCLogic {
     this.initScrollVideos();
     this.initScrollRotate();
     this.selectTab(0);
+    (()=>{const _h=window.location.hash;if(_h==='#participacao-cop30'){setTimeout(()=>{this.selectTab(2);document.getElementById('participacao')?.scrollIntoView({behavior:'smooth',block:'start'});},500);}else if(_h==='#empresa-b'||_h==='#reconhecimento'){setTimeout(()=>{document.querySelector(_h)?.scrollIntoView({behavior:'smooth',block:'start'});},400);}})();
     this.initScrollProgress();
     document.addEventListener('keydown', this._esc = (e)=>{ if(e.key==='Escape') this.setState({segOpen:false, navOpen:false}); });
   }

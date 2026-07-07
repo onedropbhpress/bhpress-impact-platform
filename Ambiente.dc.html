@@ -487,7 +487,7 @@ class Component extends DCLogic {
     this.initWasteFlow();
     this.initHeroSlider();
     document.addEventListener('keydown', this._esc = (e)=>{ if(e.key==='Escape') this.setState({cfOpen:false, navOpen:false}); });
-    window.scrollTo(0,0);
+    (()=>{const _h=window.location.hash;if(_h){setTimeout(()=>{document.querySelector(_h)?.scrollIntoView({behavior:'smooth',block:'start'});},400);}else{window.scrollTo(0,0);}})();
   }
 
   componentWillUnmount(){ if(this._esc) document.removeEventListener('keydown', this._esc); }

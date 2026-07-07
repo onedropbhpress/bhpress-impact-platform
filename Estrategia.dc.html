@@ -895,9 +895,8 @@ class Component extends DCLogic {
     this.initCollapseCompromissos();
     this.initCarousel();
     this.initOrg();
-    this.selectTab(0);
     window._esgSelectTab = (i)=>this.selectTab(i);
-    window.scrollTo(0,0);
+    (()=>{const _h=window.location.hash;if(_h==='#governanca'){setTimeout(()=>this.selectTab(1),150);}else if(_h==='#transformacao-digital'){setTimeout(()=>this.selectTab(2),150);}else{this.selectTab(0);window.scrollTo(0,0);}})();
   }
 
   initScrollProgress(){

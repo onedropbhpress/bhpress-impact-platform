@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -12,7 +12,7 @@
 <title>Relatório de Impacto BH Press</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Geist:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -60,12 +60,12 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <img id="hdrLogo" src="assets/webp-bp-logos/SVG/logo-bhpress.svg" alt="BH Press" style="height:32px;display:block;transition:filter .4s ease;filter:brightness(0) invert(1);">
     </a>
     <nav class="hdr-nav" style="margin-left:auto;display:flex;align-items:center;gap:4px;">
-      <a href="/quem-somos" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Quem Somos</a>
+      <a href="/quem-somos" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Quem somos</a>
       <a href="/estrategia" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Estratégia</a>
       <a href="/pessoas" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Pessoas</a>
       <a href="/clientes" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Clientes</a>
       <a href="/ambiente" data-nav class="hdr-tx hdr-link" style="font-size:14px;font-weight:500;color:#fff;padding:8px 13px;border-radius:6px;transition:color .4s ease,background .2s ease;" style-hover="background:rgba(255,255,255,.14);">Ambiente</a>
-      <a href="/sobre" data-nav class="hdr-cta" style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:#00269f;background:#fff;border:none;padding:8px 18px;border-radius:100px;transition:opacity .2s ease;" style-hover="opacity:.85;">Sobre este relatório</a>
+      <a href="/sobre" data-nav class="hdr-cta" style="margin-left:10px;font-family:'Geist',sans-serif;font-size:12px;font-weight:600;color:#00269f;background:#fff;border:none;padding:8px 18px;border-radius:100px;transition:opacity .2s ease;" style-hover="opacity:.85;">Sobre este relatório</a>
     </nav>
     <button class="hdr-burger" type="button" onClick="{{ toggleNav }}" aria-label="Menu" style="display:none;margin-left:auto;width:42px;height:42px;border:1px solid rgba(255,255,255,.4);background:transparent;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
       <span style="width:18px;height:2px;background:#fff;display:block;"></span><span style="width:18px;height:2px;background:#fff;display:block;"></span><span style="width:18px;height:2px;background:#fff;display:block;"></span>
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
   <div class="mobile-nav-overlay" style="position:fixed;inset:0;z-index:80;background:#00269f;display:flex;flex-direction:column;padding:80px 40px 40px;gap:6px;">
     <button type="button" onClick="{{ closeNav }}" aria-label="Fechar" style="position:absolute;top:24px;right:32px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;font-size:20px;cursor:pointer;">×</button>
-    <a href="/quem-somos" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem Somos</a>
-    <a href="/estrategia" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Estratégia &amp; Governança</a>
+    <a href="/quem-somos" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Quem somos</a>
+    <a href="/estrategia" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Estratégia e governança</a>
     <a href="/pessoas" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Pessoas</a>
     <a href="/clientes" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);">Clientes</a>
     <a href="/ambiente" data-nav style="color:#fff;font-size:30px;font-weight:700;padding:14px 0;">Ambiente</a>
@@ -97,10 +97,10 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
     <span style="flex:1;background:#00269f;"></span><span style="flex:1;background:#b3dde1;"></span><span style="flex:1;background:#83cb96;"></span><span style="flex:1;background:#fade71;"></span><span style="flex:1;background:#ff9965;"></span><span style="flex:1;background:#f3b6af;"></span><span style="flex:1;background:#ff6757;"></span><span style="flex:1;background:#1a3834;"></span>
   </div>
   <div style="position:relative;max-width:1240px;margin:0 auto;width:100%;padding:0 40px 110px;">
-    <p data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin:0 0 26px;">Ano-base 2025 · BH Press Comunicação e Sustentabilidade</p>
+    <p data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);font-family:'Geist',sans-serif;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin:0 0 26px;">Ano-base 2025 · BH Press Comunicação e Sustentabilidade</p>
     <h1 data-reveal data-delay="90" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:0;color:#fff;font-weight:800;font-size:clamp(48px,8.2vw,120px);line-height:.95;letter-spacing:-.03em;max-width:14ch;">Relatório de Impacto 2026</h1>
     <p data-reveal data-delay="200" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin:30px 0 0;color:rgba(255,255,255,.85);font-size:clamp(18px,2vw,23px);line-height:1.55;max-width:50ch;">Este é o nosso terceiro relatório de impacto. Aqui, apresentamos nossos avanços, desafios e compromissos em&nbsp;2025.</p>
-    <div data-reveal data-delay="320" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin-top:42px;display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.6);">
+    <div data-reveal data-delay="320" style="opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin-top:42px;display:flex;align-items:center;gap:10px;font-family:'Geist',sans-serif;font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.6);">
       <span style="display:inline-block;width:22px;height:34px;border:1.5px solid rgba(255,255,255,.4);border-radius:11px;position:relative;"><span style="position:absolute;top:7px;left:50%;width:3px;height:7px;background:rgba(255,255,255,.7);border-radius:2px;transform:translateX(-50%);animation:bob 1.6s ease-in-out infinite;"></span></span>
       role para explorar
     </div>
@@ -120,18 +120,18 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
             <span style="display:block;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:17px solid #fff;margin-left:4px;"></span>
           </button>
         </div>
-        <div id="ceo-caption" style="position:absolute;bottom:14px;left:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#5c6268;background:#fff;border:1px solid #e6e6e3;padding:8px 11px;border-radius:6px;z-index:2;">Vídeo · Dulcemar da Costa, CEO</div>
+        <div id="ceo-caption" style="position:absolute;bottom:14px;left:14px;right:14px;font-family:'Geist',sans-serif;font-size:11px;color:#5c6268;background:#fff;border:1px solid #e6e6e3;padding:8px 11px;border-radius:6px;z-index:2;">Vídeo · Dulcemar da Costa, CEO</div>
       </div>
       <blockquote style="margin:20px 0 0;padding:20px 24px;border:none;border-left:3px solid #00269f;border-radius:0 8px 8px 0;box-shadow:0 4px 20px rgba(0,0,0,.07);background:#fff;">
         <p style="margin:0 0 14px;font-size:16px;font-style:italic;line-height:1.65;color:#2a2e33;">"O que prevalece é a confiança. É nesse ativo que a BH Press investe para conectar negócios e pessoas, gerando impactos positivos em toda a sua cadeia de valor."</p>
-        <footer style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9aa0a6;font-style:normal;">Dulcemar da Costa, CEO</footer>
+        <footer style="font-family:'Geist',sans-serif;font-size:11px;color:#9aa0a6;font-style:normal;">Dulcemar da Costa, CEO</footer>
       </blockquote>
     </div>
     <div data-reveal data-delay="120" style="opacity:0;transform:translateY(22px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Mensagem da liderança</p>
+      <p style="font-family:'Geist',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 22px;">Mensagem da liderança</p>
       <p style="margin:0;font-size:clamp(22px,2.5vw,32px);line-height:1.34;font-weight:600;letter-spacing:-.01em;color:#14161a;">Em 2025, a BH Press se certificou como uma <span style="color:#00269f;">Empresa B</span>, revisou seu contrato social, com avanços em governança e gestão de impactos e mudou sua razão social para <span style="color:#00269f;">BH Press Comunicação e Sustentabilidade</span> — refletindo de forma explícita um posicionamento que já vinha sendo construído na prática: integrar estratégia, reputação e impacto em uma mesma proposta de valor.</p>
       <div style="margin-top:34px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-22</span>
+        <span style="font-family:'Geist',sans-serif;font-size:12px;color:#5c6268;border:1px solid #e6e6e3;padding:6px 11px;border-radius:6px;">GRI 2-22</span>
       </div>
     </div>
   </div>
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
     <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:50px;">
       <div>
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 18px;">Destaques do ano</p>
+        <p style="font-family:'Geist',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 18px;">Destaques do ano</p>
         <h2 style="margin:0;font-size:clamp(32px,4.6vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.02;max-width:18ch;">Os marcos que definiram o ciclo de 2025</h2>
       </div>
       <div style="display:flex;gap:10px;">
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <img src="assets/webp-2025-highlights-cards/img-bp-highlights-2.webp" alt="Certificação Empresa B" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="padding:24px 26px 28px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#00269f;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem Somos</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.05em;color:#00269f;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem somos</span>
         <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;color:#14161a;">Certificação Empresa B</h3>
         <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Primeira agência de comunicação de Minas Gerais a integrar o Sistema B.</p>
       </div>
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <img src="assets/webp-2025-highlights-cards/img-bp-highlights-1.webp" alt="COP 30" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="padding:24px 26px 28px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#00269f;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem Somos</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.05em;color:#00269f;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem somos</span>
         <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;color:#14161a;">COP30 e &ldquo;A COP da verdade&rdquo;</h3>
         <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Presença em Belém e o minidocumentário lançado no evento CineESG.</p>
       </div>
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <img src="assets/webp-2025-highlights-cards/img-bp-highlights-4.webp" alt="Prêmio Jatobá" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="padding:24px 26px 28px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#00269f;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem Somos</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.05em;color:#00269f;"><span style="width:8px;height:8px;border-radius:50%;background:#00269f;"></span>Quem somos</span>
         <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;color:#14161a;">Prêmio Jatobá</h3>
         <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Melhor Relatório de Sustentabilidade, em parceria com a MRV&amp;CO.</p>
       </div>
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <img src="assets/webp-2025-highlights-cards/img-bp-highlights-3.webp" alt="Dulcemar da Costa CEO" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="padding:24px 26px 28px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#1a3834;"><span style="width:8px;height:8px;border-radius:50%;background:#1a3834;"></span>Estratégia &amp; Governança</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.05em;color:#1a3834;"><span style="width:8px;height:8px;border-radius:50%;background:#1a3834;"></span>Estratégia e governança</span>
         <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;color:#14161a;">Dulcemar da Costa assume como CEO</h3>
         <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Transição de governança e fortalecimento do posicionamento da agência.</p>
       </div>
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <img src="assets/webp-2025-highlights-cards/img-bp-highlights-5.webp" alt="Claude Partner" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="padding:24px 26px 28px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#1a3834;"><span style="width:8px;height:8px;border-radius:50%;background:#1a3834;"></span>Estratégia &amp; Governança</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.05em;color:#1a3834;"><span style="width:8px;height:8px;border-radius:50%;background:#1a3834;"></span>Estratégia e governança</span>
         <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;color:#14161a;">Adesão ao Claude Partner Network</h3>
         <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">10 colaboradores formados, rumo à certificação CCA-F com a Anthropic.</p>
       </div>
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         <img src="assets/webp-2025-highlights-cards/img-bp-highlights-6.webp" alt="Carbon Free Brasil" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="padding:24px 26px 28px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#2f7a4c;"><span style="width:8px;height:8px;border-radius:50%;background:#3f9c63;"></span>Ambiente</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.05em;color:#2f7a4c;"><span style="width:8px;height:8px;border-radius:50%;background:#3f9c63;"></span>Ambiente</span>
         <h3 style="margin:14px 0 8px;font-size:22px;font-weight:700;letter-spacing:-.01em;color:#14161a;">Adesão ao Carbon Free Brasil</h3>
         <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Início da estruturação da gestão de emissões da agência.</p>
       </div>
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
 <section style="background:#f6f6f5;padding:clamp(80px,11vw,150px) 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
     <div data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);max-width:60ch;margin-bottom:54px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Explore o relatório</p>
+      <p style="font-family:'Geist',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9aa0a6;margin:0 0 18px;">Explore o relatório</p>
       <h2 style="margin:0;font-size:clamp(32px,4.6vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.02;">Cinco frentes que organizam<br>nossos impactos.</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="sect-grid">
@@ -228,11 +228,11 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <a href="/quem-somos" data-nav data-reveal style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid #e6e6e3;border-radius:14px;overflow:hidden;min-height:320px;">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#00269f;"></div>
         <div style="position:relative;aspect-ratio:16/9;background-color:#eef0ef;overflow:hidden;">
-          <img src="assets/webp-quem-somos/webp-home-quem-somos-card.webp" alt="Quem Somos" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          <img src="assets/webp-quem-somos/webp-home-quem-somos-card.webp" alt="Quem somos" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#00269f;font-weight:600;">01 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#00269f;">acessar →</span></div>
-          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Quem Somos</h3>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Geist',sans-serif;font-size:12px;color:#00269f;font-weight:600;">01 / 06</span><span style="font-family:'Geist',sans-serif;font-size:11px;color:#00269f;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Quem somos</h3>
           <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Identidade, propósito, trajetória, frentes de atuação, Empresa B, participação institucional e reconhecimento.</p>
         </div>
       </a>
@@ -243,8 +243,8 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
           <img src="assets/webp-work-fronts-cards/img-bp-wor-front-2.webp" alt="Estratégia e Governança" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#1a3834;font-weight:600;">02 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a3834;">acessar →</span></div>
-          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Estratégia &amp; Governança</h3>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Geist',sans-serif;font-size:12px;color:#1a3834;font-weight:600;">02 / 06</span><span style="font-family:'Geist',sans-serif;font-size:11px;color:#1a3834;">acessar →</span></div>
+          <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Estratégia e governança</h3>
           <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Agenda ESG / BH Press 2030, governança corporativa e transformação digital com IA.</p>
         </div>
       </a>
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
           <img src="assets/webp-work-fronts-cards/img-bp-wor-front-5.webp" alt="Pessoas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#d4763f;font-weight:600;">03 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#d4763f;">acessar →</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Geist',sans-serif;font-size:12px;color:#d4763f;font-weight:600;">03 / 06</span><span style="font-family:'Geist',sans-serif;font-size:11px;color:#d4763f;">acessar →</span></div>
           <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Pessoas</h3>
           <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Emprego e cadeia de valor, diversidade e equidade, capacitação e educação.</p>
         </div>
@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
           <img src="assets/webp-work-fronts-cards/img-bp-wor-front-3.webp" alt="Clientes" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a7e00;font-weight:600;">04 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a7e00;">acessar →</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Geist',sans-serif;font-size:12px;color:#9a7e00;font-weight:600;">04 / 06</span><span style="font-family:'Geist',sans-serif;font-size:11px;color:#9a7e00;">acessar →</span></div>
           <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Clientes</h3>
           <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Valor gerado, gestão de contratos e privacidade e proteção de dados.</p>
         </div>
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
           <img src="assets/webp-work-fronts-cards/img-bp-wor-front-4.webp" alt="Ambiente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#2f7a4c;font-weight:600;">05 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#2f7a4c;">acessar →</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Geist',sans-serif;font-size:12px;color:#2f7a4c;font-weight:600;">05 / 06</span><span style="font-family:'Geist',sans-serif;font-size:11px;color:#2f7a4c;">acessar →</span></div>
           <h3 style="margin:12px 0 10px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Ambiente</h3>
           <p style="margin:0;color:#5c6268;font-size:15px;line-height:1.5;">Gestão de impactos ambientais da operação e a nova agenda de emissões.</p>
         </div>
@@ -288,11 +288,11 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <a href="/sobre" data-nav id="sobre" data-reveal data-delay="160" style="opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),box-shadow .2s ease;position:relative;display:flex;flex-direction:column;background:#00269f;color:#fff;border:1px solid #00269f;border-radius:14px;overflow:hidden;min-height:320px;text-decoration:none;" style-hover="box-shadow:0 18px 40px -20px rgba(0,0,0,.6);">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#00269f,#3f9c63,#fade71,#ff9965,#ff6757);"></div>
         <div style="padding:30px 26px;display:flex;flex-direction:column;flex:1;">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,.6);font-weight:600;">06 / 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.5);">utilitário</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;"><span style="font-family:'Geist',sans-serif;font-size:12px;color:rgba(255,255,255,.6);font-weight:600;">06 / 06</span><span style="font-family:'Geist',sans-serif;font-size:11px;color:rgba(255,255,255,.5);">utilitário</span></div>
           <h3 style="margin:14px 0 12px;font-size:25px;font-weight:700;letter-spacing:-.01em;">Sobre este relatório</h3>
           <p style="margin:0 0 22px;color:rgba(255,255,255,.7);font-size:15px;line-height:1.5;">Transparência metodológica: escopo, metodologia, índice GRI e contato. Acessível a partir do rodapé em qualquer página.</p>
           <div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:7px;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18);padding:5px 9px;border-radius:5px;">GRI 2-2 · 2-3 · 2-4 · 2-5</span>
+            <span style="font-family:'Geist',sans-serif;font-size:11px;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18);padding:5px 9px;border-radius:5px;">GRI 2-2 · 2-3 · 2-4 · 2-5</span>
           </div>
         </div>
       </a>
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
       <img src="assets/webp-bp-logos/logo-bp-bcorp.webp" alt="Certificação B Corp" style="height:86px;display:block;margin-top:20px;">
       </div>
       <div>
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p>
+        <p style="font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Contato</p>
         <p style="margin:0 0 14px;font-size:15px;color:rgba(255,255,255,.75);line-height:1.5;">Dúvidas sobre como reportamos nossos impactos, mande uma mensagem pra gente:<br><a href="mailto:bhpress@bhpress.com.br" style="color:#fff;font-weight:600;text-decoration:underline;" style-hover="color:#83cb96;">bhpress@bhpress.com.br</a></p>
         <div style="display:flex;gap:10px;margin-top:20px;">
           <a href="https://bhpress.com.br/" target="_blank" aria-label="Site" style="width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s ease;" style-hover="background:rgba(255,255,255,.12);">
@@ -331,17 +331,17 @@ document.addEventListener('DOMContentLoaded',function(){var b=document.createEle
         </div>
       </div>
       <div>
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p>
+        <p style="font-family:'Geist',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin:0 0 18px;">Navegação</p>
         <a href="/" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Home</a>
-        <a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Quem Somos</a>
-        <a href="/estrategia" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Estratégia &amp; Governança</a>
+        <a href="/quem-somos" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Quem somos</a>
+        <a href="/estrategia" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Estratégia e governança</a>
         <a href="/pessoas" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Pessoas</a>
         <a href="/clientes" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Clientes</a>
         <a href="/ambiente" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);margin-bottom:12px;transition:color .2s ease;" style-hover="color:#fff;">Ambiente</a>
         <a href="/sobre" data-nav style="display:block;font-size:15px;color:rgba(255,255,255,.75);transition:color .2s ease;" style-hover="color:#fff;">Sobre este relatório</a>
       </div>
     </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.4);">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px 0 34px;font-family:'Geist',sans-serif;font-size:11px;color:rgba(255,255,255,.4);">
       <span>© 2026 BH Press Comunicação e Sustentabilidade</span>
       <span>Relatório de Impacto 2026 · ano-base 2025</span>
     </div>
